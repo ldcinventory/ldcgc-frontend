@@ -1,1 +1,1 @@
-# frontend
+# LDC Inventory Frontend

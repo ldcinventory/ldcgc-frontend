@@ -20,6 +20,7 @@ export function Counter() {
 
   return (
     <div>
+      <h1 className="text-3xl font-bold">Welcome to LDC/GC App!</h1>
       <div className={styles.row}>
         <button
           className={styles.button}

@@ -16,8 +16,10 @@
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.1",
     "react": "^18.2.0",
+    "react-daisyui": "^4.1.1",
     "react-dom": "^18.2.0",
-    "react-redux": "^8.0.1"
+    "react-redux": "^8.0.1",
+    "react-router-dom": "^6.16.0"
   },
   "devDependencies": {
     "@testing-library/dom": "^9.2.0",
@@ -29,6 +31,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.15",
+    "daisyui": "^3.8.2",
     "eslint": "^8.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",

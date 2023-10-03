@@ -1,4 +1,5 @@
 import ImageProps from "../../types/ImageProps"
+import Button from "../button/Button"
 import Onboarding from "./Onboarding"
 
 const images: ImageProps[] = [
@@ -23,10 +24,15 @@ const images: ImageProps[] = [
       "Gestión de recursos para los voluntarios, para llevar un control más detallado de qué, quién, y cuándo.",
   },
 ]
-function Login() {
+const Login = () => {
   return (
-    <div className="App">
-      <Onboarding images={images} />
+    <div className="flex flex-col justify-around h-screen">
+      <div className="h-[70%] mt-[70px]">
+        <Onboarding images={images} />
+      </div>
+      <div className="flex-grow">
+        <Button buttonName="Entrar" />
+      </div>
     </div>
   )
 }

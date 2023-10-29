@@ -1,5 +1,6 @@
+import { useLocation } from "react-router-dom"
+
 import { ImageProps } from "./loginSlice"
-import Button from "../button/Button"
 import Onboarding from "./Onboarding"
 
 const images: ImageProps[] = [
@@ -24,15 +25,20 @@ const images: ImageProps[] = [
       "Gestión de recursos para los voluntarios, para llevar un control más detallado de qué, quién, y cuándo.",
   },
 ]
-const Login = () => (
-  <div className="flex flex-col justify-around h-screen">
-    <div className="mt-[70px]">
-      <Onboarding images={images} />
+const Login = () => {
+  const location = useLocation()
+
+  return (
+    <div className="flex flex-col h-screen">
+      <div className="h-2/3">
+        <Onboarding images={images} active={location.hash} />
+      </div>
+      <div className="flex flex-col flex-grow gap-3 mt-20 bg-amber-500 w-[390px] p-10 justify-center">
+        <button className="btn btn-neutral">Entrar</button>
+        <button className="btn">Registrarse</button>
+      </div>
     </div>
-    <div className="flex-grow mt-20">
-      <Button text="LOGIN" />
-    </div>
-  </div>
-)
+  )
+}
 
 export default Login

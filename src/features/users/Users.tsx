@@ -11,25 +11,37 @@ export const UsersList = () => {
 
   return (
     <section className="users-list" data-testid="users-list">
-      <h1 className="font-semibold text-xl">Users</h1>
       {(() => {
         switch (usersStatus) {
           case "idle":
             return <div className="idle">Users not requested!</div>
           case "loading":
-            return <div className="loader">Loading...</div>
+            return <span className="loading loading-spinner loading-lg"></span>
           case "failed":
             return <div className="text-red-600">{error}</div>
           case "succeeded":
             return (
-              <div className="list">
-                {users.map((user) => (
-                  <div key={user.id} className="flex gap-2">
-                    <div className="text-sm">{user.role}</div>
-                    <div className="text-sm">{user.email}</div>
-                  </div>
-                ))}
-              </div>
+              <>
+                <h1 className="font-semibold text-xl mb-1">Users</h1>
+                <div className="overflow-x-auto">
+                  <table className="table">
+                    <thead>
+                      <tr>
+                        <th>Role</th>
+                        <th>Email</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {users.map((user) => (
+                        <tr key={user.id}>
+                          <td>{user.role}</td>
+                          <td>{user.email}</td>
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              </>
             )
           default:
             return <div>No data</div>

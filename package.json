@@ -29,6 +29,7 @@
     "@types/testing-library__jest-dom": "^5.14.5",
     "@vitejs/plugin-react": "^4.0.0",
     "autoprefixer": "^10.4.15",
+    "daisyui": "^3.9.4",
     "eslint": "^8.0.0",
     "eslint-config-react-app": "^7.0.1",
     "eslint-plugin-prettier": "^4.2.1",

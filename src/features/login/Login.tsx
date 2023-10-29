@@ -1,4 +1,4 @@
-import ImageProps from "../../types/ImageProps"
+import { ImageProps } from "./loginSlice"
 import Button from "../button/Button"
 import Onboarding from "./Onboarding"
 
@@ -8,7 +8,7 @@ const images: ImageProps[] = [
     alt: "Volunteers Image",
     title: "Gestor de voluntarios",
     description:
-      "Gestión básica de los voluntarios para participar en el ddepartamento de construcción de LDC.",
+      "Gestión básica de los voluntarios para participar en el departamento de construcción de LDC.",
   },
   {
     src: "assets/images/tools1.png",
@@ -24,17 +24,15 @@ const images: ImageProps[] = [
       "Gestión de recursos para los voluntarios, para llevar un control más detallado de qué, quién, y cuándo.",
   },
 ]
-const Login = () => {
-  return (
-    <div className="flex flex-col justify-around h-screen">
-      <div className="h-[70%] mt-[70px]">
-        <Onboarding images={images} />
-      </div>
-      <div className="flex-grow">
-        <Button buttonName="Entrar" />
-      </div>
+const Login = () => (
+  <div className="flex flex-col justify-around h-screen">
+    <div className="mt-[70px]">
+      <Onboarding images={images} />
     </div>
-  )
-}
+    <div className="flex-grow mt-20">
+      <Button text="LOGIN" />
+    </div>
+  </div>
+)
 
 export default Login

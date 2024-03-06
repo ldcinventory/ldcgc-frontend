@@ -43,6 +43,7 @@ export const usersSlice = createSlice({
         (state, action: PayloadAction<{ data: User[] }>) => {
           state.status = "succeeded"
           state.users = action.payload.data
+          console.log(action.payload.data)
         },
       )
       .addCase(getUsersList.rejected, (state, action) => {

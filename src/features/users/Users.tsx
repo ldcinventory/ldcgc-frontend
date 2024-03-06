@@ -32,12 +32,7 @@ export const UsersList = () => {
                       </tr>
                     </thead>
                     <tbody>
-                      {users.map((user) => (
-                        <tr key={user.id}>
-                          <td>{user.role}</td>
-                          <td>{user.email}</td>
-                        </tr>
-                      ))}
+                      {users.length}
                     </tbody>
                   </table>
                 </div>

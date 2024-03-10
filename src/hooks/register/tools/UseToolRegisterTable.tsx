@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react"
-import { getToolRegisters } from "../../../services/ToolRegisterService"
+import { getToolRegisters } from "../../../services/register/tools/ToolRegisterService"
 
 export function useToolRegisterTable() {
   const [toolRegister, setToolRegister] = useState([])

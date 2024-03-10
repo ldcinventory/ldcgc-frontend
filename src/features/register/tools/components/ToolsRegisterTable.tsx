@@ -1,7 +1,7 @@
 import { ArrowDown, ArrowTurnDown, ArrowUp, Calendar, Delete, List, Tool, User } from "../../../../Icons.js"
 import { TableHeaderCell } from "./TableHeaderCell.js"
 import { useToolRegisterTable } from "../../../../hooks/register/tools/UseToolRegisterTable.js"
-import { deleteToolRegister, updateToolRegister } from "../../../../services/ToolRegisterService.js"
+import { deleteToolRegister, updateToolRegister } from "../../../../services/register/tools/ToolRegisterService.js"
 import { useState } from "react"
 
 export function ToolsRegisterTable() {

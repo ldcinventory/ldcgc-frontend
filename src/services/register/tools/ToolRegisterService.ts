@@ -1,7 +1,7 @@
-const payloadToken = "eyJraWQiOiI0OTQ5N2I1My0zNWVmLTQ3OTUtYWNkYi0wYWY2MzA5MmZjOWQiLCJhbGciOiJFZERTQSJ9.eyJpc3MiOiJodHRwczovL2djOGludmVudG9yeS5lcyIsInN1YiI6IjMiLCJleHAiOjE3MDk3MjY5NjUsImlhdCI6MTcwOTY0MDU2NSwidXNlckNsYWltcyI6eyJyb2xlIjoiQURNSU4iLCJlbWFpbCI6Im5vZXVsYUBhZG1pbnYifSwianRpIjoiNDk0OTdiNTMtMzVlZi00Nzk1LWFjZGItMGFmNjMwOTJmYzlkIn0"
-const signatureToken = "5tkeJQKndCeZDI93uKoXggSvNPcKDd6XIvb7IgLJh2SlJCm5EomqqMINzn8cBd_OY3SQ-GxYIY3nkj_OaEapBA"
-const API_HOST = 'http://localhost:8081'
-const TOOLS_RESOURCES_PATH = '/api/resources/tools/registers'
+const payloadToken = localStorage.getItem('payloadToken')
+const signatureToken = localStorage.getItem('signatureToken')
+const API_HOST = import.meta.env.VITE_API_URL
+const TOOLS_RESOURCES_PATH = '/resources/tools/registers'
 
 export async function getToolRegisters(queryParameters) {
   const options = {

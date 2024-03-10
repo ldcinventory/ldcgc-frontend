@@ -1,14 +1,13 @@
 import { useState } from "react";
-import { Calendar, Close, Delete, MinusCircle, Plus, Switch, Tool, User, XCircle } from "../../../../Icons";
+import { Calendar, Close, MinusCircle, Plus, Switch, Tool, User, XCircle } from "../../../../Icons";
+import { toDate, toDateInputString } from "../../../../utils/DateUtils";
 
 export function AddRegisterModal({ handleCloseModal }) {
-  const [registerDate, setRegisterDate] = useState(new Date().toLocaleString())
+  const [registerDate, setRegisterDate] = useState(toDateInputString(new Date()))
   const [selectedTools, setSelectedTools] = useState([])
   const [currentTool, setCurrentTool] = useState('')
   const [selectedVolunteer, setSelectedVolunteer] = useState('')
   const [currentVolunteer, setCurrentVolunteer] = useState('')
-  const [isToday, setIsToday] = useState(true)
-
   const handleChangeCurrentVolunteer = (event) => {
     setCurrentVolunteer(event.target.value)
   }
@@ -39,23 +38,24 @@ export function AddRegisterModal({ handleCloseModal }) {
     setSelectedTools(selectedTools.filter(t => t !== tool))
   }
 
-  const toggleIsToday = () => {
-    if (!isToday){
-      setRegisterDate(new Date().toLocaleString())
-    }
-    setIsToday(!isToday)
+  const handleChangeDate = (event) => {    
+    const newDate = event.target.value
+    setRegisterDate(newDate)
   }
 
-  const handleChangeDate = (event) => {
-    setRegisterDate(event.target.value)
+  const handleAddRegisters = (event) => {
+    event.preventDefault()
+    const registers = event.target.value
+
+    //TODO: llamar al servicio
   }
 
   return (
     <>
       <div className="flex fixed min-h-full min-w-full justify-center items-center top-0 bg-slate-900 bg-opacity-80 text-lg font-semibold">
-        <div className="bg-slate-600 p-4 flex flex-col gap-4 rounded-xl mx-auto w-4/5 lg:w-2/3 overflow-hidden transition-all">
+        <form onSubmit={handleAddRegisters} className="bg-slate-600 p-4 flex flex-col gap-4 rounded-xl mx-auto w-4/5 lg:w-2/3 overflow-hidden transition-all">
           <div className="flex justify-end">
-            <button onClick={handleCloseModal}>
+            <button type="button" onClick={handleCloseModal}>
               <Close />
             </button>
           </div>
@@ -65,11 +65,11 @@ export function AddRegisterModal({ handleCloseModal }) {
             </label>
             <input id="volunteer_input" value={currentVolunteer} onChange={handleChangeCurrentVolunteer}
               type="text" placeholder="BA ID o nombre..." className="px-2 py-1 rounded-md flex-1 text-slate-900 font-normal" />
-            <button className={`bg-green-700 rounded-md p-1 ${selectedVolunteer === '' && currentVolunteer !== '' ? '' : 'hidden'}`}
+            <button type="button" className={`bg-green-700 rounded-md p-1 ${selectedVolunteer === '' && currentVolunteer !== '' ? '' : 'hidden'}`}
             onClick={handleAddVolunteer}>
               <Plus />
             </button>
-            <button className={`rounded-md p-1 bg-cyan-700 ${selectedVolunteer !== '' && currentVolunteer !== '' && selectedVolunteer !== currentVolunteer ? '' : 'hidden'}`}
+            <button type="button" className={`rounded-md p-1 bg-cyan-700 ${selectedVolunteer !== '' && currentVolunteer !== '' && selectedVolunteer !== currentVolunteer ? '' : 'hidden'}`}
             onClick={handleAddVolunteer}
             >
               <Switch />
@@ -80,22 +80,16 @@ export function AddRegisterModal({ handleCloseModal }) {
               <Tool /> <span className="hidden sm:inline">Herramienta</span>
             </label>
             <input id="tool_input" type="text" value={currentTool} onChange={handleChangeCurrentTool} placeholder="Código de barras o nombre..." className="px-2 py-1 rounded-md flex-1 text-slate-900 font-normal" />
-            <button className={`bg-green-700 rounded-md p-1 ${currentTool !== '' && !selectedTools.includes(currentTool) ? '' : 'hidden'}`}
+            <button type="button" className={`bg-green-700 rounded-md p-1 ${currentTool !== '' && !selectedTools.includes(currentTool) ? '' : 'hidden'}`}
               onClick={handleAddTool}>
               <Plus />
             </button>
-            <button className={`bg-cyan-700 rounded-md p-1 ${selectedTools.length > 0 ? '' : 'hidden'}`}
+            <button type="button" className={`bg-cyan-700 rounded-md p-1 ${selectedTools.length > 0 ? '' : 'hidden'}`}
               onClick={handleClearTools}>
               <XCircle />
             </button>
           </section>
-          <section className="flex flex-col sm:flex-row justify-start items-center gap-2 w-full border-slate-500 border p-2 rounded-lg">
-            <label htmlFor="isToday" className="flex-1 py-1">Usar fecha de hoy</label>
-            <div className="flex justify-start flex-1">
-              <input type="checkbox" id="isToday" className="w-6 h-6" checked={isToday} value={isToday} onChange={toggleIsToday}/>
-            </div>
-          </section>
-          <section className={`${isToday ? 'hidden' : ''} flex flex-col sm:flex-row justify-between items-center gap-2 w-full border-slate-500 border p-2 rounded-lg`}>
+          <section className="flex flex-col sm:flex-row justify-between items-center gap-2 w-full border-slate-500 border p-2 rounded-lg">
             <label className="flex-1 flex gap-2 items-center">
               <Calendar /> <span className="hidden sm:inline">Fecha</span>
             </label>
@@ -106,7 +100,7 @@ export function AddRegisterModal({ handleCloseModal }) {
             {
               selectedVolunteer !== '' &&
               <section className="flex gap-2 items-center font-semibold text-lg">
-                <button onClick={() => handleDeleteVolunteer()} className="text-red-600 rounded-md p-1"><MinusCircle/></button>
+                <button type="button" onClick={() => handleDeleteVolunteer()} className="text-red-600 rounded-md p-1"><MinusCircle/></button>
                 <User />
                 <span>{selectedVolunteer}</span>
               </section>
@@ -115,7 +109,7 @@ export function AddRegisterModal({ handleCloseModal }) {
               selectedTools.length > 0 && selectedTools.map(tool => {
                 return(
                   <div className="flex gap-2 items-center ">
-                    <button onClick={() => handleDeleteTool(tool)} className="text-red-600 rounded-md p-1"><MinusCircle/></button>
+                    <button type="button" onClick={() => handleDeleteTool(tool)} className="text-red-600 rounded-md p-1"><MinusCircle/></button>
                     <Tool />
                     <span>{tool}</span>
                   </div>
@@ -123,14 +117,14 @@ export function AddRegisterModal({ handleCloseModal }) {
               })
             }
             {
-              registerDate !== '' && registerDate
+              registerDate !== '' && toDate(registerDate).toLocaleDateString('es-ES')
             }
           </div>
-          <button className={`col-span-2 self-center flex justify-center gap-2 p-2 items-center bg-green-700 rounded-md py-2
+          <button type="submit" className={`col-span-2 self-center flex justify-center gap-2 p-2 items-center bg-green-700 rounded-md py-2
           ${selectedTools.length > 0 ? '' : 'disabled opacity-50'}`}>
             <Plus />{`Añadir registro${selectedTools.length <= 1 ? '' : 's'}`}
           </button>
-        </div>
+        </form>
       </div>
     </>
   )

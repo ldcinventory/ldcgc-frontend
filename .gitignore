@@ -28,3 +28,7 @@ build
 
 # Miscellaneous
 *.local
+
+.prettierrc
+
+package.json

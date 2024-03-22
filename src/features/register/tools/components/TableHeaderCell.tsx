@@ -1,4 +1,4 @@
-export function TableHeaderCell({ children, thStyle }) {
+export function TableHeaderCell({ children, thStyle = '' }) {
   return (
     <th className={thStyle}>
       <div className="flex gap-2 mb-2">

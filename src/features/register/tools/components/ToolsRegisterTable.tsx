@@ -79,14 +79,14 @@ export function ToolsRegisterTable({
           <tr className={`${!showFilters && 'hidden'}`}>
             <th className="w-2/3 p-2">
               <div className="flex w-full gap-3">
-                <input className="w-full p-1 rounded-sm text-slate-900"
+                <input className="w-full p-1 rounded-sm text-slate-900 font-normal"
                   type="text" placeholder="Voluntario" onChange={debouncedVolunteer} />
-                <input className="w-full p-1 rounded-sm text-slate-900"
+                <input className="w-full p-1 rounded-sm text-slate-900 font-normal"
                   type="text" placeholder="Herramienta" onChange={debouncedTool}/>
               </div>
             </th>
             <th className="w-1/2">
-              <select className="h-8 text-slate-900 w-full rounded-sm"
+              <select className="h-8 text-slate-900 w-full rounded-sm font-normal"
                 onChange={handleChangeStatus}>
                 <option value="">Cualquiera</option>
                 <option value="opened">Abierto</option>
@@ -194,15 +194,15 @@ export function ToolsRegisterTable({
           </tr>
           <tr className={`${!showFilters && 'hidden'}`}>
             <th className="w-1/4 p-2">
-              <input className="w-full p-1 rounded-sm text-slate-900"
+              <input className="w-full p-1 rounded-sm text-slate-900 font-normal"
                 type="text" placeholder="Voluntario" onChange={debouncedVolunteer} />               
             </th>
             <th className="w-1/4 p-2">
-              <input className="w-full p-1 rounded-sm text-slate-900"
+              <input className="w-full p-1 rounded-sm text-slate-900 font-normal"
                 type="text" placeholder="Herramienta" onChange={debouncedTool} />
             </th>
             <th className="w-1/4 p-2">
-              <select className="h-8 text-slate-900 w-full rounded-sm p-1"
+              <select className="h-8 text-slate-900 w-full rounded-sm font-normal p-1"
                 onChange={handleChangeStatus}>
                 <option value="">Cualquiera</option>
                 <option value="opened">Abierto</option>
@@ -333,15 +333,15 @@ export function ToolsRegisterTable({
           </tr>
           <tr className={`${!showFilters && 'hidden'}`}>
             <th className="w-1/5 p-2">
-              <input className="w-full p-1 rounded-sm text-slate-900"
+              <input className="w-full p-1 rounded-sm text-slate-900 font-normal"
                 type="text" placeholder="Voluntario" onChange={debouncedVolunteer} />
             </th>
             <th className="w-1/5 p-2">
-              <input className="w-full p-1 rounded-sm text-slate-900"
+              <input className="w-full p-1 rounded-sm text-slate-900 font-normal"
                 type="text" placeholder="Herramienta" onChange={debouncedTool} />
             </th>            
             <th className="w-1/5 p-2">
-              <select className="h-8 text-slate-900 w-full rounded-sm p-1"
+              <select className="h-8 text-slate-900 w-full rounded-sm font-normal p-1"
                 onChange={handleChangeStatus}>
                 <option value="">Cualquiera</option>
                 <option value="opened">Abierto</option>

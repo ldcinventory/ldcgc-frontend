@@ -1,7 +1,6 @@
 const LOGIN_PATH = '/accounts/login'
 
 export const ApiLogin = ({ email, password }) => {
-  console.log(email, password)
   const options = {
     method: "POST",
     headers: {

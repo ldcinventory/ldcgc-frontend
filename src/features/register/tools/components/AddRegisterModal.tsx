@@ -1,131 +1,122 @@
-import { useState } from "react";
-import { Calendar, Close, MinusCircle, Plus, Switch, Tool, User, XCircle } from "../../../../Icons";
-import { toDate, toDateInputString } from "../../../../utils/DateUtils";
+import { Check, Close, MinusCircle } from "../../../../Icons"
+import { useAddToolRegisterModal } from "../../../../hooks/register/tools/UseAddToolRegisterModal"
 
-export function AddRegisterModal({ handleCloseModal }) {
-  const [registerDate, setRegisterDate] = useState(toDateInputString(new Date()))
-  const [selectedTools, setSelectedTools] = useState([])
-  const [currentTool, setCurrentTool] = useState('')
-  const [selectedVolunteer, setSelectedVolunteer] = useState('')
-  const [currentVolunteer, setCurrentVolunteer] = useState('')
-  const handleChangeCurrentVolunteer = (event) => {
-    setCurrentVolunteer(event.target.value)
-  }
+export function AddRegisterModal({ closeRegisterModal, refreshRegister }:
+  { closeRegisterModal: () => void, refreshRegister: () => void }) {
+  const {
+    selectedVolunteer,
+    date,
+    selectedTools,
+    loading,
+    handleAddRegisters,
+    handleChangeCurrentVolunteer,
+    currentVolunteer,
+    possibleVolunteers,
+    handleChangeSelectedVolunteer,
+    removeTool,
+    currentTool,
+    handleChangeCurrentTool,
+    possibleTools,
+    handleSelectTool,
+    handleSetDate,
+    successMessage
+  } = useAddToolRegisterModal({ refreshRegister });
 
-  const handleAddVolunteer = () => {
-    setSelectedVolunteer(currentVolunteer)
-    setCurrentVolunteer('')
-  }
-
-  const handleDeleteVolunteer = () => {
-    setSelectedVolunteer('')
-  }
-
-  const handleChangeCurrentTool = (event) => {
-    setCurrentTool(event.target.value)
-  }
-
-  const handleAddTool = () => {
-    setSelectedTools([...selectedTools, currentTool])
-    setCurrentTool('')
-  }
-
-  const handleClearTools = () => {
-    setSelectedTools([])
-  }
-
-  const handleDeleteTool = (tool) => {
-    setSelectedTools(selectedTools.filter(t => t !== tool))
-  }
-
-  const handleChangeDate = (event) => {    
-    const newDate = event.target.value
-    setRegisterDate(newDate)
-  }
-
-  const handleAddRegisters = (event) => {
-    event.preventDefault()
-    const registers = event.target.value
-
-    //TODO: llamar al servicio
-  }
+  const isSubmitDisabled = () => selectedVolunteer === null || date === '' || selectedTools.length <= 0 || loading
 
   return (
-    <>
-      <div className="flex fixed min-h-full min-w-full justify-center items-center top-0 bg-slate-900 bg-opacity-80 text-lg font-semibold">
-        <form onSubmit={handleAddRegisters} className="bg-slate-600 p-4 flex flex-col gap-4 rounded-xl mx-auto w-4/5 lg:w-2/3 overflow-hidden transition-all">
-          <div className="flex justify-end">
-            <button type="button" onClick={handleCloseModal}>
-              <Close />
-            </button>
-          </div>
-          <section className="flex flex-col sm:flex-row justify-between items-center gap-2 w-full border-slate-500 border p-2 rounded-lg">
-            <label className="flex-1 flex gap-2 items-center" htmlFor="volunteer_input">
-              < User /> <span className="hidden sm:inline">Voluntario</span>
-            </label>
-            <input id="volunteer_input" value={currentVolunteer} onChange={handleChangeCurrentVolunteer}
-              type="text" placeholder="BA ID o nombre..." className="px-2 py-1 rounded-md flex-1 text-slate-900 font-normal" />
-            <button type="button" className={`bg-green-700 rounded-md p-1 ${selectedVolunteer === '' && currentVolunteer !== '' ? '' : 'hidden'}`}
-            onClick={handleAddVolunteer}>
-              <Plus />
-            </button>
-            <button type="button" className={`rounded-md p-1 bg-cyan-700 ${selectedVolunteer !== '' && currentVolunteer !== '' && selectedVolunteer !== currentVolunteer ? '' : 'hidden'}`}
-            onClick={handleAddVolunteer}
-            >
-              <Switch />
-            </button>
-          </section>
-          <section className="flex flex-col sm:flex-row justify-between items-center gap-2 w-full border-slate-500 border p-2 rounded-lg">
-            <label className="flex-1 flex gap-2 items-center" htmlFor="tool_input">
-              <Tool /> <span className="hidden sm:inline">Herramienta</span>
-            </label>
-            <input id="tool_input" type="text" value={currentTool} onChange={handleChangeCurrentTool} placeholder="Código de barras o nombre..." className="px-2 py-1 rounded-md flex-1 text-slate-900 font-normal" />
-            <button type="button" className={`bg-green-700 rounded-md p-1 ${currentTool !== '' && !selectedTools.includes(currentTool) ? '' : 'hidden'}`}
-              onClick={handleAddTool}>
-              <Plus />
-            </button>
-            <button type="button" className={`bg-cyan-700 rounded-md p-1 ${selectedTools.length > 0 ? '' : 'hidden'}`}
-              onClick={handleClearTools}>
-              <XCircle />
-            </button>
-          </section>
-          <section className="flex flex-col sm:flex-row justify-between items-center gap-2 w-full border-slate-500 border p-2 rounded-lg">
-            <label className="flex-1 flex gap-2 items-center">
-              <Calendar /> <span className="hidden sm:inline">Fecha</span>
-            </label>
-            <input type="date" value={registerDate} onChange={handleChangeDate}
-              className="text-slate-900 rounded-md px-2 py-1 flex-1 font-normal" />
-          </section>
-          <div className="flex flex-col font-light text-sm gap-2">
+    <div className="flex fixed min-h-full min-w-full justify-center items-center top-0 bg-slate-900 bg-opacity-80 text-lg font-semibold">
+      <section className="w-4/5 m-auto flex flex-col gap-4 items-end bg-slate-600 p-6 lg:w-1/3 rounded-xl">
+        <button onClick={closeRegisterModal}>
+          <Close />
+        </button>
+        <form onSubmit={handleAddRegisters} className="flex flex-col gap-4 mx-auto w-full overflow-hidden transition-all">
+          <label htmlFor="volunteerInput" className="flex items-center gap-4">
             {
-              selectedVolunteer !== '' &&
-              <section className="flex gap-2 items-center font-semibold text-lg">
-                <button type="button" onClick={() => handleDeleteVolunteer()} className="text-red-600 rounded-md p-1"><MinusCircle/></button>
-                <User />
-                <span>{selectedVolunteer}</span>
-              </section>
+              selectedVolunteer !== null &&
+              <span className="text-green-500">
+                  <Check />
+              </span>  
             }
+            Voluntario
+          </label>
+          <div className="bg-slate-50 relative rounded-md">
+            <input id="volunteerInput" name="volunteer" type="text" placeholder="Nombre o BA ID..."
+              onChange={(event) => handleChangeCurrentVolunteer(event.target.value)} value={currentVolunteer}
+                className="text-slate-900 font-normal bg-slate-50 w-full p-2 rounded-md" />
             {
-              selectedTools.length > 0 && selectedTools.map(tool => {
-                return(
-                  <div className="flex gap-2 items-center ">
-                    <button type="button" onClick={() => handleDeleteTool(tool)} className="text-red-600 rounded-md p-1"><MinusCircle/></button>
-                    <Tool />
-                    <span>{tool}</span>
-                  </div>
-                )
-              })
-            }
-            {
-              registerDate !== '' && toDate(registerDate).toLocaleDateString('es-ES')
+              possibleVolunteers?.length > 0 && selectedVolunteer === null &&
+              <ul className="z-10 absolute mt-2 overflow-auto max-h-60 text-slate-900 font-normal w-full bg-inherit rounded-md">
+              {
+                possibleVolunteers?.map(v => 
+                  <li key={v.id} onClick={() => handleChangeSelectedVolunteer(v, `${v.name} ${v.lastName} (${v.builderAssistantId})`)}
+                  className="hover:bg-slate-200 transition-colors duration-200">
+                    {`${v.name} ${v.lastName} (${v.builderAssistantId})`}
+                  </li>
+                )            
+              }
+              </ul>
             }
           </div>
-          <button type="submit" className={`col-span-2 self-center flex justify-center gap-2 p-2 items-center bg-green-700 rounded-md py-2
-          ${selectedTools.length > 0 ? '' : 'disabled opacity-50'}`}>
-            <Plus />{`Añadir registro${selectedTools.length <= 1 ? '' : 's'}`}
-          </button>
+          <label className="flex items-center gap-4">
+            {
+              selectedTools.length > 0  &&
+              <span className="text-green-500">
+                <Check />
+              </span>
+            }
+            Herramientas
+          </label>
+          
+          {
+            selectedTools.map(tool => 
+              <div key={tool.id} className="flex justify-between gap-4">
+                <input type="text" value={`${tool.name} (${tool.barcode})`} disabled
+                  className="text-slate-900 font-normal bg-slate-50 w-full p-2 rounded-md"/>
+                <button className="text-red-500" onClick={() => removeTool(tool.id)}> <MinusCircle /> </button>
+              </div>
+            )
+          }
+          <div className="bg-slate-50 relative rounded-md">
+            <input type="text" className="text-slate-900 font-normal bg-slate-50 w-full p-2 rounded-md" 
+              value={currentTool} onChange={(e) => handleChangeCurrentTool(e.target.value)} />
+            {
+              possibleTools?.length > 0 &&
+              <ul className="z-10 absolute mt-2 overflow-auto max-h-60 text-slate-900 font-normal w-full bg-inherit rounded-md">
+              {
+                possibleTools?.map(t => 
+                  <li key={t.id} onClick={() => handleSelectTool(t)}
+                    className="hover:bg-slate-200 transition-colors duration-200">
+                    {t.name}
+                  </li>
+                )     
+              }
+              </ul>
+            }
+          </div>
+          <label className="flex gap-4 items-center">
+            {
+              date !== '' &&
+              <span className="text-green-500">
+                <Check />
+              </span>
+            }
+            Fecha
+          </label>
+          <input type="date" className="text-slate-900 p-2 rounded-md font-normal" value={date}
+            onChange={(e) => handleSetDate(e.target.value)} />
+          <button type="submit"
+            className={`bg-green-700 w-1/3 m-auto p-2 rounded-md ${isSubmitDisabled() ? 'opacity-50' : ''}`}
+            disabled={isSubmitDisabled()}>
+            Añadir</button>
         </form>
-      </div>
-    </>
+        {
+          successMessage !== '' &&
+          <span className="self-center text-green-500 p-2 rounded-md">
+              {successMessage}
+            </span>
+        }
+      </section>
+    </div>
   )
 }

@@ -15,7 +15,12 @@ function App() {
       </header>
       <main>
         {localStorage.getItem('signatureToken') ? <ToolsRegister /> : <Login />}
-      </main>        
+      </main>
+      <footer className="bottom-0">
+        <p className="text-xs w-full p-2">
+          LDC Inventory App 2024 | Todos los derechos reservados
+        </p>
+      </footer>
     </div>
   )
 }

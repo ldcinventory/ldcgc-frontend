@@ -1,1 +1,1 @@
-VITE_API_URL=http://localhost:8081/api
+VITE_API_URL=https://ldcgc-api.onrender.com/api

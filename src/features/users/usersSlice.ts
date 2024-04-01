@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
-import { RootState } from "../../app/store"
+import { RootState } from "../../app"
 import { fetchUsers } from "./usersAPI"
 
 export interface User {
@@ -53,7 +53,7 @@ export const usersSlice = createSlice({
   },
 })
 
-export const {} = usersSlice.actions
+export const { } = usersSlice.actions
 
 export const selectAllUsers = (state: RootState) => state.users.users
 

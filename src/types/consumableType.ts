@@ -1,23 +1,19 @@
 import { Brand, Group, Location } from "./commonTypes";
 
-export interface Tool {
+export interface Consumable {
   id: number;
   barcode: string;
   category: Brand;
   brand: Brand;
+  purchaseDate: Date;
   name: string;
   model: string;
   description: string;
-  weight: number;
-  stockWeightType: string;
-  price: number;
-  purchaseDate: Date;
   urlImages: string[];
-  maintenancePeriod: number;
-  maintenanceTime: string;
-  lastMaintenance: Date;
-  nextMaintenance: Date;
-  status: string;
+  quantityEachItem: number;
+  stock: number;
+  minStock: number;
+  stockType: string;
   location: Location;
   group: Group;
 }

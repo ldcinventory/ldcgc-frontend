@@ -1,6 +1,7 @@
 import "./App.css"
-import { ToolsRegister } from "./features/register/tools/ToolsRegister"
 import { Login } from './features/login/Login';
+import { ConsumablesRegister } from "./features/register/consumables/ConsumableRegister";
+import { ToolsRegister } from "./features/register/tools/ToolsRegister";
 
 function App() {
   
@@ -14,10 +15,10 @@ function App() {
         <button onClick={handleLogout}>Logout</button>
       </header>
       <main>
-        {localStorage.getItem('signatureToken') ? <ToolsRegister /> : <Login />}
+        {localStorage.getItem('signatureToken') ? <ConsumablesRegister /> : <Login />}
       </main>
       <footer className="bottom-0">
-        <p className="text-xs w-full p-2">
+        <p className="text-xs w-full p-2 text-center">
           LDC Inventory App 2024 | Todos los derechos reservados
         </p>
       </footer>

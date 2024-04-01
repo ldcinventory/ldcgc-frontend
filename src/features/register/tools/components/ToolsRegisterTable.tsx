@@ -89,8 +89,8 @@ export function ToolsRegisterTable({
               <select className="h-8 text-slate-900 w-full rounded-sm font-normal"
                 onChange={handleChangeStatus}>
                 <option value="">Cualquiera</option>
-                <option value="opened">Abierto</option>
-                <option value="closed">Cerrado</option>
+                <option value="OPENED">Abierto</option>
+                <option value="CLOSED">Cerrado</option>
               </select>
             </th>
           </tr>
@@ -205,8 +205,8 @@ export function ToolsRegisterTable({
               <select className="h-8 text-slate-900 w-full rounded-sm font-normal p-1"
                 onChange={handleChangeStatus}>
                 <option value="">Cualquiera</option>
-                <option value="opened">Abierto</option>
-                <option value="closed">Cerrado</option>
+                <option value="OPENED">Abierto</option>
+                <option value="CLOSED">Cerrado</option>
               </select>
             </th>
             <th className="w-1/4 p-2">
@@ -325,9 +325,9 @@ export function ToolsRegisterTable({
             <th className="p-2">
               <button className="flex justify-end w-full"
                 onClick={toggleShowFilters}>
-                <button className={`${showFilters && 'bg-slate-50 bg-opacity-30'} rounded-lg transition-all duration-300`}>
+                <span className={`${showFilters && 'bg-slate-50 bg-opacity-30'} rounded-lg transition-all duration-300`}>
                   <MenuSmall />
-                </button>
+                </span>
               </button>
             </th>
           </tr>
@@ -344,8 +344,8 @@ export function ToolsRegisterTable({
               <select className="h-8 text-slate-900 w-full rounded-sm font-normal p-1"
                 onChange={handleChangeStatus}>
                 <option value="">Cualquiera</option>
-                <option value="opened">Abierto</option>
-                <option value="closed">Cerrado</option>
+                <option value="OPENED">Abierto</option>
+                <option value="CLOSED">Cerrado</option>
               </select>
             </th>
             <th className="w-1/5 p-2">

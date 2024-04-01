@@ -16,7 +16,8 @@ export const getVolunteers = ({query, size}) => {
   }
 
   const baID = Number(query)
-  const url = `${API_HOST}${VOLUNTEERS_PATH}?${isNaN(baID) || query === '' ? 'filterString' : 'builderAssistantId'}=${query}&size=${size}`
+  const queryParams = `?${isNaN(baID) || query === '' ? 'filterString' : 'builderAssistantId'}=${query}&size=${size}`
+  const url = `${API_HOST}${VOLUNTEERS_PATH}${queryParams}`
 
   return fetch(url, options)
     .then(response => response.json())

@@ -2,7 +2,7 @@ import React from "react"
 import { useSelector } from "react-redux"
 
 import { selectAllUsers } from "./usersSlice"
-import { RootState } from "../../app/store"
+import { RootState } from "../../app"
 
 export const UsersList = () => {
   const users = useSelector(selectAllUsers)

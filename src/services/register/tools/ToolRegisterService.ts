@@ -26,6 +26,7 @@ export async function getToolRegisters(queryParameters: ToolRegisterQueryParams)
   if (str !== '')
     str = '?' + str
 
+  
   const url = `${API_HOST}${TOOLS_RESOURCES_PATH}${str}`
   return fetch(url, options)
     .then(response => response.json())

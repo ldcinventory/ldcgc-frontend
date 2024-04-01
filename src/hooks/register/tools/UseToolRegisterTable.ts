@@ -5,7 +5,7 @@ import { ToolRegister, ToolRegisterQueryParams, ToolRegisterWithId } from "../..
 export function useToolRegisterTable() {
   const [toolRegister, setToolRegister] = useState<ToolRegisterWithId[]>([])
   const [queryParameters, setQueryParameters] = useState<ToolRegisterQueryParams>({
-    status: "opened",
+    status: "OPENED",
     size: 10,
     pageIndex: 0
   })

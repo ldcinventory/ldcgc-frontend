@@ -1,10 +1,10 @@
 import "./App.css"
-import { Login } from './features/login/Login';
-import { ConsumablesRegister } from "./features/register/consumables/ConsumableRegister";
-import { ToolsRegister } from "./features/register/tools/ToolsRegister";
+import { Login } from './login/Login';
+import { ConsumablesRegister } from "./register/consumables/components/ConsumableRegister";
+import { ToolsRegister } from "./register/tools/components/ToolsRegister";
 
 function App() {
-  
+
   const handleLogout = () => {
     localStorage.clear()
     window.location.reload()

@@ -1,13 +1,14 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit"
 
-import usersReducer from "../features/users/usersSlice"
-import consumablesRegisterReducer from "../features/register/consumables/consumablesRegisterSlice"
+import usersReducer from "../users/usersSlice"
+import consumablesRegisterReducer from "../register/consumables/consumablesRegisterSlice"
+import consumablesReducer from "../resources/consumables/consumablesSlice"
 
 export const store = configureStore({
   reducer: {
     users: usersReducer,
- 
-    consumablesRegister: consumablesRegisterReducer
+    consumables: consumablesReducer,
+    consumablesRegister: consumablesRegisterReducer,
   }
 })
 

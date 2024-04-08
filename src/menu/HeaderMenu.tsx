@@ -1,5 +1,5 @@
 import { ProfileSmall } from "../profile/ProfileSmall";
-import { AppNavLink } from "./components/AppNavLink";
+import { AppNavLink } from "../common/components/AppNavLink";
 
 export function HeaderMenu() {
   return (

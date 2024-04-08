@@ -1,5 +1,4 @@
-import { redirect } from "react-router-dom"
-import { FetchApiParams } from "./tCommon"
+import { FetchApiParams } from "../common/tCommon"
 
 const API_URL = import.meta.env.VITE_API_URL
 
@@ -10,7 +9,7 @@ export const fetchApi = ({ method, path, queryParams, body }: FetchApiParams) =>
 
   if (!payloadToken || !signatureToken || payloadToken === '' || signatureToken === '') {
     window.location.replace('/login')
-    return;
+    return Promise.reject();
   }
   const headers: HeadersInit = {
     "Content-Type": "application/json",
@@ -37,12 +36,11 @@ export const fetchApi = ({ method, path, queryParams, body }: FetchApiParams) =>
   
   return fetch(url, options)
     .then(res => {
-      console.log(res)
       if (!res.ok && res.status === 401) {
         localStorage.removeItem('payloadToken')
         localStorage.removeItem('signatureToken')
         window.location.replace('/login')
-        return;
+        return Promise.reject();
       }
       return res
   })

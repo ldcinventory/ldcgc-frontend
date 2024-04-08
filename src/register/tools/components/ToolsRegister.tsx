@@ -1,8 +1,8 @@
 import { useState } from "react"
 import { Plus } from "../../../Icons.js"
 import { ToolsRegisterTable } from "./ToolsRegisterTable.js"
-import { AddRegisterModal } from "./components/AddRegisterModal.js"
 import { useToolRegisterTable } from "../hooks/UseToolRegisterTable.js"
+import { AddToolRegisterModal } from "./AddToolRegisterModal.js"
 
 export function ToolsRegister() {
   const [addRegisterModal, setAddRegisterModal] = useState(false)
@@ -47,7 +47,7 @@ export function ToolsRegister() {
         toggleOrderByRegisterTo={toggleOrderByRegisterTo} fromDesc={fromDesc} toDesc={toDesc} showFilters={showFilters}
         toggleShowFilters={toggleShowFilters} pageIndex={pageIndex} changePageIndex={changePageIndex} maxPage={maxPage} />
       <section className={`${addRegisterModal ? '' : 'hidden'}`}>
-        <AddRegisterModal closeRegisterModal={closeRegisterModal} refreshRegister={refreshRegister} />
+        <AddToolRegisterModal closeRegisterModal={closeRegisterModal} refreshRegister={refreshRegister} />
       </section>
     </>
   )

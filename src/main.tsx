@@ -6,11 +6,14 @@ import App from "./App"
 import { store } from "./app/index"
 
 import "./index.css"
+import { BrowserRouter } from "react-router-dom"
 
 //store.dispatch(getUsersList())
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
-  <Provider store={store}>
-    <App />
-  </Provider>
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
+    </Provider>
+  </BrowserRouter>
 )

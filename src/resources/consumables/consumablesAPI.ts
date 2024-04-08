@@ -1,4 +1,4 @@
-import { fetchApi } from "../../common/fetchApi"
+import { fetchApi } from "../../api/fetchApi"
 import { ConsumableParams, ConsumableWithId } from "./tConsumables"
 
 const payloadToken = localStorage.getItem('payloadToken')
@@ -10,7 +10,7 @@ export const fetchConsumables = (params: ConsumableParams = {}) =>
   fetchApi({ method: "GET", path: `${CONSUMABLES_PATH}/loose`, queryParams: params })
 
 export const fetchDeleteConsumable = (registerId: number) =>
-  fetchApi({method:'DELETE', path:`${CONSUMABLES_PATH}/${registerId}`})
+  fetchApi({ method: 'DELETE', path: `${CONSUMABLES_PATH}/${registerId}` })
 
 
 export function fetchUpdateConsumable(register: ConsumableWithId) {

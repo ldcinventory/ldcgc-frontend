@@ -3,7 +3,6 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../app/index"
 import { fetchMyUser, fetchUsers } from "./usersAPI"
 import { User } from "./tUsers"
-import { ac } from "vitest/dist/types-e3c9754d.js"
 
 export interface UsersState {
   users: User[]

@@ -4,7 +4,7 @@ import { Login } from './login/Login';
 import { ConsumablesRegister } from "./register/consumables/components/ConsumableRegister";
 import { ToolsRegister } from "./register/tools/components/ToolsRegister";
 import { Home } from "./home/Home";
-import { HeaderMenu } from "./common/HeaderMenu";
+import { HeaderMenu } from "./menu/HeaderMenu";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = localStorage.getItem('payloadToken') !== null

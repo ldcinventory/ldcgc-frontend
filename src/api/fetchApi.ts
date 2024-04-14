@@ -36,7 +36,7 @@ export const fetchApi = ({ method, path, queryParams, body }: FetchApiParams) =>
   
   return fetch(url, options)
     .then(res => {
-      if (!res.ok && res.status === 401) {
+      if (!res.ok && (res.status === 401 || res.statusText.toLowerCase().includes('token'))) {
         localStorage.removeItem('payloadToken')
         localStorage.removeItem('signatureToken')
         window.location.replace('/login')

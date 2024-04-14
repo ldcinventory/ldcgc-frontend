@@ -33,7 +33,6 @@ export function ToolsRegister() {
   }
   return (
     <>
-      <h1 className="container mx-auto my-5 text-center text-lg font-bold ">Registro de herramientas</h1>
       <div className="mx-4 xl:ml-16 transition-all duration-300 overflow-clip my-5">
         <button onClick={openRegisterModal}
           className="p-4 bg-slate-700 rounded-xl flex gap-4 hover:bg-slate-500 transition-colors">

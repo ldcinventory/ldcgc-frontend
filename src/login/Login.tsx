@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom"
 import { ApiLogin } from "./LoginService"
+import { AppButtonSubmit } from "../common/components/AppButton"
 
 export function Login() {
 
@@ -17,14 +18,14 @@ export function Login() {
   }
 
   return (
-    <section className="bg-primary-3 dark:bg-primary-8 py-10">
+    <section className="bg-primary-3 dark:bg-primary-8 py-10 min-h-[92.5vh]">
       <form onSubmit={handleLogin} className="flex flex-col justify-center gap-2 w-1/4 mx-auto my-10">
         <p className="self-center text-lg font-bold">Inicia sesión</p>
         <label htmlFor="emailInput">Email</label>
         <input className="text-slate-900 p-2 rounded-md" id="emailInput" type="text" placeholder="noeula@adminv" name='email' />
         <label htmlFor="pwdInput">Contraseña</label>
         <input className="text-slate-900 p-2 rounded-md" id="pwdInput" type="password" placeholder="admin" name='password' />
-        <button type="submit" className="bg-slate-500 rounded-md p-2">Iniciar sesión</button>
+        <AppButtonSubmit className="bg-slate-500 rounded-md p-2">Iniciar sesión</AppButtonSubmit>
       </form>
     </section>
   )

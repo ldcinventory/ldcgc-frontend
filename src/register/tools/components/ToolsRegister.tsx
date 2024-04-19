@@ -69,7 +69,7 @@ export function ToolsRegister() {
               <AppButtonTransparent
                 onClick={() =>
                   updateQueryParams({ volunteer: '', tool: '', status: '', descOrder: true })}>
-                <TrashIcon className="h-7" className="h-7" />
+                <TrashIcon className="h-7" />
               </AppButtonTransparent>
             </th>
           </tr>

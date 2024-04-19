@@ -13,4 +13,4 @@ export const fetchUpdateConsumableRegister = (register: ConsumableRegisterWithId
   fetchApi({ method: 'PUT', path: `${CONSUMABLES_RESOURCES_PATH}/${register.id}`, body: JSON.stringify(register) })
 
 export const fetchCreateConsumableRegisters = (consumableRegisters: ConsumableRegister[]) => 
-  fetchApi({ method: "POST", path: `${CONSUMABLES_RESOURCES_PATH}/many`, body: JSON.stringify(consumableRegisters) })
+  fetchApi({ method: 'POST', path: `${CONSUMABLES_RESOURCES_PATH}/many`, body: JSON.stringify(consumableRegisters) })

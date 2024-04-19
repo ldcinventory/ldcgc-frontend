@@ -1,31 +1,32 @@
-import { Consumable } from "../../resources/consumables/tConsumables";
+import { Consumable } from "../../resources/consumables/tConsumables"
 
 export interface ConsumableRegister {
-  consumableBarcode: string;
-  volunteerBAId: string;
-  volunteerName: string;
-  volunteerLastName: string;
-  registerFrom: Date;
-  registerTo?: Date;
-  stockAmountRequest: number;
-  stockAmountReturn?: number;
-  consumable: Consumable;
-  closedRegister: boolean;
-  processingStockChanges: boolean;
+  consumableBarcode: string
+  consumableName: string
+  consumableStockType: string
+  volunteerBAId: string
+  volunteerName: string
+  volunteerLastName: string
+  registerFrom: Date
+  registerTo?: Date
+  stockAmountRequest: number
+  stockAmountReturn?: number
+  closedRegister: boolean
+  processingStockChanges: boolean
 }
 
 export interface ConsumableRegisterWithId extends ConsumableRegister {
-  id: number;
+  id: number
 }
 
 export interface ConsumablesRegisterParams {
-  pageIndex?: number;
-  size?: number;
-  volunteer?: number | string;
-  consumable?: string;
-  registerFrom?: string;
-  registerTo?: string;
-  status?: string;
-  sortField?: string;
-  descOrder?: boolean;
+  pageIndex?: number
+  size?: number
+  volunteer?: number | string
+  consumable?: string
+  registerFrom?: string
+  registerTo?: string
+  status?: string
+  sortField?: string
+  descOrder?: boolean
 }

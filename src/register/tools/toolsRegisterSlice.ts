@@ -31,7 +31,7 @@ export const getToolsRegister =
       const newParams = { ...state.toolsRegister.queryParams, ...queryParams }
       thunkApi.dispatch(updateQueryParams(newParams))
       const response = await fetchGetToolRegisters(newParams)
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
 
@@ -40,7 +40,7 @@ export const deleteToolRegister =
     "register/tools/delete",
     async (registerId, thunkApi) => {
       const response = await fetchDeleteToolRegister(registerId)
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       if (response.ok)
         thunkApi.dispatch(getToolsRegister(thunkApi.getState().toolsRegister.queryParams))
@@ -55,7 +55,7 @@ export const closeToolRegister =
     async (register, thunkApi) => {
       register = { ...register, registerTo: new Date() }
       const response = await fetchUpdateToolRegister(register)
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
       
       if (response.ok)
         thunkApi.dispatch(getToolsRegister(thunkApi.getState().toolsRegister.queryParams))

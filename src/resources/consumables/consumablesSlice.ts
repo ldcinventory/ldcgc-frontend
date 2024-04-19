@@ -35,7 +35,7 @@ export const getConsumables =
 
           return res.json()
         })
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       return response
     })

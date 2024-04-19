@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { ConsumableRegisterWithId, ConsumablesRegisterParams } from "./tConsumableRegisters"
-import { fetchConsumablesRegister, fetchDeleteConsumableRegister, fetchUpdateConsumableRegister } from "./consumablesRegisterApi.ts"
+import { fetchConsumablesRegister, fetchDeleteConsumableRegister, fetchUpdateConsumableRegister } from "./consumablesRegisterApi"
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
 
@@ -30,7 +30,7 @@ export const getConsumablesRegister =
       const newParams = { ...state.consumablesRegister.queryParams, ...queryParams }
       thunkApi.dispatch(updateQueryParams(newParams))
       const response = await fetchConsumablesRegister(newParams)
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
 
@@ -39,7 +39,7 @@ export const deleteConsumableRegister =
     "register/consumables/delete",
     async (registerId, thunkApi) => {
       const response = await fetchDeleteConsumableRegister(registerId)
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       if (response.ok)
         thunkApi.dispatch(getConsumablesRegister(thunkApi.getState().consumablesRegister.queryParams))
@@ -56,7 +56,7 @@ export const closeConsumableRegister =
         throw new Error('Error! Indica el stock devuelto antes de cerrar el registro')
       register = { ...register, registerTo: new Date() }
       const response = await fetchUpdateConsumableRegister(register)
-        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
       if (response.ok)
         thunkApi.dispatch(getConsumablesRegister(thunkApi.getState().consumablesRegister.queryParams))
 

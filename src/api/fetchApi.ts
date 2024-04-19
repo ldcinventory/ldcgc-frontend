@@ -33,15 +33,17 @@ export const fetchApi = ({ method, path, queryParams, body }: FetchApiParams) =>
   }
   
   const url = `${API_URL}${path}${paramsStr}`
-  
-  return fetch(url, options)
-    .then(res => {
-      if (!res.ok && res.status === 401) {
+  return fetch(url, options)  
+    .then(async res => {
+      const json = await res.json()
+      if (!res.ok && (res.status === 401 || json.message.toLowerCase().includes('token'))) {
         localStorage.removeItem('payloadToken')
         localStorage.removeItem('signatureToken')
         window.location.replace('/login')
         return Promise.reject();
       }
+
+      res.json = () => json
       return res
   })
 }

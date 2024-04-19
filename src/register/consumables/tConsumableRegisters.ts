@@ -1,14 +1,14 @@
 import { Consumable } from "../../resources/consumables/tConsumables";
 
 export interface ConsumableRegister {
-  consumableBardcode: string;
+  consumableBarcode: string;
   volunteerBAId: string;
   volunteerName: string;
   volunteerLastName: string;
   registerFrom: Date;
-  registerTo: Date;
+  registerTo?: Date;
   stockAmountRequest: number;
-  stockAmountReturn: number;
+  stockAmountReturn?: number;
   consumable: Consumable;
   closedRegister: boolean;
   processingStockChanges: boolean;

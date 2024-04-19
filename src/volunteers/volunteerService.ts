@@ -1,9 +1,12 @@
+import { fetchApi } from "../api/fetchApi"
+import { VolunteersParams } from "./tVolunteers"
+
 const payloadToken = localStorage.getItem('payloadToken')
 const signatureToken = localStorage.getItem('signatureToken')
 const API_HOST = import.meta.env.VITE_API_URL
 const VOLUNTEERS_PATH = '/volunteers'
 
-export const getVolunteers = ({query, size}) => {
+/*export const getVolunteers = ({query, size}) => {
   const options = {
     method: "GET",
     headers: {
@@ -26,4 +29,7 @@ export const getVolunteers = ({query, size}) => {
         return [json.data]
       return json.data.elements
     })
-}
+}*/
+
+export const fetchVolunteers = ({ volunteersParams }: { volunteersParams: VolunteersParams }) =>
+  fetchApi({ method: 'GET', path: VOLUNTEERS_PATH, queryParams: volunteersParams })

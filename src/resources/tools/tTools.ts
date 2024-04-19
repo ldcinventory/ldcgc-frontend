@@ -1,4 +1,5 @@
 import { Brand } from "../../brands/tBrands";
+import { FindAllParams } from "../../common/tCommon";
 import { Group } from "../../groups/tGroups";
 
 export interface Tool {
@@ -21,4 +22,8 @@ export interface Tool {
   status: string;
   location: Location;
   group: Group;
+}
+
+export interface ToolsParams extends FindAllParams{
+  status?: 'AVAILABLE' | 'IN_USE'
 }

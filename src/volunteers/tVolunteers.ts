@@ -1,4 +1,5 @@
 import { Absence } from "../absences/tAbsences";
+import { FindAllParams } from "../common/tCommon";
 import { Group } from "../groups/tGroups";
 
 export interface Volunteer {
@@ -10,4 +11,9 @@ export interface Volunteer {
   availability: string[];
   absences: Absence[];
   groupDto: Group;
+}
+
+export interface VolunteersParams extends FindAllParams {
+  builderAssistantId?: number
+  userId?: number
 }

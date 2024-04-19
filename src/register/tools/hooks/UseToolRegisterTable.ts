@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { deleteToolRegister, getToolRegisters, updateToolRegister } from "../ToolRegisterService"
-import { ToolRegister, ToolRegisterQueryParams, ToolRegisterWithId } from "../tToolRegisters"
+import { fetchDeleteToolRegister, fetchGetToolRegisters, fetchUpdateToolRegister } from "../toolRegisterApi"
+import { ToolRegister, ToolRegisterParams, ToolRegisterWithId } from "../tToolRegisters"
 
 export function useToolRegisterTable() {
   const [toolRegister, setToolRegister] = useState<ToolRegisterWithId[]>([])
-  const [queryParameters, setQueryParameters] = useState<ToolRegisterQueryParams>({
+  const [queryParameters, setQueryParameters] = useState<ToolRegisterParams>({
     status: "OPENED",
     size: 10,
     pageIndex: 0
@@ -16,7 +16,7 @@ export function useToolRegisterTable() {
   const [maxPage, setMaxPage] = useState(0);
 
   const refreshRegister = () => {
-    getToolRegisters(queryParameters)
+    fetchGetToolRegisters(queryParameters)
       .then(res => {
         setMaxPage(res.data.totalPages - 1)
         setToolRegister(res.data.elements)
@@ -30,18 +30,18 @@ export function useToolRegisterTable() {
   }),
     [])
 
-  const handleQueryParams = (newQueryParameters: ToolRegisterQueryParams) => {
+  const handleQueryParams = (newQueryParameters: ToolRegisterParams) => {
     setQueryParameters({ ...queryParameters, ...newQueryParameters })
   }
 
   const closeRegister = async (register: ToolRegisterWithId) => {
     register.registerTo = new Date()
-    await updateToolRegister(register)
+    await fetchUpdateToolRegister(register)
     refreshRegister()
   }
 
   const deleteRegister = async (register: ToolRegisterWithId) => {
-    await deleteToolRegister(register.id)
+    await fetchDeleteToolRegister(register.id)
     refreshRegister()
   }
 

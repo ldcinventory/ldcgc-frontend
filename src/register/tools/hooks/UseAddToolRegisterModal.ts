@@ -2,13 +2,13 @@ import { useDebounce } from 'use-debounce';
 import { FormEvent, useEffect, useState } from "react"
 import { toDate, toDateInputString } from "../../../utils/DateUtils"
 import { getVolunteers } from "../../../volunteers/volunteerService"
-import { getToolsLoose } from "../../../resources/tools/toolService"
+import { fecthToolsLoose } from "../../../resources/tools/toolService"
 import { Volunteer } from "../../../volunteers/tVolunteers"
 import { ToolRegister } from "../tToolRegisters"
-import { createToolRegister } from "../ToolRegisterService"
+import { fetchCreateToolRegisters } from "../toolRegisterApi"
 import { Tool } from "../../../resources/tools/tTools"
 
-export function useAddToolRegisterModal({ refreshRegister }: {refreshRegister: Function}) {
+export function useAddToolRegisterModal({ refreshRegister }: { refreshRegister: Function }) {
   const [possibleVolunteers, setPossibleVolunteers] = useState<Volunteer[]>([])
   const [currentVolunteer, setCurrentVolunteer] = useState<string>('')
   const [debouncedVolunteer] = useDebounce(currentVolunteer, 500)
@@ -26,8 +26,8 @@ export function useAddToolRegisterModal({ refreshRegister }: {refreshRegister: F
       return setPossibleVolunteers([])
 
     async function fetchVolunteers(query: string) {
-      const newVolunteers = await getVolunteers({ query, size: 10 })
-      setPossibleVolunteers(newVolunteers)
+      //const newVolunteers = await getVolunteers({ query, size: 10 })
+      //setPossibleVolunteers(newVolunteers)
     }
     fetchVolunteers(currentVolunteer)
 
@@ -39,7 +39,7 @@ export function useAddToolRegisterModal({ refreshRegister }: {refreshRegister: F
       return setPossibleTools([])
 
     async function fetchTools(query: string) {
-      const newTools = await getToolsLoose({ filterString: query, status: 'AVAILABLE', size: 10 })
+      const newTools = await fecthToolsLoose({ filterString: query, status: 'AVAILABLE', size: 10 })
       const selectedIds = selectedTools.map(t => t.id)
       newTools.filter(t => !selectedIds.includes(t.id))
       setPossibleTools(newTools.filter(t => !selectedIds.includes(t.id)))
@@ -76,7 +76,7 @@ export function useAddToolRegisterModal({ refreshRegister }: {refreshRegister: F
     }
     )
 
-    createToolRegister(registersToCreate)
+    fetchCreateToolRegisters(registersToCreate)
       .then(registersCreated => {
         setSuccessMessage(`¡Registros creados correctamente! Número de registros añadidos: ${registersCreated.length}`)
       })
@@ -105,7 +105,7 @@ export function useAddToolRegisterModal({ refreshRegister }: {refreshRegister: F
     setCurrentTool(tool)
   }
 
-  const handleSetDate = (date:string) => {
+  const handleSetDate = (date: string) => {
     setDate(date)
   }
 

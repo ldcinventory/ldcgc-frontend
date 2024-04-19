@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Consumable, ConsumableParams, ConsumableWithId } from "./tConsumables"
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
-import { fetchConsumables } from "./consumablesAPI"
+import { fetchConsumables } from "./consumablesApi"
 
 export interface ConsumablesState {
   consumables: Consumable[]
@@ -35,7 +35,7 @@ export const getConsumables =
 
           return res.json()
         })
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       return response
     })

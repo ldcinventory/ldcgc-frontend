@@ -6,11 +6,11 @@ import { RootState } from "../../app/index"
 import { fetchVolunteers } from "../../volunteers/volunteerService"
 import { Tool, ToolsParams } from "../../resources/tools/tTools"
 import { ConsumableParams, ConsumableWithId } from "../../resources/consumables/tConsumables"
-import { fecthToolsLoose } from "../../resources/tools/toolService"
-import { fetchConsumables } from "../../resources/consumables/consumablesAPI"
+import { fecthToolsLoose } from "../../resources/tools/toolApi"
 import { ConsumableRegister } from "../consumables/tConsumableRegisters"
 import { ToolRegister } from "../tools/tToolRegisters"
 import { fetchCreateToolRegisters } from "../tools/toolRegisterApi"
+import { fetchConsumables } from "../../resources/consumables/consumablesApi"
 import { fetchCreateConsumableRegisters } from "../consumables/consumablesRegisterApi"
 
 export interface RegisterState {

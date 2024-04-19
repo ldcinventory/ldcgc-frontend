@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../app/store";
 import { useEffect } from "react";
 import { getMyUser } from "../users/usersSlice";
+import { ApiLogout } from "../login/LoginService";
 
 export function ProfileSmall() {
   const state = useAppSelector(state => state.users)
@@ -19,6 +20,7 @@ export function ProfileSmall() {
   const handleLogout = () => {
     localStorage.removeItem('payloadToken')
     localStorage.removeItem('signatureToken')
+    ApiLogout()
     navigate('/login')
   }
 

@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
-export function AppTableHeaderCellMd({ children, className }:{children?: ReactNode, className?: string}) {
+export function AppTableHeaderCell5({ children, className }:{children?: ReactNode, className?: string}) {
   return (
     <th className="p-2 w-1/5">
       <div className={`flex gap-2 items-center ${className}`}>
@@ -10,7 +10,7 @@ export function AppTableHeaderCellMd({ children, className }:{children?: ReactNo
   )
 }
 
-export function AppTableCellMd({ children, className }: { children?: ReactNode, className?: string }) {
+export function AppTableCell5({ children, className }: { children?: ReactNode, className?: string }) {
   return ( 
     <td className={`p-2 w-1/5 ${className}`}>
       {children}
@@ -18,7 +18,7 @@ export function AppTableCellMd({ children, className }: { children?: ReactNode, 
   )
 }
 
-export function AppTableHeaderCellLg({ children, className }: { children?: ReactNode, className?: string }) {
+export function AppTableHeaderCell7({ children, className }: { children?: ReactNode, className?: string }) {
   return (
     <th className="p-2 w-[14%]">
       <div className={`flex gap-2 items-center ${className}`}>
@@ -28,7 +28,7 @@ export function AppTableHeaderCellLg({ children, className }: { children?: React
   )
 }
 
-export function AppTableCellLg({ children, className }: { children?: ReactNode, className?: string }) {
+export function AppTableCell7({ children, className }: { children?: ReactNode, className?: string }) {
   return (
     <td className={`p-2 w-[14%] ${className}`}>
       {children}

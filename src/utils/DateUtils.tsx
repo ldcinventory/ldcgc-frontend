@@ -1,9 +1,6 @@
-export const toDate = (dateStr: string) => {
-  const [year, month, day] = dateStr.split("-")
-  const date = new Date(year, month - 1, day)
-  return date
-}
+export const toDateString = (date: Date | undefined, lang: string, options: Intl.DateTimeFormatOptions = {}) => {
+  if (date === undefined)
+    return ''
 
-export const toDateInputString = (date: Date) => {
-  return `${date.getFullYear()}-${date.getMonth() < 9 ? '0' : ''}${date.getMonth() + 1}-${date.getDate()}`
+  return new Date(date).toLocaleDateString(lang, options)
 }

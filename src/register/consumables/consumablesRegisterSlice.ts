@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 
 import { ConsumableRegisterWithId, ConsumablesRegisterParams } from "./tConsumableRegisters"
-import { fetchConsumablesRegister, fetchDeleteConsumableRegister, fetchUpdateConsumableRegister } from "./consumablesRegisterAPI"
+import { fetchConsumablesRegister, fetchDeleteConsumableRegister, fetchUpdateConsumableRegister } from "./consumablesRegisterApi"
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
 
@@ -16,7 +16,7 @@ export interface ConsumablesRegisterState {
 
 const initialState: ConsumablesRegisterState = {
   consumablesRegister: [],
-  queryParams: { size: 10, pageIndex: 0 },
+  queryParams: { size: 10, pageIndex: 0, status: '', volunteer: '', consumable: '', sortField: '', descOrder: true },
   totalPages: 0,
   status: "idle",
   error: undefined,
@@ -65,18 +65,14 @@ export const closeConsumableRegister =
     }
   )
 
-const updateQueryParams =
-  createAsyncThunk<any, ConsumablesRegisterParams, { state: RootState }>(
-    "register/consumables/updateParams",
-    async (queryParams) => {
-      return queryParams;
-    }
-  )
-
 export const consumablesRegisterSlice = createSlice({
   name: "consumablesRegister",
   initialState,
-  reducers: {},
+  reducers: {
+    updateQueryParams: (state, action: PayloadAction<ConsumablesRegisterParams>) => {
+      return {...state, queryParams: action.payload}
+    }
+  },
   extraReducers: (builder) => {
     builder
       .addCase(getConsumablesRegister.pending, state => {
@@ -94,11 +90,6 @@ export const consumablesRegisterSlice = createSlice({
         state.status = "failed"
         state.error = action.error.message
       })
-      .addCase(updateQueryParams.fulfilled,
-        (state, action: PayloadAction<ConsumablesRegisterParams>) => {
-          state.queryParams = action.payload
-        }
-      )
       .addCase(deleteConsumableRegister.pending, state => {
         state.status = "loading"
       })
@@ -112,6 +103,6 @@ export const consumablesRegisterSlice = createSlice({
   }
 })
 
-export const { } = consumablesRegisterSlice.actions
+export const { updateQueryParams } = consumablesRegisterSlice.actions
 
 export default consumablesRegisterSlice.reducer

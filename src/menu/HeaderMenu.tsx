@@ -11,7 +11,7 @@ export function HeaderMenu() {
         <AppNavLink to='/'><HomeIcon className="h-8" /></AppNavLink>
         <AppNavLink to='/volunteers'>Voluntarios</AppNavLink>
         <AppNavLink to='/tools'>Herramientas</AppNavLink>
-        <AppNavLink to='/register'>Registro</AppNavLink>
+        <AppNavLink to='/register/tools'>Registro</AppNavLink>
         <ProfileSmall />
       </header>
       <main className="bg-primary-4 dark:bg-primary-8 mx-5 lg:mx-20">

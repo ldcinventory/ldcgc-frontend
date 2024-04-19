@@ -5,7 +5,7 @@ import { getVolunteers } from "../../../volunteers/volunteerService"
 import { fecthToolsLoose } from "../../../resources/tools/toolService"
 import { Volunteer } from "../../../volunteers/tVolunteers"
 import { ToolRegister } from "../tToolRegisters"
-import { createToolRegister } from "../ToolRegisterService"
+import { fetchCreateToolRegisters } from "../toolRegisterApi"
 import { Tool } from "../../../resources/tools/tTools"
 
 export function useAddToolRegisterModal({ refreshRegister }: { refreshRegister: Function }) {
@@ -76,7 +76,7 @@ export function useAddToolRegisterModal({ refreshRegister }: { refreshRegister: 
     }
     )
 
-    createToolRegister(registersToCreate)
+    fetchCreateToolRegisters(registersToCreate)
       .then(registersCreated => {
         setSuccessMessage(`¡Registros creados correctamente! Número de registros añadidos: ${registersCreated.length}`)
       })

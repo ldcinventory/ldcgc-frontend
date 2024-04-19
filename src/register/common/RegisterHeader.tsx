@@ -1,11 +1,8 @@
-import { Outlet, useNavigate } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { AppNavLinkBox } from "../../common/components/AppNavLink";
-import { useEffect } from "react";
 import { AddRegistersModal } from "./AddRegistersModal";
 
 export function RegisterHeader() {
-  const navigate = useNavigate()
-  useEffect(() => navigate('tools'), [])
 
   return ( 
     <>

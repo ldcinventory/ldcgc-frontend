@@ -13,7 +13,7 @@ export interface ToolRegisterWithId extends ToolRegister {
   id: number
 }
 
-export interface ToolRegisterQueryParams {
+export interface ToolRegisterParams {
   pageIndex?: number
   size?: number
   sortString?: string

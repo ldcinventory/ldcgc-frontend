@@ -96,7 +96,7 @@ export function ToolsRegisterTable({
           </tr>
         </thead>
         <tbody className="border-b">
-          {toolRegister.map(register => {
+          {toolRegister && toolRegister.map(register => {
             const { volunteerName, volunteerLastName, toolName, registerFrom, registerTo, id } = register
             const opened = registerTo === undefined
             const from = new Date(registerFrom).toLocaleDateString("es-ES")

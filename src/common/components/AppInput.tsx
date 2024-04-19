@@ -9,7 +9,7 @@ export function AppTextInput({ value, onChange, placeholder }: Input) {
   )
 }
 
-export function AppNumberInput({ value, onChange, placeholder, min, max, step, onKeyUp, className }: Input) {
+export function AppNumberInput({ value, defaultValue, onChange, placeholder, min, max, step, onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
@@ -17,6 +17,7 @@ export function AppNumberInput({ value, onChange, placeholder, min, max, step, o
       step={step}
       onKeyUp={onKeyUp}
       value={value}
+      defaultValue={defaultValue}
       className={` ${className} font-normal rounded-md w-full p-1 
       dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}
       onChange={onChange} />

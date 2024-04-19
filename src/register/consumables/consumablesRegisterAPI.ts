@@ -1,5 +1,5 @@
 import { fetchApi } from "../../api/fetchApi"
-import { ConsumableRegisterWithId, ConsumablesRegisterParams } from "./tConsumableRegisters"
+import { ConsumableRegister, ConsumableRegisterWithId, ConsumablesRegisterParams } from "./tConsumableRegisters"
 
 const CONSUMABLES_RESOURCES_PATH = '/resources/consumables/registers'
 
@@ -11,3 +11,6 @@ export const fetchDeleteConsumableRegister = (registerId: number) =>
 
 export const fetchUpdateConsumableRegister = (register: ConsumableRegisterWithId) =>
   fetchApi({ method: 'PUT', path: `${CONSUMABLES_RESOURCES_PATH}/${register.id}`, body: JSON.stringify(register) })
+
+export const fetchCreateConsumableRegisters = (consumableRegisters: ConsumableRegister[]) => 
+  fetchApi({ method: "POST", path: `${CONSUMABLES_RESOURCES_PATH}/many`, body: JSON.stringify(consumableRegisters) })

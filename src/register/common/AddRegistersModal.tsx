@@ -87,8 +87,8 @@ export function AddRegistersModal() {
                         <li key={consumableRegister.consumableBarcode} className="flex flex-col items-start text-sm">
                           <div className="flex justify-between w-full">
                             <section className="flex gap-2">
-                              {<CheckCircleIcon className="h-6 text-success-4" />}
-                              {consumableRegister.consumable?.name}
+                              {consumableRegister.stockAmountRequest > 0 && <CheckCircleIcon className="h-6 text-success-4" />}
+                              {consumableRegister.consumableName}
                             </section>
                             <AppButton onClick={() => handleRemoveSelectedConsumable(consumableRegister)}><XCircleIcon className="h-6" /></AppButton>
                           </div>
@@ -103,8 +103,9 @@ export function AddRegistersModal() {
 
               }
             </div>
-
-            <AppButtonSubmitSuccess className="p-2" disabled={!state.selectedVolunteer || (state.selectedTools.length <= 0 && state.selectedConsumables.length <= 0)}>
+            {state.possibleConsumables.map(pc => <span>{pc.stock}</span>)}
+            <AppButtonSubmitSuccess className="p-2" disabled={!state.selectedVolunteer || (state.selectedTools.length <= 0 &&
+              (state.selectedConsumables.length <= 0 || state.selectedConsumables.some(register => register.stockAmountRequest <= 0)))}>
               Añadir registros
             </AppButtonSubmitSuccess> 
             <span className="text-success-6 dark:text-success-4 p-2 rounded-md">{state.message}</span>

@@ -11,6 +11,7 @@ import { fetchConsumables } from "../../resources/consumables/consumablesAPI"
 import { ConsumableRegister } from "../consumables/tConsumableRegisters"
 import { ToolRegister } from "../tools/tToolRegisters"
 import { fetchCreateToolRegisters } from "../tools/toolRegisterApi"
+import { fetchCreateConsumableRegisters } from "../consumables/consumablesRegisterApi"
 
 export interface RegisterState {
   status: StatusType
@@ -42,11 +43,11 @@ const initialState: RegisterState = {
   currentTool: "",
   possibleTools: [],
   selectedTools: [],
-  toolsParams: {},
+  toolsParams: { pageIndex: 0, size: 10, status: 'AVAILABLE' },
   currentConsumable: "",
   possibleConsumables: [],
   selectedConsumables: [],
-  consumablesParams: {},
+  consumablesParams: { pageIndex: 0, size: 10, hasStock: true },
   modalOpened: false
 }
 
@@ -71,7 +72,6 @@ export const getPossibleTools =
       , thunkApi) => {
       const state = thunkApi.getState()
       const newParams = { ...state.register.toolsParams, ...toolsParams }
-      newParams.status = 'AVAILABLE'
       thunkApi.dispatch(updateToolsParams(newParams))
       const response = await fecthToolsLoose({ toolsParams: newParams })
         .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
@@ -85,8 +85,7 @@ export const getPossibleConsumables =
     async (consumablesParams
       , thunkApi) => {
       const state = thunkApi.getState()
-      const newParams = { ...state.register.consumablesParams, ...consumablesParams }
-      //TODO: filtrar por consumibles con stock > 0 en los query params
+      const newParams = { ...state.register.consumablesParams, ...consumablesParams }      
       thunkApi.dispatch(updateConsumablesParams(newParams))
       const response = await fetchConsumables(newParams)
         .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
@@ -99,18 +98,25 @@ export const addRegisters =
     async (ignored, thunkApi) => {
       const state = thunkApi.getState().register
       const volunteer = state.selectedVolunteer
+      if (volunteer === null)
+        throw new Error('El campo de voluntario no puede estar vacío')
+
       const toolRegisters = state.selectedTools.map(toolRegister => {
-        return { ...toolRegister, volunteerBuilderAssistantId: volunteer === null ? '' : volunteer.builderAssistantId, registerFrom: new Date() }
+        return { ...toolRegister, volunteerBuilderAssistantId: volunteer.builderAssistantId, registerFrom: new Date() }
       })
       const toolsResponse = await fetchCreateToolRegisters(toolRegisters)
         .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
 
-      const consumablesRegisters = state.selectedConsumables.map(selectConsumable => {
-        return { ...selectConsumable, volunteerBAId: volunteer?.builderAssistantId, registerFrom: new Date() }
+      const consumablesRegisters = state.selectedConsumables
+        .filter(consumableRegister => consumableRegister.stockAmountRequest > 0)
+        .map(consumableRegister => {
+        return { ...consumableRegister, volunteerBAId: volunteer.builderAssistantId, registerFrom: new Date() }
       })
 
-      //TODO: Llamar al endpoint de consumables/many cuando esté hecho
-      if (toolsResponse.ok) {
+      const consumablesResponse = await fetchCreateConsumableRegisters(consumablesRegisters)
+        .catch(error => { throw new Error(`The server responded with an error: ${error}`) })
+
+      if (toolsResponse.ok && consumablesResponse.ok) {
         thunkApi.dispatch(resetState({ ...initialState, modalOpened: state.modalOpened, message: "Registros añadidos correctamente" }))
         setTimeout(() => thunkApi.dispatch(resetState({ ...initialState, modalOpened: state.modalOpened, message: undefined })),
           1500)
@@ -168,12 +174,12 @@ export const registerSlice = createSlice({
       return { ...state, currentConsumable: newCurrentConsumable }
     },
     updateConsumablesParams: (state, action: PayloadAction<ConsumableParams>) => {
-      return { ...state, ConsumablesParams: action.payload }
+      return { ...state, consumablesParams: action.payload }
     },
     selectConsumable: (state, action: PayloadAction<ConsumableWithId>) => {
       const newConsumable = action.payload
       const selectedConsumable = {
-        consumable: newConsumable, consumableBarcode: newConsumable.barcode, stockAmountRequest: 0, closedRegister: false, volunteerBAId: '', volunteerName: '',
+        consumableName: newConsumable.name, consumableStockType: newConsumable.stockType, consumableBarcode: newConsumable.barcode, stockAmountRequest: 0, closedRegister: false, volunteerBAId: '', volunteerName: '',
         volunteerLastName: '', registerFrom: new Date(), processingStockChanges: true }
       return { ...state, selectedConsumables: [...state.selectedConsumables, selectedConsumable], currentConsumable: '', possibleConsumables: [] }
     },

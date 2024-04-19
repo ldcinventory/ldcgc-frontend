@@ -1,5 +1,4 @@
-import { ArrowUturnDownIcon, Bars2Icon, BeakerIcon, CalendarIcon, CircleStackIcon, QueueListIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { ArrowLeft, ArrowRight, ArrowTurnDown, ArrowUpDown, Close, Delete, DoubleArrowLeft, DoubleArrowRight, MenuSmall } from "../../../Icons"
+import { ArrowUturnDownIcon, ArrowsUpDownIcon, Bars2Icon, BeakerIcon, CalendarIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon, CircleStackIcon, QueueListIcon, TrashIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { useConsumablesRegisterTable } from "../hooks/UseConsumablesRegisterTable"
 import { AppNumberInput, AppNumberInputSm, AppTextInput } from "../../../common/components/AppInput"
 import { AppSelect } from "../../../common/components/AppSelect"
@@ -82,7 +81,7 @@ export function ConsumablesRegister() {
           }
           {
             state.consumablesRegister.length !== 0 && state.consumablesRegister.map(register => {
-              const stockType = register.consumable.stockType.toLocaleLowerCase()
+              const stockType = register.consumableStockType.toLocaleLowerCase()
               const isLoading = state.status === 'loading'
               const opened = !register.registerTo
 
@@ -91,7 +90,7 @@ export function ConsumablesRegister() {
                   <td className="p-2 w-2/3">
                     <div className="flex flex-col">
                       <span>{register.volunteerName} {register.volunteerLastName}</span>
-                      <span className="opacity-90">{register.consumable.name}</span>
+                      <span className="opacity-90">{register.consumableName}</span>
                       <div className="flex gap-2 text-sm opacity-80 items-center ">
                         {`${register.stockAmountRequest.toFixed(2)}${stockType.substring(0, 2)}`}
                         {!opened && ` - ${register.stockAmountReturn?.toFixed(2)}${stockType.substring(0, 2)}`}
@@ -133,7 +132,7 @@ export function ConsumablesRegister() {
                       <AppButtonError onClick={() => deleteRegister(register.id)}
                         className={isLoading ? 'bg-opacity-50' : ''}
                         disabled={isLoading}>
-                        <Delete />
+                        <TrashIcon className="h-7" />
                       </AppButtonError>
                     </div>
                   </td>
@@ -146,11 +145,11 @@ export function ConsumablesRegister() {
             <td className="pt-2 w-full">
               <div className="flex justify-e items-center">
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
-                  <DoubleArrowLeft />
+                  <ChevronDoubleLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
-                  <ArrowLeft />
+                  <ChevronLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <div className="flex gap-2 justify-center w-full whitespace-nowrap">
                   Página
@@ -165,10 +164,10 @@ export function ConsumablesRegister() {
               <div className="flex justify-end items-center ">
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.min(state.totalPages, (queryParams.pageIndex || 0) + 1) })}>
-                  <ArrowRight />
+                  <ChevronRightIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: state.totalPages - 1 })}>
-                  <DoubleArrowRight />
+                  <ChevronDoubleRightIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </td>
@@ -202,21 +201,21 @@ export function ConsumablesRegister() {
             <AppTableHeaderCell5 className="gap-6">
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountRequest', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent> -
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountReturn', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5 className="gap-7">
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerFrom', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent> -
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerTo', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
@@ -234,7 +233,7 @@ export function ConsumablesRegister() {
               <AppButtonTransparent
                 onClick={() =>
                   updateQueryParams({ volunteer: '', consumable: '', status: '', sortField: 'id', descOrder: true })}>
-                <Close />
+                <XMarkIcon className="h-7" />
               </AppButtonTransparent>
             </th>
           </tr>
@@ -249,14 +248,14 @@ export function ConsumablesRegister() {
             </tr>
           }
           {state.consumablesRegister.length !== 0 && state.consumablesRegister.map(register => {
-            const stockType = register.consumable.stockType.toLocaleLowerCase()
+            const stockType = register.consumableStockType.toLocaleLowerCase()
             const isLoading = state.status === 'loading'
             const opened = !register.registerTo && !register.stockAmountReturn
 
             return (
               <tr key={register.id} className="align-top h-16">
                 <AppTableCell5>{register.volunteerName} {register.volunteerLastName}</AppTableCell5>
-                <AppTableCell5>{register.consumable.name}</AppTableCell5>
+                <AppTableCell5>{register.consumableName}</AppTableCell5>
                 <AppTableCell5>
                   <div className="flex gap-3">
                     <span className="w-1/4">{`${register.stockAmountRequest.toFixed(2)}${stockType.substring(0, 2)}`}</span>
@@ -291,12 +290,12 @@ export function ConsumablesRegister() {
                       opened &&
                       <AppButtonSuccess onClick={() => { closeRegister(register) }} disabled={isLoading}
                         className={isLoading ? 'bg-opacity-50' : ''}>
-                        <ArrowTurnDown />
+                        <ArrowUturnDownIcon className="h-7" />
                       </AppButtonSuccess>
                     }
                     <AppButtonError onClick={() => deleteRegister(register.id)} disabled={isLoading}
                       className={isLoading ? 'bg-opacity-50' : ''}>
-                      <Delete />
+                      <TrashIcon className="h-7" />
                     </AppButtonError>
                   </div>
                 </AppTableCell5>
@@ -309,11 +308,11 @@ export function ConsumablesRegister() {
             <AppTableCell5>
               <div className="flex items-center">
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
-                  <DoubleArrowLeft />
+                  <ChevronDoubleLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
-                  <ArrowLeft />
+                  <ChevronLeftIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </AppTableCell5>
@@ -333,10 +332,10 @@ export function ConsumablesRegister() {
               <div className="flex justify-end items-center">
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.min(state.totalPages, (queryParams.pageIndex || 0) + 1) })}>
-                  <ArrowRight />
+                  <ChevronRightIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: state.totalPages - 1 })}>
-                  <DoubleArrowRight />
+                  <ChevronDoubleRightIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </AppTableCell5>
@@ -356,7 +355,7 @@ export function ConsumablesRegister() {
             <AppTableHeaderCell7><QueueListIcon className="h-7" />Estado</AppTableHeaderCell7>
             <AppTableHeaderCell7 className="justify-end">
               <AppButtonTransparent onClick={toggleShowFilters} className={showFilters ? 'bg-primary-6' : ''}>
-                <MenuSmall />
+                <Bars2Icon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
           </tr>
@@ -372,25 +371,25 @@ export function ConsumablesRegister() {
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountRequest', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerFrom', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountReturn', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerTo', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
@@ -408,7 +407,7 @@ export function ConsumablesRegister() {
               <AppButtonTransparent
                 onClick={() =>
                   updateQueryParams({ volunteer: '', consumable: '', status: '', sortField: 'id', descOrder: true })}>
-                <Close />
+                <XMarkIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
           </tr>
@@ -424,14 +423,14 @@ export function ConsumablesRegister() {
           }
           {
             state.consumablesRegister.length !== 0 && state.consumablesRegister.map(register => {
-              const stockType = register.consumable.stockType.toLocaleLowerCase()
+              const stockType = register.consumableStockType.toLocaleLowerCase()
               const isLoading = state.status === 'loading'
               const opened = !register.registerTo
 
               return (
                 <tr key={register.id} className="align-top h-16">
                   <AppTableCell7>{register.volunteerName} {register.volunteerLastName}</AppTableCell7>
-                  <AppTableCell7>{register.consumable.name} </AppTableCell7>
+                  <AppTableCell7>{register.consumableName} </AppTableCell7>
                   <AppTableCell7>{`${register.stockAmountRequest} ${stockType}`} </AppTableCell7>
                   <AppTableCell7>{new Date(register.registerFrom).toLocaleDateString("es-ES")} </AppTableCell7>
                   <AppTableCell7>
@@ -458,12 +457,12 @@ export function ConsumablesRegister() {
                         opened &&
                         <AppButtonSuccess onClick={() => { closeRegister(register) }} disabled={isLoading}
                           className={isLoading ? 'bg-opacity-50' : ''}>
-                          <ArrowTurnDown />
+                          <ArrowUturnDownIcon className="h-7" />
                         </AppButtonSuccess>
                       }
                       <AppButtonError onClick={() => deleteRegister(register.id)} disabled={isLoading}
                         className={isLoading ? 'bg-opacity-50' : ''}>
-                        <Delete />
+                        <TrashIcon className="h-7" />
                       </AppButtonError>
                     </div>
                   </AppTableCell7>
@@ -476,11 +475,11 @@ export function ConsumablesRegister() {
             <AppTableCell7>
               <div className="flex items-center">
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
-                  <DoubleArrowLeft />
+                  <ChevronDoubleLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
-                  <ArrowLeft />
+                  <ChevronLeftIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </AppTableCell7>
@@ -502,10 +501,10 @@ export function ConsumablesRegister() {
               <div className="flex justify-end items-center">
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.min(state.totalPages, (queryParams.pageIndex || 0) + 1) })}>
-                  <ArrowRight />
+                  <ChevronRightIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: state.totalPages - 1 })}>
-                  <DoubleArrowRight />
+                  <ChevronDoubleRightIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </AppTableCell7>

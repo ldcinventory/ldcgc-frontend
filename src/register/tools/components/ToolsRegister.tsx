@@ -1,5 +1,7 @@
-import { ArrowUturnDownIcon, Bars2Icon, BeakerIcon, CalendarIcon, CircleStackIcon, QueueListIcon, UserIcon, WrenchIcon, XMarkIcon } from "@heroicons/react/24/outline"
-import { ArrowLeft, ArrowRight, ArrowTurnDown, ArrowUpDown, Close, Delete, DoubleArrowLeft, DoubleArrowRight, MenuSmall } from "../../../Icons"
+import {
+  ArrowUturnDownIcon, Bars2Icon, CalendarIcon, ChevronDoubleLeftIcon, CircleStackIcon, QueueListIcon, UserIcon, WrenchIcon,
+  ArrowsUpDownIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon, TrashIcon, XMarkIcon
+ } from "@heroicons/react/24/outline"
 import { AppNumberInputSm, AppTextInput } from "../../../common/components/AppInput"
 import { AppSelect } from "../../../common/components/AppSelect"
 import { AppButtonError, AppButtonSuccess, AppButtonTransparent } from "../../../common/components/AppButton"
@@ -67,7 +69,7 @@ export function ToolsRegister() {
               <AppButtonTransparent
                 onClick={() =>
                   updateQueryParams({ volunteer: '', tool: '', status: '', descOrder: true })}>
-                <XMarkIcon className="h-7" />
+                <TrashIcon className="h-7" className="h-7" />
               </AppButtonTransparent>
             </th>
           </tr>
@@ -115,7 +117,7 @@ export function ToolsRegister() {
                       <AppButtonError onClick={() => deleteRegister(register.id)}
                         className={isLoading ? 'bg-opacity-50' : ''}
                         disabled={isLoading}>
-                        <Delete />
+                        <TrashIcon className="h-7" />
                       </AppButtonError>
                     </div>
                   </td>
@@ -128,11 +130,11 @@ export function ToolsRegister() {
             <td className="pt-2 w-full">
               <div className="flex justify-e items-center">
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
-                  <DoubleArrowLeft />
+                  <ChevronDoubleLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
-                  <ArrowLeft />
+                  <ChevronLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <div className="flex gap-2 justify-center w-full whitespace-nowrap">
                   Página
@@ -147,10 +149,10 @@ export function ToolsRegister() {
               <div className="flex justify-end items-center ">
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.min(state.totalPages, (queryParams.pageIndex || 0) + 1) })}>
-                  <ArrowRight />
+                  <ChevronRightIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: state.totalPages - 1 })}>
-                  <DoubleArrowRight />
+                  <ChevronDoubleRightIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </td>
@@ -168,7 +170,7 @@ export function ToolsRegister() {
             <AppTableHeaderCell5><QueueListIcon className="h-7" />Estado</AppTableHeaderCell5>
             <AppTableHeaderCell5 className="justify-end">
               <AppButtonTransparent onClick={toggleShowFilters} className={showFilters ? 'bg-primary-6' : ''}>
-                <MenuSmall />
+                <Bars2Icon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
           </tr>
@@ -184,13 +186,13 @@ export function ToolsRegister() {
             <AppTableHeaderCell5>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortString: 'registerFrom', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortString: 'registerTo', descOrder: !queryParams.descOrder })}>
-                <ArrowUpDown />
+                <ArrowsUpDownIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
@@ -208,7 +210,7 @@ export function ToolsRegister() {
               <AppButtonTransparent
                 onClick={() =>
                   updateQueryParams({ volunteer: '', tool: '', status: '', descOrder: true })}>
-                <Close />
+                <XMarkIcon className="h-7" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
           </tr>
@@ -240,12 +242,12 @@ export function ToolsRegister() {
                         opened &&
                         <AppButtonSuccess onClick={() => { closeRegister(register) }} disabled={isLoading}
                           className={isLoading ? 'bg-opacity-50' : ''}>
-                          <ArrowTurnDown />
+                          <ArrowUturnDownIcon className="h-7" />
                         </AppButtonSuccess>
                       }
                       <AppButtonError onClick={() => deleteRegister(register.id)} disabled={isLoading}
                         className={isLoading ? 'bg-opacity-50' : ''}>
-                        <Delete />
+                        <TrashIcon className="h-7" />
                       </AppButtonError>
                     </div>
                   </AppTableCell5>
@@ -258,11 +260,11 @@ export function ToolsRegister() {
             <AppTableCell5>
               <div className="flex items-center">
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
-                  <DoubleArrowLeft />
+                  <ChevronDoubleLeftIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
-                  <ArrowLeft />
+                  <ChevronLeftIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </AppTableCell5>
@@ -282,10 +284,10 @@ export function ToolsRegister() {
               <div className="flex justify-end items-center">
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.min(state.totalPages, (queryParams.pageIndex || 0) + 1) })}>
-                  <ArrowRight />
+                  <ChevronRightIcon className="h-7" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: state.totalPages - 1 })}>
-                  <DoubleArrowRight />
+                  <ChevronDoubleRightIcon className="h-7" />
                 </AppButtonTransparent>
               </div>
             </AppTableCell5>

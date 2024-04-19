@@ -9,7 +9,7 @@ export function Login() {
 
   const handleLogin = async (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    const formData = new FormData(event.target)
+    const formData = new FormData(event.currentTarget)
     const email = formData.get('email') as string
     const password = formData.get('password') as string
     const headers = await ApiLogin({ email, password })

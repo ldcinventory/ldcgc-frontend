@@ -203,8 +203,7 @@ export function ToolsRegister() {
                   { value: "", name: "Cualquiera" },
                   { value: "OPENED", name: "Abierto" },
                   { value: "CLOSED", name: "Cerrado" }
-                ]}>
-              </AppSelect>
+                ]}/>              
             </AppTableHeaderCell5>
             <AppTableHeaderCell5 className="justify-end">
               <AppButtonTransparent

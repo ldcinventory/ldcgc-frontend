@@ -24,9 +24,11 @@ export interface PaginatedResponse<T> {
 export interface FetchApiParams {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
   path: string
-  queryParams?: ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams
+  queryParams?: QueryParams
   body?: string
 }
+
+export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams
 
 export type StatusType = "idle" | "loading" | "failed" | "succeeded"
 

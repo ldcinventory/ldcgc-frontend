@@ -2,7 +2,7 @@ import { Bars3Icon, ChevronLeftIcon, HomeIcon } from "@heroicons/react/24/outlin
 import { AppNavLink } from "../common/components/AppNavLink";
 import { ProfileSmall } from "../profile/ProfileSmall";
 import { useState } from "react";
-import { AppButtonRounded } from "../common/components/AppButton";
+import { AppButtonRounded, AppButtonTransparent } from "../common/components/AppButton";
 
 export function AsideMenu() {
   const [opened, setOpened] = useState(false)
@@ -20,10 +20,18 @@ export function AsideMenu() {
       <aside className={`md:hidden fixed bg-primary-3 dark:bg-primary-9 w-4/5 h-screen top-0 z-10
       transition-all duration-300 pl-10 py-10 flex flex-col justify-between ${opened ? 'left-0' : 'left-[-100%]'}`}>
         <div className="flex flex-col gap-10">
-          <AppNavLink to='/'><HomeIcon className="h-8" /></AppNavLink>
-          <AppNavLink to='/volunteers'>Voluntarios</AppNavLink>
-          <AppNavLink to='/tools'>Herramientas</AppNavLink>
-          <AppNavLink to='/register/tools'>Registro</AppNavLink>
+          <AppNavLink to='/'>
+            <AppButtonTransparent onClick={() => setOpened(false)} ><HomeIcon className="h-8" /></AppButtonTransparent>
+          </AppNavLink>
+          <AppNavLink to='/volunteers'>
+            <AppButtonTransparent onClick={() => setOpened(false)} >Voluntarios</AppButtonTransparent>
+          </AppNavLink>
+          <AppNavLink to='/tools'>
+            <AppButtonTransparent onClick={() => setOpened(false)} >Herramientas</AppButtonTransparent>
+          </AppNavLink>
+          <AppNavLink to='/register/tools'>
+            <AppButtonTransparent onClick={() => setOpened(false)} >Registro</AppButtonTransparent>
+          </AppNavLink>
         </div>
         <ProfileSmall />
       </aside>

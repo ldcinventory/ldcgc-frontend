@@ -225,9 +225,7 @@ export function ConsumablesRegister() {
                   { name: 'Cualquiera', value: '' },
                   { name: 'Abierto', value: 'OPENED' },
                   { name: 'Cerrado', value: 'CLOSED' },
-                ]}>
-
-              </AppSelect>
+                ]}/>
             </AppTableHeaderCell5>
             <th className="p-2 font-normal flex justify-end">
               <AppButtonTransparent
@@ -400,8 +398,7 @@ export function ConsumablesRegister() {
                   { value: "", name: "Cualquiera" },
                   { value: "OPENED", name: "Abierto" },
                   { value: "CLOSED", name: "Cerrado" }
-                ]}>
-              </AppSelect>
+                ]}/>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7 className="justify-end">
               <AppButtonTransparent

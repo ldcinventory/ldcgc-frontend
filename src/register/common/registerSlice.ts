@@ -10,8 +10,8 @@ import { fecthToolsLoose } from "../../resources/tools/toolApi"
 import { ConsumableRegister } from "../consumables/tConsumableRegisters"
 import { ToolRegister } from "../tools/tToolRegisters"
 import { fetchCreateToolRegisters } from "../tools/toolRegisterApi"
-import { fetchConsumables } from "../../resources/consumables/consumablesApi"
-import { fetchCreateConsumableRegisters } from "../consumables/consumablesRegisterApi"
+import { fetchConsumables } from "../../../src/resources/consumables/consumablesAPI"
+import { fetchCreateConsumableRegisters } from "../../register/consumables/consumablesRegisterAPI"
 
 export interface RegisterState {
   status: StatusType

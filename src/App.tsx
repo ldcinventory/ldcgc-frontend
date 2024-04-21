@@ -14,7 +14,7 @@ const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = localStorage.getItem('payloadToken') !== null
 
   if (isAuthenticated)
-    return <>{children}</>
+    return children
 
   return <Navigate to={'/login'}/>
 }

@@ -4,7 +4,7 @@ export function AppButtonTransparent({ children, onClick, className, disabled }:
   return ( 
     <button onClick={onClick}
       className={`dark:hover:text-primary-3 dark:hover:bg-primary-6 
-      rounded-md transition-colors duration-300 p-1 transition-all duration-300
+      rounded-md p-1 transition-all duration-300
       ${className}`}
       disabled={disabled}>
       {children}
@@ -15,7 +15,7 @@ export function AppButtonTransparent({ children, onClick, className, disabled }:
 export function AppButtonSuccess({children, onClick, className, disabled}: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-success-5 rounded-md p-1 hover:bg-success-4 transition-all duration-300
+      className={`bg-success-4 rounded-md p-1 hover:bg-success-3 transition-all duration-300
       ${className}`}
       disabled={disabled}>
       {children}
@@ -26,7 +26,7 @@ export function AppButtonSuccess({children, onClick, className, disabled}: Butto
 export function AppButtonError({ children, onClick, className, disabled }: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-error-5 rounded-md p-1 hover:bg-error-4 transition-all duration-300
+      className={`bg-error-3 rounded-md p-1 hover:bg-error-4 transition-all duration-300
       ${className}`}
       disabled={disabled}>
       {children}
@@ -38,7 +38,7 @@ export function AppButtonError({ children, onClick, className, disabled }: Butto
 export function AppButton({ children, onClick, className, disabled }: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-primary-6 rounded-md p-1 hover:bg-primary-5 transition-all duration-300
+      className={`bg-primary-2 rounded-md p-1 hover:bg-primary-4 transition-all duration-300
       ${className}`}
       disabled={disabled}>
       {children}
@@ -50,7 +50,7 @@ export function AppButton({ children, onClick, className, disabled }: Button) {
 export function AppButtonRounded({ children, onClick, className, disabled }: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-primary-6 rounded-full p-1 hover:bg-primary-5 transition-all duration-300
+      className={`bg-primary-2 rounded-full p-1 hover:bg-primary-4 transition-all duration-300
       ${className}`}
       disabled={disabled}>
       {children}
@@ -62,7 +62,7 @@ export function AppButtonRounded({ children, onClick, className, disabled }: But
 export function AppButtonSubmit({ children, onClick, className, disabled }: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-primary-6 rounded-md p-1 hover:bg-primary-5 transition-all duration-300
+      className={`bg-primary-2 rounded-md p-1 hover:bg-primary-4 transition-all duration-300
       ${className}`}
       disabled={disabled}
       type="submit">

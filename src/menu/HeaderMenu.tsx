@@ -14,7 +14,7 @@ export function HeaderMenu() {
         <AppNavLink to='/register/tools'>Registro</AppNavLink>
         <ProfileSmall />
       </header>
-      <main className="bg-primary-4 dark:bg-primary-8 mx-5 lg:mx-20">
+      <main className="dark:bg-primary-8 mx-5 lg:mx-20">
         <Outlet />
       </main>
     </>

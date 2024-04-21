@@ -21,7 +21,7 @@ export function ToolsRegister() {
   } = useToolsRegisterTable()
   return (
 
-    <div className="bg-primary-4 dark:bg-primary-7 mb-10 rounded-xl mx-5 lg:mx-auto px-4 pb-2">
+    <div className="bg-primary-2 dark:bg-primary-7 mb-10 rounded-xl mx-5 lg:mx-auto px-4 pb-2">
       {
         state.status === 'failed' &&
         <section

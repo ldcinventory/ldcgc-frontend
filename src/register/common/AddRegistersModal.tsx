@@ -28,19 +28,16 @@ export function AddRegistersModal() {
                 value={state.currentVolunteer} onChange={handleGetPossibleVolunteers} />
               {
                 state.possibleVolunteers?.length > 0 && state.selectedVolunteer === null &&
-                <ul className="z-10 absolute overflow-auto text-primary-9 dark:text-primary-1 flex flex-col gap-2 p-1 w-full rounded-md bg-primary-5">
-                  {
-                    state.possibleVolunteers?.map(v =>
-                      <li key={v.id} onClick={() => handleSelectVolunteer(v)}
-                        className="hover:bg-primary-5 transition-colors duration-200">
-                        {`${v.name} ${v.lastName} (${v.builderAssistantId})`}
-                      </li>
-                    )
+                <AppList items={state.possibleVolunteers.map(volunteer => {
+                  return {
+                    id: volunteer.id,
+                    display: `${volunteer.name} ${volunteer.lastName}`,
+                    onClick: () => handleSelectVolunteer(volunteer)
                   }
-                </ul>
+                })} />
               }
             </div>
-            <div className="relative rounded-md w-full bg-primary-6">
+            <div className="relative rounded-md w-full">
               <AppLabeledTextInput placeholder="Herramienta..." id="tool_input"
                 label="Herramientas"
                 value={state.currentTool} onChange={handleGetPossibleTools} />
@@ -66,7 +63,7 @@ export function AddRegistersModal() {
 
               }
             </div>
-            <div className="relative rounded-md w-full bg-primary-6">
+            <div className="relative rounded-md w-full">
               <AppLabeledTextInput placeholder="Consumible..." id="tool_input"
                 label="Consumibles"
                 value={state.currentConsumable} onChange={handleGetPossibleConsumables} />

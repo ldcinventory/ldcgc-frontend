@@ -18,7 +18,7 @@ export function AppNavLinkBox({ children, to, className }: { children?: ReactNod
   return (
     <NavLink className={({ isActive, isPending, isTransitioning }) =>
       `hover:text-primary-8 hover:dark:text-primary-3 px-4 py-3 border transition-all duration-300
-      ${isActive ? 'bg-primary-3 dark:bg-primary-6' : ''}
+      ${isActive ? 'bg-primary-2 dark:bg-primary-6' : ''}
       ${className}`
     }
       to={to}>

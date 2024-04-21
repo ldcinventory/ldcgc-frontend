@@ -13,18 +13,20 @@ export function Login() {
     const formData = new FormData(event.currentTarget)
     const email = formData.get('email') as string
     const password = formData.get('password') as string
-    const headers = await ApiLogin({ email, password })
-      .catch((error:string) => setError('Usuario o contraseña incorrectos'))
-    const payloadToken = headers.get('x-header-payload-token')
-    
-    if (payloadToken !== null)
-      localStorage.setItem('payloadToken', payloadToken)
+    await ApiLogin({ email, password })
+      .then(headers => {
+        const payloadToken = headers.get('x-header-payload-token')
 
-    const signatureToken = headers.get('x-signature-token')
-    if (signatureToken !== null)
-      localStorage.setItem('signatureToken', signatureToken)
+        if (payloadToken !== null)
+          localStorage.setItem('payloadToken', payloadToken)
 
-    return navigate('/')
+        const signatureToken = headers.get('x-signature-token')
+        if (signatureToken !== null)
+          localStorage.setItem('signatureToken', signatureToken)
+
+        navigate('/')
+      })
+      .catch((error: string) => setError('Usuario o contraseña incorrectos'))
   }
 
   return (

@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { Consumable, ConsumableParams, ConsumableWithId } from "./tConsumables"
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
-import { fetchConsumables } from "../consumables/consumablesAPI"
+import { fetchConsumables } from "./consumablesApi"
 
 export interface ConsumablesState {
   consumables: Consumable[]

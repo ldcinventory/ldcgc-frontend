@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { ConsumableRegisterWithId, ConsumablesRegisterParams } from "./tConsumableRegisters"
-import { fetchConsumablesRegister, fetchDeleteConsumableRegister, fetchUpdateConsumableRegister } from "../consumables/consumablesRegisterAPI"
+import { fetchConsumablesRegister, fetchDeleteConsumableRegister, fetchUpdateConsumableRegister } from "../consumables/consumablesRegisterApi"
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
 

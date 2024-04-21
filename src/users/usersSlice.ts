@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { RootState } from "../app/index"
-import { fetchMyUser, fetchUsers } from "../users/usersAPI"
+import { fetchMyUser, fetchUsers } from "../users/usersApi"
 import { User } from "./tUsers"
 
 export interface UsersState {

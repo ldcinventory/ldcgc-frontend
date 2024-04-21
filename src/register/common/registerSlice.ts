@@ -10,8 +10,8 @@ import { fecthToolsLoose } from "../../resources/tools/toolApi"
 import { ConsumableRegister } from "../consumables/tConsumableRegisters"
 import { ToolRegister } from "../tools/tToolRegisters"
 import { fetchCreateToolRegisters } from "../tools/toolRegisterApi"
-import { fetchConsumables } from "../../../src/resources/consumables/consumablesAPI"
-import { fetchCreateConsumableRegisters } from "../../register/consumables/consumablesRegisterAPI"
+import { fetchConsumables } from "../../resources/consumables/consumablesApi"
+import { fetchCreateConsumableRegisters } from "../../register/consumables/consumablesRegisterApi"
 
 export interface RegisterState {
   status: StatusType
@@ -60,7 +60,7 @@ export const getPossibleVolunteers =
       const newParams = { ...state.register.volunteersParams, ...volunteersParams }
       thunkApi.dispatch(updateVolunteersParams(newParams))
       const response = await fetchVolunteers({ volunteersParams: newParams })
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
 
@@ -74,7 +74,7 @@ export const getPossibleTools =
       const newParams = { ...state.register.toolsParams, ...toolsParams }
       thunkApi.dispatch(updateToolsParams(newParams))
       const response = await fecthToolsLoose({ toolsParams: newParams })
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
 
@@ -85,10 +85,10 @@ export const getPossibleConsumables =
     async (consumablesParams
       , thunkApi) => {
       const state = thunkApi.getState()
-      const newParams = { ...state.register.consumablesParams, ...consumablesParams }      
+      const newParams = { ...state.register.consumablesParams, ...consumablesParams }
       thunkApi.dispatch(updateConsumablesParams(newParams))
       const response = await fetchConsumables(newParams)
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
 
@@ -105,16 +105,16 @@ export const addRegisters =
         return { ...toolRegister, volunteerBuilderAssistantId: volunteer.builderAssistantId, registerFrom: new Date() }
       })
       const toolsResponse = await fetchCreateToolRegisters(toolRegisters)
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       const consumablesRegisters = state.selectedConsumables
         .filter(consumableRegister => consumableRegister.stockAmountRequest > 0)
         .map(consumableRegister => {
-        return { ...consumableRegister, volunteerBAId: volunteer.builderAssistantId, registerFrom: new Date() }
-      })
+          return { ...consumableRegister, volunteerBAId: volunteer.builderAssistantId, registerFrom: new Date() }
+        })
 
       const consumablesResponse = await fetchCreateConsumableRegisters(consumablesRegisters)
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       if (toolsResponse.ok && consumablesResponse.ok) {
         thunkApi.dispatch(resetState({ ...initialState, modalOpened: state.modalOpened, message: "Registros añadidos correctamente" }))
@@ -180,13 +180,14 @@ export const registerSlice = createSlice({
       const newConsumable = action.payload
       const selectedConsumable = {
         consumableName: newConsumable.name, consumableStockType: newConsumable.stockType, consumableBarcode: newConsumable.barcode, stockAmountRequest: 0, closedRegister: false, volunteerBAId: '', volunteerName: '',
-        volunteerLastName: '', registerFrom: new Date(), processingStockChanges: true }
+        volunteerLastName: '', registerFrom: new Date(), processingStockChanges: true
+      }
       return { ...state, selectedConsumables: [...state.selectedConsumables, selectedConsumable], currentConsumable: '', possibleConsumables: [] }
     },
     updateSelectedConsumable: (state, action: PayloadAction<ConsumableRegister>) => {
       const newConsumable = action.payload
       const newSelectedConsumables = state.selectedConsumables.filter(consumableRegister => newConsumable.consumableBarcode !== consumableRegister.consumableBarcode)
-      return { ...state, selectedConsumables: [...newSelectedConsumables, newConsumable]}
+      return { ...state, selectedConsumables: [...newSelectedConsumables, newConsumable] }
     },
     removeSelectedConsumable: (state, action: PayloadAction<ConsumableRegister>) => {
       const newSelectedConsumables = state.selectedConsumables.filter(c => c.consumableBarcode !== action.payload.consumableBarcode)

@@ -31,13 +31,13 @@ export function Login() {
 
   return (
     <section className="dark:bg-primary-8 py-10 min-h-[92.5vh]">
-      <span>{error}</span>
+      <span className="text-error-4">{error}</span>
       <form onSubmit={(e) => { handleLogin(e) }} className="flex flex-col justify-center gap-2 w-4/5 md:w-1/2 xl:w-1/4 mx-auto my-10">
         <p className="self-center text-lg font-bold">Inicia sesión</p>
         <label htmlFor="emailInput">Email</label>
-        <input className="text-slate-900 p-2 rounded-md" id="emailInput" type="text" placeholder="noeula@adminv" name='email' />
+        <input className="text-slate-900 p-2 rounded-md" id="emailInput" type="text" placeholder="user@example.com" name='email' />
         <label htmlFor="pwdInput">Contraseña</label>
-        <input className="text-slate-900 p-2 rounded-md" id="pwdInput" type="password" placeholder="admin" name='password' />
+        <input className="text-slate-900 p-2 rounded-md" id="pwdInput" type="password" name='password' />
         <AppButtonSubmit className="rounded-md p-2">Iniciar sesión</AppButtonSubmit>
       </form>
     </section>

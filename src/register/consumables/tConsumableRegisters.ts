@@ -30,3 +30,10 @@ export interface ConsumablesRegisterParams {
   sortField?: string
   descOrder?: boolean
 }
+
+export interface SelectedConsumable {
+  consumableBarcode: string
+  consumableName: string
+  consumableStockType: string
+  stockAmountRequest: number
+}

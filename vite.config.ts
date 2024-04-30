@@ -12,7 +12,10 @@ const load = ({ mode }) => {
     plugins: [react()],
     server: {
       open: true,
-      port: parseInt(PORT)
+      port: parseInt(PORT),
+      proxy: {
+        '/*': '/'
+      }
     },
     build: {
       outDir: "build",

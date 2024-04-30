@@ -25,7 +25,8 @@ export interface FetchApiParams {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE'
   path: string
   queryParams?: QueryParams
-  body?: string
+  body?: string | BodyInit | File | FormData
+  contentType?: string
 }
 
 export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams
@@ -55,6 +56,12 @@ export interface LabeledInput extends Input {
 export interface InputSelect extends Interactable {
   onChange: ChangeEventHandler<HTMLSelectElement>,
   options: Option[]
+}
+
+export interface InputFile extends Input {
+  id: string
+  children: ReactNode
+  accept: string
 }
 
 type Option = {

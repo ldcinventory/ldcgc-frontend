@@ -1,12 +1,12 @@
 import { CheckCircleIcon, PlusIcon, XCircleIcon, XMarkIcon } from "@heroicons/react/24/outline";
-import { AppButton, AppButtonSubmitSuccess } from "../../common/components/AppButton";
-import { AppLabeledTextInput, AppNumberInput } from "../../common/components/AppInput";
+import { AppButton, AppButtonSubmitSuccess, AppButtonTransparent } from "../../common/components/AppButton";
+import { AppLabeledDateInput, AppLabeledTextInput, AppNumberInput } from "../../common/components/AppInput";
 import { AppList } from "../../common/components/AppList";
 import { useRegisterModal } from "./useRegisterModal";
 
 export function AddRegistersModal() {
   const { state, handleToggleModalOpened, handleSelectVolunteer, handleGetPossibleVolunteers, handleGetPossibleTools, handleSelectTool, handleRemoveSelectedTool, handleGetPossibleConsumables,
-    handleSelectConsumable, handleRemoveSelectedConsumable, handleUpdateSelectedConsumable, handleAddRegisters } = useRegisterModal()
+    handleSelectConsumable, handleRemoveSelectedConsumable, handleUpdateSelectedConsumable, handleAddRegisters, handleSetAddRegistersDate } = useRegisterModal()
 
   return (
     <>
@@ -18,9 +18,9 @@ export function AddRegistersModal() {
       ${state.modalOpened ? '' : 'hidden'}`}>
         <section className={`bg-primary-3 dark:bg-primary-6 p-4 rounded-md w-4/5 md:w-1/2 xl:w-1/3 transition-all duration-300
         flex flex-col`}>
-          <AppButton className="self-end" onClick={handleToggleModalOpened}>
+          <AppButtonTransparent className="self-end" onClick={handleToggleModalOpened}>
             <XMarkIcon className="h-7" />
-          </AppButton>
+          </AppButtonTransparent>
           <form onSubmit={handleAddRegisters} className="flex flex-col gap-4 items-center">
             <div className="relative rounded-md w-full">
               <AppLabeledTextInput placeholder="Voluntario..." id="volunteer_input"
@@ -100,7 +100,9 @@ export function AddRegistersModal() {
 
               }
             </div>
-            {state.possibleConsumables.map(pc => <span>{pc.stock}</span>)}
+            <div className="relative rounded-md w-full">
+              <AppLabeledDateInput value={state.registersAddDate.slice(0, 10)} label="Fecha" id="registers_date" onChange={handleSetAddRegistersDate}/>
+            </div>
             <AppButtonSubmitSuccess className="p-2" disabled={!state.selectedVolunteer || (state.selectedTools.length <= 0 &&
               (state.selectedConsumables.length <= 0 || state.selectedConsumables.some(register => register.stockAmountRequest <= 0)))}>
               Añadir registros

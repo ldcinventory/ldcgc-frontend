@@ -22,3 +22,8 @@ export interface ToolRegisterParams {
   volunteer?: string
   tool?: string
 }
+
+export interface SelectedTool {
+  toolName: string
+  toolBarcode: string
+}

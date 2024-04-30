@@ -10,3 +10,5 @@ export const fetchDeleteConsumable = (registerId: number) =>
 
 export const fetchUpdateConsumable = (register: ConsumableWithId) =>
   fetchApi({ method: "PUT", path: `${CONSUMABLES_PATH}/${register.id}`, body: JSON.stringify(register) })
+
+export const fetchUploadConsumablesExcel = (formData: FormData) => fetchApi({ method: "POST", path: `${CONSUMABLES_PATH}/excel`, body: formData })

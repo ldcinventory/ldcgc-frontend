@@ -9,8 +9,8 @@ export function HeaderMenu() {
       <header className="h-16 justify-between items-center p-4
       bg-primary-2 dark:bg-primary-9 hidden md:flex">
         <AppNavLink to='/'><HomeIcon className="h-8" /></AppNavLink>
-        <AppNavLink to='/volunteers'>Voluntarios</AppNavLink>
-        <AppNavLink to='/tools'>Herramientas</AppNavLink>
+        <a href={`${import.meta.env.VITE_ELM_APP}/volunteers`}>Voluntarios</a>
+        <AppNavLink to='/resources/tools'>Materiales</AppNavLink>
         <AppNavLink to='/register/tools'>Registro</AppNavLink>
         <ProfileSmall />
       </header>

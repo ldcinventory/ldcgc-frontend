@@ -1,12 +1,12 @@
 import { useAppDispatch, useAppSelector } from "../../app/store";
-import { addRegisters, getPossibleConsumables, getPossibleTools, getPossibleVolunteers, removeSelectedConsumable, removeSelectedTool, selectConsumable, selectTool, selectVolunteer, setCurrentConsumable, setCurrentTool, setCurrentVolunteer, toggleModalOpened, updateSelectedConsumable } from "./registerSlice";
+import { addRegisters, getPossibleConsumables, getPossibleTools, getPossibleVolunteers, removeSelectedConsumable, removeSelectedTool, selectConsumable, selectTool, selectVolunteer, setCurrentConsumable, setCurrentTool, setCurrentVolunteer, toggleModalOpened, updateAddRegistersDate, updateSelectedConsumable } from "./registerSlice";
 import { ChangeEvent, FormEvent } from "react";
 import { getConsumablesRegister } from "../consumables/consumablesRegisterSlice";
 import { Volunteer } from "../../volunteers/tVolunteers";
 import { Tool } from "../../resources/tools/tTools";
-import { ToolRegister } from "../tools/tToolRegisters";
+import { SelectedTool, ToolRegister } from "../tools/tToolRegisters";
 import { ConsumableWithId } from "../../resources/consumables/tConsumables";
-import { ConsumableRegister } from "../consumables/tConsumableRegisters";
+import { ConsumableRegister, SelectedConsumable } from "../consumables/tConsumableRegisters";
 import { useDebouncedCallback } from "use-debounce";
 
 export const useRegisterModal = () => {
@@ -39,7 +39,7 @@ export const useRegisterModal = () => {
   }
 
   const handleSelectTool = (tool: Tool) => dispatch(selectTool(tool))
-  const handleRemoveSelectedTool = (toolRegister: ToolRegister) => dispatch(removeSelectedTool(toolRegister))
+  const handleRemoveSelectedTool = (toolRegister: SelectedTool) => dispatch(removeSelectedTool(toolRegister))
   const handleGetPossibleConsumables = (e: ChangeEvent<HTMLInputElement>) => {
     const newConsumable = e.target.value
     dispatch(setCurrentConsumable(newConsumable))
@@ -49,16 +49,20 @@ export const useRegisterModal = () => {
   }
 
   const handleSelectConsumable = (consumable: ConsumableWithId) => dispatch(selectConsumable(consumable))
-  const handleRemoveSelectedConsumable = (consumableRegister: ConsumableRegister) => dispatch(removeSelectedConsumable(consumableRegister))
-  const handleUpdateSelectedConsumable = (consumableRegister: ConsumableRegister) => dispatch(updateSelectedConsumable(consumableRegister))
+  const handleRemoveSelectedConsumable = (consumableRegister: SelectedConsumable) => dispatch(removeSelectedConsumable(consumableRegister))
+  const handleUpdateSelectedConsumable = (consumableRegister: SelectedConsumable) => dispatch(updateSelectedConsumable(consumableRegister))
   const handleAddRegisters = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     dispatch(addRegisters())
     dispatch(getConsumablesRegister({}))
   }
 
+  const handleSetAddRegistersDate = (e: ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateAddRegistersDate(e.target.value))
+  }
+
   return {
     state, handleToggleModalOpened, handleSelectVolunteer, handleGetPossibleVolunteers, handleGetPossibleTools, handleSelectTool, handleRemoveSelectedTool, handleGetPossibleConsumables,
-    handleSelectConsumable, handleRemoveSelectedConsumable, handleUpdateSelectedConsumable, handleAddRegisters
+    handleSelectConsumable, handleRemoveSelectedConsumable, handleUpdateSelectedConsumable, handleAddRegisters, handleSetAddRegistersDate
   }
 }

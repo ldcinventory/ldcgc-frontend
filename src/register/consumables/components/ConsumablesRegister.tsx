@@ -342,7 +342,7 @@ export function ConsumablesRegister() {
       </table>
       { /* Tabla desktop */}
       <table className="w-full text-left min-h-[80vh] hidden xl:[display:table]">
-        <thead className="border-b">
+        <thead className="border-b border-primary-1">
           <tr>
             <AppTableHeaderCell7><UserIcon className="h-7" />Voluntario</AppTableHeaderCell7>
             <AppTableHeaderCell7><BeakerIcon className="h-7" />Consumible</AppTableHeaderCell7>

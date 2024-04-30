@@ -9,6 +9,9 @@ import { Tools } from "./resources/tools/components/Tools";
 import { Volunteers } from "./volunteers/components/Volunteers";
 import { Menu } from "./menu/Menu";
 import { ConsumablesRegister } from "./register/consumables/components/ConsumablesRegister";
+import { ResourcesHeader } from "./resources/common/ResourcesHeader";
+import { Consumables } from "./resources/consumables/Consumables";
+import { ToolDetail } from "./resources/tools/components/ToolDetail";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = localStorage.getItem('payloadToken') !== null
@@ -25,7 +28,11 @@ const AppRoutes = () => {
       <Route path='/' element={<ProtectedRoute><Menu /></ProtectedRoute>}>
         <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
         <Route path='/volunteers' element={<ProtectedRoute><Volunteers /></ProtectedRoute>} />
-        <Route path='/tools' element={<ProtectedRoute><Tools /></ProtectedRoute>} />
+        <Route path='/resources' element={<ProtectedRoute><ResourcesHeader /></ProtectedRoute>}>
+          <Route path='consumables' element={<ProtectedRoute><Consumables /></ProtectedRoute>} />
+          <Route path='tools' element={<ProtectedRoute><Tools /></ProtectedRoute>} />
+        </Route>
+        <Route path="/resources/tools/:barcode" element={<ToolDetail />} />
         <Route path='/register' element={<ProtectedRoute><RegisterHeader /></ProtectedRoute>}>
           <Route path='consumables' element={<ProtectedRoute><ConsumablesRegister /></ProtectedRoute>} />
           <Route path='tools' element={<ProtectedRoute><ToolsRegister /></ProtectedRoute>} />

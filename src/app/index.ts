@@ -5,6 +5,7 @@ import registerReducer from "../register/common/registerSlice"
 import consumablesRegisterReducer from "../register/consumables/consumablesRegisterSlice"
 import toolsRegisterReducer from "../register/tools/toolsRegisterSlice"
 import consumablesReducer from "../resources/consumables/consumablesSlice"
+import toolsReducer from "../resources/tools/toolsSlice"
 
 
 export const store = configureStore({
@@ -12,8 +13,9 @@ export const store = configureStore({
     users: usersReducer,
     consumables: consumablesReducer,
     consumablesRegister: consumablesRegisterReducer,
+    tools: toolsReducer,
     toolsRegister: toolsRegisterReducer,
-    register: registerReducer
+    register: registerReducer,
   }
 })
 

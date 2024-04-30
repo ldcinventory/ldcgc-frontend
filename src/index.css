@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@font-face {
+  font-family: "Barcode";
+  src: url("../public/fonts/LibreBarcode128Text-Regular.woff");
+}
+
+@font-face {
+  font-family: "Jetbrains mono";
+  src: url("https: //fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap");
+}

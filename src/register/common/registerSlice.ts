@@ -4,7 +4,7 @@ import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { Volunteer, VolunteersParams } from "../../volunteers/tVolunteers"
 import { RootState } from "../../app/index"
 import { fetchVolunteers } from "../../volunteers/volunteerService"
-import { Tool, ToolsParams } from "../../resources/tools/tTools"
+import { Tool, ToolWithId, ToolsParams } from "../../resources/tools/tTools"
 import { ConsumableParams, ConsumableWithId } from "../../resources/consumables/tConsumables"
 import { fecthToolsLoose } from "../../resources/tools/toolApi"
 import { SelectedConsumable } from "../consumables/tConsumableRegisters"
@@ -22,7 +22,7 @@ export interface RegisterState {
   selectedVolunteer: Volunteer | null
   volunteersParams: VolunteersParams
   currentTool: string
-  possibleTools: Tool[]
+  possibleTools: ToolWithId[]
   selectedTools: SelectedTool[]
   toolsParams: ToolsParams
   currentConsumable: string
@@ -206,7 +206,7 @@ export const registerSlice = createSlice({
         state.status = "succeeded"
         state.possibleVolunteers = action.payload.data.elements
       })
-      .addCase(getPossibleTools.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<Tool> }>) => {
+      .addCase(getPossibleTools.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<ToolWithId> }>) => {
         state.status = "succeeded"
         const excludedBarcodes = state.selectedTools.map(t => t.toolBarcode)
         const newPossibleTools = action.payload.data.elements.filter(t => !excludedBarcodes.includes(t.barcode))

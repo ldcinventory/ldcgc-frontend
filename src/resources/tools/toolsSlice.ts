@@ -5,6 +5,7 @@ import { RootState } from "../../app/index"
 import { fecthTools, fetchDeleteTool, fetchUploadToolsExcel } from "./toolApi"
 import { toast } from "sonner"
 import { json } from "react-router-dom"
+import { AnyAsyncThunk, RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
 
 export interface ToolsState {
   tools: ToolWithId[]
@@ -32,16 +33,9 @@ export const getTools =
       const state = thunkApi.getState()
       const newParams = { ...state.tools.queryParams, ...queryParams }
       thunkApi.dispatch(updateQueryParams(newParams))
-      const response = await fecthTools({ toolsParams: newParams })
-        .then(res => {
-          if (!res.ok)
-            throw new Error('Internal server error')
-
-          return res.json()
-        })
-        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
-
-      return response
+      return fecthTools({ toolsParams: newParams })
+        .then(res => res.json())
+        .catch((error: string) => thunkApi.rejectWithValue(`The server responded with an error: ${error}`))
     })
 
 
@@ -73,6 +67,11 @@ export const deleteTool =
 
       return fetchDeleteTool(tool.id)
         .then(() => thunkApi.dispatch(getTools({})))
+        .catch(e => {
+          if (e.status === 409)
+            return thunkApi.rejectWithValue('No se puede eliminar la herramienta porque tiene registros asociados.')
+          return thunkApi.rejectWithValue(e.message)
+        })
     })
 
 export const selectToolDetail =
@@ -136,9 +135,9 @@ export const toolsSlice = createSlice({
           toast.success("Herramienta eliminada con éxito")
         },
       )
-      .addCase(deleteTool.rejected, state => {
+      .addCase(deleteTool.rejected, (state, action: PayloadAction<RejectedWithValueActionFromAsyncThunk<AnyAsyncThunk>, string>) => {
         state.status = "failed"
-        toast.error("Error al eliminar la herramienta, asegúrate de que no hay registros asociados.")
+        toast.error(action.payload)
       })
       .addCase(selectToolDetail.fulfilled, (state, action: PayloadAction<ToolWithId>) => {
         state.toolDetail = action.payload

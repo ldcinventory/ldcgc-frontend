@@ -23,11 +23,11 @@ export function ToolsTable() {
           </tr>
           <tr className={showFilters ? '' : 'hidden'}>
             <AppTableHeaderCell className="flex flex-col">
-              <AppTextInput placeholder="Nombre" value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ name: e.target.value })} />
-              <AppTextInput placeholder="Código de barras" value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ barcode: e.target.value })} />
-              <AppTextInput placeholder="Ubicación" value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ location: e.target.value })} />
-              <AppTextInput placeholder="Marca" value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ brand: e.target.value })} />
-              <AppTextInput placeholder="Modelo" value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ model: e.target.value })} />
+              <AppTextInput placeholder="Nombre" value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0,  name: e.target.value })} />
+              <AppTextInput placeholder="Código de barras" value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0,  barcode: e.target.value })} />
+              <AppTextInput placeholder="Ubicación" value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0,  location: e.target.value })} />
+              <AppTextInput placeholder="Marca" value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0,  brand: e.target.value })} />
+              <AppTextInput placeholder="Modelo" value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0,  model: e.target.value })} />
             </AppTableHeaderCell>
             <AppTableHeaderCell className="flex justify-end">
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ name: "", barcode: "", brand: "", model: "", location: "" })}>
@@ -114,15 +114,15 @@ export function ToolsTable() {
           </tr>
           <tr className={showFilters ? '' : 'hidden'}>
             <AppTableHeaderCell className="flex flex-col">
-              <AppTextInput placeholder="Nombre" value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ name: e.target.value })} />
-              <AppTextInput placeholder="Marca" value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ brand: e.target.value })} />
-              <AppTextInput placeholder="Modelo" value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ model: e.target.value })} />
+              <AppTextInput placeholder="Nombre" value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, name: e.target.value })} />
+              <AppTextInput placeholder="Marca" value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, brand: e.target.value })} />
+              <AppTextInput placeholder="Modelo" value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, model: e.target.value })} />
             </AppTableHeaderCell>
             <AppTableHeaderCell>
-              <AppTextInput placeholder="19XG87F..." value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ barcode: e.target.value })} />
+              <AppTextInput placeholder="19XG87F..." value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, barcode: e.target.value })} />
             </AppTableHeaderCell>
             <AppTableHeaderCell>
-              <AppTextInput placeholder="Arcón, oficina..." value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ location: e.target.value })} />
+              <AppTextInput placeholder="Arcón, oficina..." value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, location: e.target.value })} />
             </AppTableHeaderCell>
             <AppTableHeaderCell>
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ name: "", barcode: "", brand: "", model: "", location: "" })}>
@@ -209,19 +209,19 @@ export function ToolsTable() {
           </tr>
           <tr className={showFilters ? '' : 'hidden'}>
             <AppTableHeaderCell5>
-              <AppTextInput placeholder="Martillo, destornillador..." value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ name: e.target.value })} />
+              <AppTextInput placeholder="Martillo, destornillador..." value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, name: e.target.value })} />
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
-              <AppTextInput placeholder="19XG87F..." value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ barcode: e.target.value })} />
+              <AppTextInput placeholder="19XG87F..." value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, barcode: e.target.value })} />
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
-              <AppTextInput placeholder="Bosch, Hilti..." value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ brand: e.target.value })} />
+              <AppTextInput placeholder="Bosch, Hilti..." value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, brand: e.target.value })} />
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
-              <AppTextInput placeholder="B2..." value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ model: e.target.value })} />
+              <AppTextInput placeholder="B2..." value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, model: e.target.value })} />
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
-              <AppTextInput placeholder="Arcón, oficina..." value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ location: e.target.value })} />
+              <AppTextInput placeholder="Arcón, oficina..." value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, location: e.target.value })} />
             </AppTableHeaderCell5>
             <AppTableHeaderCell>
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ name: "", barcode: "", brand: "", model: "", location: "" })}>

@@ -1,16 +1,17 @@
 import { useAppDispatch, useAppSelector } from "../../app/store";
-import { addRegisters, getPossibleConsumables, getPossibleTools, getPossibleVolunteers, removeSelectedConsumable, removeSelectedTool, selectConsumable, selectTool, selectVolunteer, setCurrentConsumable, setCurrentTool, setCurrentVolunteer, toggleModalOpened, updateAddRegistersDate, updateSelectedConsumable } from "./registerSlice";
+import { getPossibleVolunteers, selectVolunteer, setCurrentVolunteer, toggleModalOpened, updateAddRegistersDate } from "./registerSlice";
 import { ChangeEvent, FormEvent } from "react";
-import { getConsumablesRegister } from "../consumables/consumablesRegisterSlice";
+import { addConsumableRegisters, getConsumablesRegister, getPossibleConsumables, removeSelectedConsumable, selectConsumable, setCurrentConsumable, updateSelectedConsumable } from "../consumables/consumablesRegisterSlice";
 import { Volunteer } from "../../volunteers/tVolunteers";
 import { Tool } from "../../resources/tools/tTools";
-import { SelectedTool, ToolRegister } from "../tools/tToolRegisters";
+import { SelectedTool } from "../tools/tToolRegisters";
 import { ConsumableWithId } from "../../resources/consumables/tConsumables";
-import { ConsumableRegister, SelectedConsumable } from "../consumables/tConsumableRegisters";
+import { SelectedConsumable } from "../consumables/tConsumableRegisters";
 import { useDebouncedCallback } from "use-debounce";
+import { addToolRegisters, getPossibleTools, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
 
 export const useRegisterModal = () => {
-  const state = useAppSelector(state => state.register)
+  const { toolsRegister, register, consumablesRegister } = useAppSelector(state => state)
   const dispatch = useAppDispatch()
   const getPossibleVolunteerssDebounced = useDebouncedCallback((volunteersParams) => dispatch(getPossibleVolunteers(volunteersParams)), 500)
   const getPossibleToolsDebounced = useDebouncedCallback((toolsParams) => dispatch(getPossibleTools(toolsParams)), 500)
@@ -53,8 +54,39 @@ export const useRegisterModal = () => {
   const handleUpdateSelectedConsumable = (consumableRegister: SelectedConsumable) => dispatch(updateSelectedConsumable(consumableRegister))
   const handleAddRegisters = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch(addRegisters())
-    dispatch(getConsumablesRegister({}))
+    //dispatch(addRegisters())
+
+
+    const volunteer = register.selectedVolunteer
+    if (volunteer === null)
+      return
+    
+    const registerFrom = new Date(register.registersAddDate)
+
+    if (toolsRegister.selectedTools.length > 0) {
+
+      const toolRegisters = toolsRegister.selectedTools.map(toolRegister => {
+        return { ...toolRegister, volunteerBuilderAssistantId: volunteer.builderAssistantId, registerFrom, volunteerName: volunteer.name, volunteerLastName: volunteer.lastName, toolUrlImages: [] }
+      })
+      dispatch(addToolRegisters(toolRegisters))
+    }
+
+    const validConsumables = consumablesRegister.selectedConsumables
+      .filter(consumableRegister => consumableRegister.stockAmountRequest > 0)
+
+    if (validConsumables.length > 0) {
+      const consumablesRegistersToAdd = validConsumables
+        .map(consumableRegister => {
+          return {
+            ...consumableRegister, volunteerBuilderAssistantId: volunteer.builderAssistantId, registerFrom, closedRegister: false, volunteerName: volunteer.name,
+            volunteerLastName: volunteer.lastName, processingStockChanges: true
+          }
+        })
+
+      dispatch(addConsumableRegisters(consumablesRegistersToAdd))
+    }
+    
+      dispatch(getConsumablesRegister({}))
   }
 
   const handleSetAddRegistersDate = (e: ChangeEvent<HTMLInputElement>) => {
@@ -62,7 +94,7 @@ export const useRegisterModal = () => {
   }
 
   return {
-    state, handleToggleModalOpened, handleSelectVolunteer, handleGetPossibleVolunteers, handleGetPossibleTools, handleSelectTool, handleRemoveSelectedTool, handleGetPossibleConsumables,
+    register, toolsRegister, consumablesRegister, handleToggleModalOpened, handleSelectVolunteer, handleGetPossibleVolunteers, handleGetPossibleTools, handleSelectTool, handleRemoveSelectedTool, handleGetPossibleConsumables,
     handleSelectConsumable, handleRemoveSelectedConsumable, handleUpdateSelectedConsumable, handleAddRegisters, handleSetAddRegistersDate
   }
 }

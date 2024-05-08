@@ -7,4 +7,4 @@ export const fecthToolsLoose = ({ toolsParams }: { toolsParams: ToolsParams }) =
 export const fecthTools = ({ toolsParams }: { toolsParams: ToolsParams }) => fetchApi({ method: 'GET', path: TOOLS_PATH, queryParams: toolsParams })
 export const fetchDeleteTool = (toolId: number) => fetchApi({ method: "DELETE", path: `${TOOLS_PATH}/${toolId}` })
 export const fetchUploadToolsExcel = (formData: FormData) =>
-  fetchApi({ method: "POST", path: `${TOOLS_PATH}/excel`, body: formData})
+  fetchApi({ method: "POST", path: `${TOOLS_PATH}/excel`, body: formData, contentTypeAuto: true})

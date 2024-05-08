@@ -4,7 +4,7 @@ export interface ConsumableRegister {
   consumableBarcode: string
   consumableName: string
   consumableStockType: string
-  volunteerBAId: string
+  volunteerBuilderAssistantId: string
   volunteerName: string
   volunteerLastName: string
   registerFrom: Date
@@ -36,4 +36,5 @@ export interface SelectedConsumable {
   consumableName: string
   consumableStockType: string
   stockAmountRequest: number
+  stockAvailable: number
 }

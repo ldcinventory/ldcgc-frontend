@@ -4,14 +4,6 @@ import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { Volunteer, VolunteersParams } from "../../volunteers/tVolunteers"
 import { RootState } from "../../app/index"
 import { fetchVolunteers } from "../../volunteers/volunteerService"
-import { Tool, ToolWithId, ToolsParams } from "../../resources/tools/tTools"
-import { ConsumableParams, ConsumableWithId } from "../../resources/consumables/tConsumables"
-import { fecthToolsLoose } from "../../resources/tools/toolApi"
-import { SelectedConsumable } from "../consumables/tConsumableRegisters"
-import { SelectedTool } from "../tools/tToolRegisters"
-import { fetchCreateToolRegisters } from "../tools/toolRegisterApi"
-import { fetchConsumables } from "../../resources/consumables/consumablesApi"
-import { fetchCreateConsumableRegisters } from "../../register/consumables/consumablesRegisterApi"
 
 export interface RegisterState {
   status: StatusType
@@ -21,14 +13,6 @@ export interface RegisterState {
   possibleVolunteers: Volunteer[]
   selectedVolunteer: Volunteer | null
   volunteersParams: VolunteersParams
-  currentTool: string
-  possibleTools: ToolWithId[]
-  selectedTools: SelectedTool[]
-  toolsParams: ToolsParams
-  currentConsumable: string
-  possibleConsumables: ConsumableWithId[]
-  selectedConsumables: SelectedConsumable[]
-  consumablesParams: ConsumableParams
   modalOpened: boolean
   registersAddDate: string
 }
@@ -41,14 +25,6 @@ const initialState: RegisterState = {
   possibleVolunteers: [],
   selectedVolunteer: null,
   volunteersParams: { pageIndex: 0, size: 10 },
-  currentTool: "",
-  possibleTools: [],
-  selectedTools: [],
-  toolsParams: { pageIndex: 0, size: 10, status: 'AVAILABLE' },
-  currentConsumable: "",
-  possibleConsumables: [],
-  selectedConsumables: [],
-  consumablesParams: { pageIndex: 0, size: 10, hasStock: true },
   modalOpened: false,
   registersAddDate: new Date().toISOString()
 }
@@ -64,74 +40,6 @@ export const getPossibleVolunteers =
       const response = await fetchVolunteers({ volunteersParams: newParams })
         .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
-    })
-
-
-export const getPossibleTools =
-  createAsyncThunk<any, ToolsParams, { state: RootState }>(
-    "register/possibleTools",
-    async (toolsParams
-      , thunkApi) => {
-      const state = thunkApi.getState()
-      const newParams = { ...state.register.toolsParams, ...toolsParams }
-      thunkApi.dispatch(updateToolsParams(newParams))
-      const response = await fecthToolsLoose({ toolsParams: newParams })
-        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
-      return response.json()
-    })
-
-
-export const getPossibleConsumables =
-  createAsyncThunk<any, ConsumableParams, { state: RootState }>(
-    "register/possibleConsumables",
-    async (consumablesParams
-      , thunkApi) => {
-      const state = thunkApi.getState()
-      const newParams = { ...state.register.consumablesParams, ...consumablesParams }
-      thunkApi.dispatch(updateConsumablesParams(newParams))
-      const response = await fetchConsumables(newParams)
-        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
-      return response.json()
-    })
-
-export const addRegisters =
-  createAsyncThunk<any, void, { state: RootState }>(
-    "register/AddRegisters",
-    async (ignored, thunkApi) => {
-      const state = thunkApi.getState().register
-      const volunteer = state.selectedVolunteer
-      const registerFrom = new Date(state.registersAddDate)
-      const exactTime = new Date()
-      registerFrom.setHours(exactTime.getHours(), exactTime.getMinutes(), exactTime.getSeconds())
-
-      if (volunteer === null)
-        throw new Error('El campo de voluntario no puede estar vacío')
-
-      const toolRegisters = state.selectedTools.map(toolRegister => {
-        return { ...toolRegister, volunteerBuilderAssistantId: volunteer.builderAssistantId, registerFrom, volunteerName: volunteer.name, volunteerLastName: volunteer.lastName, toolUrlImages: [] }
-      })
-      const toolsResponse = await fetchCreateToolRegisters(toolRegisters)
-        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
-
-      const consumablesRegisters = state.selectedConsumables
-        .filter(consumableRegister => consumableRegister.stockAmountRequest > 0)
-        .map(consumableRegister => {
-          return {
-            ...consumableRegister, volunteerBAId: volunteer.builderAssistantId, registerFrom, closedRegister: false, volunteerName: volunteer.name,
-            volunteerLastName: volunteer.lastName, processingStockChanges: true
-          }
-      })
-
-      const consumablesResponse = await fetchCreateConsumableRegisters(consumablesRegisters)
-        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
-
-      if (toolsResponse.ok && consumablesResponse.ok) {
-        thunkApi.dispatch(resetState({ ...initialState, modalOpened: state.modalOpened, message: "Registros añadidos correctamente" }))
-        setTimeout(() => thunkApi.dispatch(resetState({ ...initialState, modalOpened: state.modalOpened, message: undefined })),
-          1500)
-      }
-
-      return toolsResponse.json()
     })
 
 
@@ -154,45 +62,6 @@ export const registerSlice = createSlice({
       const newVolunteer = action.payload
       return { ...state, selectedVolunteer: newVolunteer, currentVolunteer: `${newVolunteer.name} ${newVolunteer.lastName} (${newVolunteer.builderAssistantId})` }
     },
-    setCurrentTool: (state, action: PayloadAction<string>) => {
-      const newCurrentTool = action.payload
-
-      return { ...state, currentTool: newCurrentTool }
-    },
-    updateToolsParams: (state, action: PayloadAction<ToolsParams>) => {
-      return { ...state, toolsParams: action.payload }
-    },
-    selectTool: (state, action: PayloadAction<Tool>) => {
-      const newTool = action.payload
-      const selectedTool = { toolName: newTool.name, toolBarcode: newTool.barcode }
-      return { ...state, selectedTools: [...state.selectedTools, selectedTool], currentTool: '', possibleTools: [] }
-    },
-    removeSelectedTool: (state, action: PayloadAction<SelectedTool>) => {
-      const newSelectedTools = state.selectedTools.filter(t => t.toolBarcode !== action.payload.toolBarcode)
-      return { ...state, selectedTools: newSelectedTools }
-    },
-    setCurrentConsumable: (state, action: PayloadAction<string>) => {
-      const newCurrentConsumable = action.payload
-
-      return { ...state, currentConsumable: newCurrentConsumable }
-    },
-    updateConsumablesParams: (state, action: PayloadAction<ConsumableParams>) => {
-      return { ...state, consumablesParams: action.payload }
-    },
-    selectConsumable: (state, action: PayloadAction<ConsumableWithId>) => {
-      const newConsumable = action.payload
-      const selectedConsumable = { consumableName: newConsumable.name, consumableStockType: newConsumable.stockType, consumableBarcode: newConsumable.barcode, stockAmountRequest: 0 }
-      return { ...state, selectedConsumables: [...state.selectedConsumables, selectedConsumable], currentConsumable: '', possibleConsumables: [] }
-    },
-    updateSelectedConsumable: (state, action: PayloadAction<SelectedConsumable>) => {
-      const newConsumable = action.payload
-      const newSelectedConsumables = state.selectedConsumables.filter(consumableRegister => newConsumable.consumableBarcode !== consumableRegister.consumableBarcode)
-      return { ...state, selectedConsumables: [...newSelectedConsumables, newConsumable] }
-    },
-    removeSelectedConsumable: (state, action: PayloadAction<SelectedConsumable>) => {
-      const newSelectedConsumables = state.selectedConsumables.filter(c => c.consumableBarcode !== action.payload.consumableBarcode)
-      return { ...state, selectedConsumables: newSelectedConsumables }
-    },
     resetState: (state, action: PayloadAction<RegisterState>) => {
       return { ...initialState, ...action.payload }
     },
@@ -206,26 +75,9 @@ export const registerSlice = createSlice({
         state.status = "succeeded"
         state.possibleVolunteers = action.payload.data.elements
       })
-      .addCase(getPossibleTools.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<ToolWithId> }>) => {
-        state.status = "succeeded"
-        const excludedBarcodes = state.selectedTools.map(t => t.toolBarcode)
-        const newPossibleTools = action.payload.data.elements.filter(t => !excludedBarcodes.includes(t.barcode))
-        state.possibleTools = newPossibleTools
-      })
-      .addCase(getPossibleConsumables.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<ConsumableWithId> }>) => {
-        state.status = "succeeded"
-        const excludedBarcodes = state.selectedConsumables.map(c => c.consumableBarcode)
-        const newPossibleConsumables = action.payload.data.elements.filter(c => !excludedBarcodes.includes(c.barcode))
-        state.possibleConsumables = newPossibleConsumables
-      })
-      .addCase(addRegisters.fulfilled, (state, action: PayloadAction) => {
-        state.status = "succeeded"
-      })
   }
 })
 
-export const { toggleModalOpened, setCurrentVolunteer, updateVolunteersParams, selectVolunteer, setCurrentTool, updateToolsParams, selectTool, removeSelectedTool,
-  setCurrentConsumable, updateConsumablesParams, selectConsumable, updateSelectedConsumable, removeSelectedConsumable, resetState, updateAddRegistersDate
-} = registerSlice.actions
+export const { toggleModalOpened, setCurrentVolunteer, updateVolunteersParams, selectVolunteer, resetState, updateAddRegistersDate } = registerSlice.actions
 
 export default registerSlice.reducer

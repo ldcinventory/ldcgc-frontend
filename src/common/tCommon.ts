@@ -27,6 +27,7 @@ export interface FetchApiParams {
   queryParams?: QueryParams
   body?: string | BodyInit | File | FormData
   contentType?: string
+  contentTypeAuto?: boolean
 }
 
 export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams

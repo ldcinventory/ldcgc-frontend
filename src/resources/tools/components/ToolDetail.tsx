@@ -21,8 +21,13 @@ export function ToolDetail() {
   }, [])
 
   return (
-    <>
-      <h1>{state.toolDetail?.name}</h1>
-    </>
+    <section className="min-h-[86vh] py-10 px-5">
+      <header className="flex flex-col gap-2">
+        <h1 className="text-2xl font-bold">{state.toolDetail?.name}</h1>
+        <h2 className="font-barcode text-3xl">{state.toolDetail?.barcode}</h2>
+        <img src={state.toolDetail?.urlImages[0]} alt={`Herramienta ${state.toolDetail?.name}`}/>        
+      </header>
+
+    </section>
   )
 }

@@ -2,7 +2,7 @@ import { FetchApiParams, QueryParams } from "../common/tCommon"
 
 const API_URL = import.meta.env.VITE_API_URL
 
-export const fetchApi = ({ method, path, queryParams, body}: FetchApiParams) => {
+export const fetchApi = ({ method, path, queryParams, body, contentTypeAuto = false, contentType = 'application/json'}: FetchApiParams) => {
   const payloadToken = localStorage.getItem('payloadToken')
   const signatureToken = localStorage.getItem('signatureToken')
 
@@ -11,11 +11,19 @@ export const fetchApi = ({ method, path, queryParams, body}: FetchApiParams) => 
     window.location.replace('/login')
     return Promise.reject();
   }
-  const headers: HeadersInit = {
-    "x-header-payload-token":  payloadToken ||"",
+  const headers: HeadersInit = contentTypeAuto ?
+  {
+    "x-header-payload-token": payloadToken || "",
+    "x-signature-token": signatureToken || ""
+  } :
+  {
+    "x-header-payload-token": payloadToken || "",
     "x-signature-token": signatureToken || "",
-  }
-
+    "Content-Type": contentType
+  }  
+  
+  console.log(contentType, headers)
+  
   const options: RequestInit = {
     method,
     headers,
@@ -40,7 +48,7 @@ export const fetchApi = ({ method, path, queryParams, body}: FetchApiParams) => 
         return Promise.reject();
       }
 
-      return Promise.reject(json.message || json.data?.message)
+      return Promise.reject({message: json.message || json.data?.message, status: res.status})
     })
 }
 

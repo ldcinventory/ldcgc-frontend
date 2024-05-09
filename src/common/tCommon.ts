@@ -59,6 +59,11 @@ export interface InputSelect extends Interactable {
   options: Option[]
 }
 
+export interface LabeledInputSelect extends InputSelect {
+  id: string
+  label: string
+}
+
 export interface InputFile extends Input {
   id: string
   children: ReactNode
@@ -92,4 +97,15 @@ export interface FindAllParams {
   filterString?: string
   size?: number
   pageIndex?: number
+}
+
+export interface TextArea extends Interactable {
+  onChange: ChangeEventHandler<HTMLTextAreaElement>,
+  rows?: number
+  cols?: number
+}
+
+export interface LabeledTextArea extends TextArea {
+  id: string
+  label: string
 }

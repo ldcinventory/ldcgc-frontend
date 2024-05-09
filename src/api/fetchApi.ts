@@ -21,9 +21,7 @@ export const fetchApi = ({ method, path, queryParams, body, contentTypeAuto = fa
     "x-signature-token": signatureToken || "",
     "Content-Type": contentType
   }  
-  
-  console.log(contentType, headers)
-  
+    
   const options: RequestInit = {
     method,
     headers,

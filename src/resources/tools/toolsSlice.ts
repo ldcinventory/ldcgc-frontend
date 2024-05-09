@@ -2,10 +2,9 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { ToolsParams, ToolWithId } from "./tTools"
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
-import { fecthTools, fetchDeleteTool, fetchUploadToolsExcel } from "./toolApi"
+import { fecthTools, fetchDeleteTool, fetchUpdateTool, fetchUploadToolsExcel } from "./toolApi"
 import { toast } from "sonner"
-import { json } from "react-router-dom"
-import { AnyAsyncThunk, RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
+import { AnyAsyncThunk, FulfilledActionFromAsyncThunk, RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
 
 export interface ToolsState {
   tools: ToolWithId[]
@@ -82,13 +81,23 @@ export const selectToolDetail =
       .then(json => json.data.elements[0])
   )
 
+export const updateTool =
+  createAsyncThunk<any, ToolWithId, {state: RootState}>(
+    "resources/tools/detail/update",
+    (tool, thunkApi) => fetchUpdateTool(tool)
+        .then(() => thunkApi.fulfillWithValue('Herramienta actualizada con éxito.'))
+  )
+
 export const toolsSlice = createSlice({
   name: "tools",
   initialState,
   reducers: {
     selectToolToDelete: (state, action: PayloadAction<ToolWithId | null>) => {
       return {...state, toolToDelete: action.payload}
-    } 
+    },
+    updateToolDetail: (state, action: PayloadAction<ToolWithId>) => {
+      return {...state, toolDetail: action.payload}
+    }
   },
   extraReducers: (builder) => {
     builder
@@ -142,10 +151,13 @@ export const toolsSlice = createSlice({
       .addCase(selectToolDetail.fulfilled, (state, action: PayloadAction<ToolWithId>) => {
         state.toolDetail = action.payload
       })
+      .addCase(updateTool.fulfilled, (state, action: PayloadAction<FulfilledActionFromAsyncThunk<AnyAsyncThunk>, string>) => {
+        toast.success(action.payload)
+      })
   }
   }
 )
 
-export const { selectToolToDelete } = toolsSlice.actions
+export const { selectToolToDelete, updateToolDetail } = toolsSlice.actions
 
 export default toolsSlice.reducer

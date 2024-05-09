@@ -2,6 +2,7 @@ import { Brand } from "../../brands/tBrands";
 import { FindAllParams } from "../../common/tCommon";
 import { Group } from "../../groups/tGroups";
 import { Location } from "../../locations/tLocations";
+import { ResourceType } from "../tResources";
 
 const ToolStatus = {
   AVAILABLE: "AVAILABLE",
@@ -12,31 +13,30 @@ const ToolStatus = {
   DEPRECATED: "DEPRECATED",
 } as const
 
-//Type ToolStatus = { typeof keyof ToolStatus }
-
 export interface Tool {
-  barcode: string;
-  category: Brand;
-  brand: Brand;
-  name: string;
-  model: string;
-  description: string;
-  weight: number;
-  stockWeightType: string;
-  price: number;
-  purchaseDate: Date;
-  urlImages: string[];
-  maintenancePeriod: number;
-  maintenanceTime: string;
-  lastMaintenance: Date;
-  nextMaintenance: Date;
-  status: string;
-  location: Location;
-  group: Group;
+  barcode: string
+  resourceType: ResourceType
+  brand: Brand
+  name: string
+  model: string
+  description: string
+  weight: number
+  stockWeightType: string
+  price: number
+  purchaseDate: Date
+  urlImages: string[]
+  maintenancePeriod: number
+  maintenanceTime: string
+  lastMaintenance: Date
+  nextMaintenance: Date
+  status: string
+  location: Location
+  group: Group
+  uploadStatus: 'INSERTED' | 'UPDATED' | 'SKIPPED'
 }
 
 export interface ToolWithId extends Tool {
-  id: number;
+  id: number
 }
 
 export interface ToolsParams extends FindAllParams{

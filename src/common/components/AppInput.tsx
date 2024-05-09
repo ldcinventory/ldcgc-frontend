@@ -1,11 +1,11 @@
-import { Input, InputFile, LabeledInput } from "../tCommon";
+import { Input, InputFile, LabeledInput, LabeledTextArea } from "../tCommon";
 import { AppButton } from "./AppButton";
 
-export function AppTextInput({ value, onChange, placeholder }: Input) {
+export function AppTextInput({ value, onChange, placeholder, className }: Input) {
   return (
     <input type="text" placeholder={placeholder}
       value={value}
-      className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+      className={`font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
       onChange={onChange} />
   )
 }
@@ -53,6 +53,23 @@ export function AppNumberInputXs({ value, onChange, placeholder, min, max, step,
   )
 }
 
+export function AppLabeledNumberInput({ value, defaultValue, onChange, placeholder, min, max, step, onKeyUp, className, id, label }: LabeledInput) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={id} className="flex gap-2">{label}</label>
+        <input type="number" placeholder={placeholder}
+        min={min}
+        max={max}
+        step={step}
+        onKeyUp={onKeyUp}
+        value={value}
+        defaultValue={defaultValue}
+        className={` ${className} font-normal rounded-md w-full p-1 
+        dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}
+          onChange={onChange} />
+    </div>
+  )
+}
 
 export function AppLabeledTextInput({ value, onChange, placeholder, label, id }: LabeledInput) { 
   return (
@@ -65,6 +82,19 @@ export function AppLabeledTextInput({ value, onChange, placeholder, label, id }:
     </div>
   )
 }
+
+export function AppLabeledTextArea({ value, onChange, placeholder, label, id, rows = 4, cols = 20 }: LabeledTextArea) {
+  return (
+    <div className="flex flex-col gap-2">
+      <label htmlFor={id} className="flex gap-2">{label}</label>
+      <textarea id={id} placeholder={placeholder} rows={rows} cols={cols}
+        value={value}
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+        onChange={onChange} />
+    </div>
+  )
+}
+
 
 export function AppLabeledDateInput({ defaultValue, value, onChange, placeholder, label, id }: LabeledInput) {
   return (

@@ -6,6 +6,10 @@ import consumablesRegisterReducer from "../register/consumables/consumablesRegis
 import toolsRegisterReducer from "../register/tools/toolsRegisterSlice"
 import consumablesReducer from "../resources/consumables/consumablesSlice"
 import toolsReducer from "../resources/tools/toolsSlice"
+import resourceTypesReducer from "../resources/common/resourceTypeSlice"
+import locationsReducer from "../locations/locationsSlice"
+import brandsReducer from "../brands/brandSlice"
+import driveReducer from "../drive/driveSlice"
 
 
 export const store = configureStore({
@@ -16,6 +20,10 @@ export const store = configureStore({
     tools: toolsReducer,
     toolsRegister: toolsRegisterReducer,
     register: registerReducer,
+    resourceTypes: resourceTypesReducer,
+    locations: locationsReducer,
+    brands: brandsReducer,
+    drive: driveReducer
   }
 })
 

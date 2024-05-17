@@ -13,8 +13,7 @@ const ToolStatus = {
   DEPRECATED: "DEPRECATED",
 } as const
 
-export interface Tool {
-  barcode: string
+export interface ToolPost {
   resourceType: ResourceType
   brand: Brand
   name: string
@@ -24,14 +23,18 @@ export interface Tool {
   stockWeightType: string
   price: number
   purchaseDate: Date
-  urlImages: string[]
   maintenancePeriod: number
   maintenanceTime: string
+  location: Location
+  group: Group
+}
+
+export interface Tool extends ToolPost {
+  barcode: string
+  urlImages: string[]
   lastMaintenance: Date
   nextMaintenance: Date
   status: string
-  location: Location
-  group: Group
   uploadStatus: 'INSERTED' | 'UPDATED' | 'SKIPPED'
 }
 
@@ -61,3 +64,95 @@ export function toolStatusConverter(status:string) {
   
   return status
 }
+
+export const StockWeightTypes =
+  [
+    {
+      name: "Unidades",
+      value: "UNITS"
+    },
+    {
+      name: "Litros",
+      value: "LITERS"
+    },
+    {
+      name: "Mililitros",
+      value: "MILLILITERS"
+    },
+    {
+      name: "Kilogramos",
+      value: "KILOGRAMS"
+    },
+    {
+      name: "Gramos",
+      value: "GRAMS"
+    },
+    {
+      name: "Metros",
+      value: "METERS"
+    },
+    {
+      name: "Centímetros",
+      value: "CENTIMETERS"
+    },
+    {
+      name: "Milímetros",
+      value: "MILLIMETERS"
+    },
+    {
+      name: "Libras",
+      value: "POUNDS"
+    },
+    {
+      name: "Onzas",
+      value: "OUNCES"
+    },
+  ]
+
+export const MaintenaceTimes = 
+  [
+    {
+      name: "Días",
+      value: "DAYS"
+    },
+    {
+      name: "Semanas",
+      value: "WEEKS"
+    },
+    {
+      name: "Meses",
+      value: "MONTHS"
+    },
+    {
+      name: "Años",
+      value: "YEARS"
+    },
+  ]
+
+export const StatusTypes =
+  [
+    {
+      name: "Disponible",
+      value: "AVAILABLE"
+    },
+    {
+      name: "No disponible",
+      value: "NOT_AVAILABLE"
+    },
+    {
+      name: "En mantenimiento",
+      value: "IN_MAINTENANCE"
+    },
+    {
+      name: "Dañada",
+      value: "DAMAGED"
+    },
+    {
+      name: "Nueva",
+      value: "NEW"
+    },
+    {
+      name: "En desuso",
+      value: "DEPRECATED"
+    },
+  ]

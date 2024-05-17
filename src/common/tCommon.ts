@@ -1,9 +1,10 @@
-import { ChangeEventHandler, KeyboardEventHandler, ReactNode } from "react"
+import { ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, ReactNode } from "react"
 import { ConsumablesRegisterParams } from "../register/consumables/tConsumableRegisters"
 import { ToolRegisterParams } from "../register/tools/tToolRegisters"
 import { ConsumableParams } from "../resources/consumables/tConsumables"
 import { VolunteersParams } from "../volunteers/tVolunteers"
 import { ToolsParams } from "../resources/tools/tTools"
+import { DriveParams } from "../drive/tDrive"
 
 export interface Parent {
   id: number
@@ -30,7 +31,7 @@ export interface FetchApiParams {
   contentTypeAuto?: boolean
 }
 
-export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams
+export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams | DriveParams
 
 export type StatusType = "idle" | "loading" | "failed" | "succeeded"
 
@@ -42,11 +43,12 @@ export interface Interactable {
 }
 
 export interface Input extends Interactable {
-  onChange: ChangeEventHandler<HTMLInputElement>,
+  onChange?: ChangeEventHandler<HTMLInputElement>,
   max?: number,
   min?: number,
   step?: number | "any"
   onKeyUp?: KeyboardEventHandler<HTMLInputElement>
+  name?: string
 }
 
 export interface LabeledInput extends Input {
@@ -55,19 +57,21 @@ export interface LabeledInput extends Input {
 }
 
 export interface InputSelect extends Interactable {
-  onChange: ChangeEventHandler<HTMLSelectElement>,
+  onChange?: ChangeEventHandler<HTMLSelectElement>,
   options: Option[]
+  name?: string
 }
 
 export interface LabeledInputSelect extends InputSelect {
   id: string
-  label: string
+  label: ReactNode
 }
 
 export interface InputFile extends Input {
   id: string
   children: ReactNode
   accept: string
+  multiple?: boolean
 }
 
 type Option = {
@@ -77,7 +81,7 @@ type Option = {
 
 export interface Button {
   children?: ReactNode
-  onClick?: () => void
+  onClick?: MouseEventHandler<HTMLButtonElement>
   className?: string
   disabled?: boolean
 }
@@ -107,5 +111,5 @@ export interface TextArea extends Interactable {
 
 export interface LabeledTextArea extends TextArea {
   id: string
-  label: string
+  label: ReactNode
 }

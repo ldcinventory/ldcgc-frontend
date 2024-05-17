@@ -5,10 +5,9 @@ import { useToolsExcel } from "../hooks/useToolsExcel";
 export function ToolsExcel() {
   const { handleUploadExcel } = useToolsExcel()
   return (
-    <nav className="flex gap-2 items-center  mb-7">
-      <AppFileInput id="tools-excel-input" className="flex gap-4 px-4 py-[11px]" onChange={handleUploadExcel} accept=".xls, .xlsx, .csv, .ods, .tsv">
-        <ArrowUpTrayIcon className="h-6" /> Subir excel
-      </AppFileInput>
-    </nav>
+    <AppFileInput id="tools-excel-input" className="flex gap-4 px-4 py-[11px]" onChange={handleUploadExcel} accept=".xls, .xlsx, .csv, .ods, .tsv">
+      <ArrowUpTrayIcon className="h-6" /> Subir excel
+    </AppFileInput>
+  
   )
 }

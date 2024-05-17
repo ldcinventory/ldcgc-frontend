@@ -12,6 +12,7 @@ import { ConsumablesRegister } from "./register/consumables/components/Consumabl
 import { ResourcesHeader } from "./resources/common/ResourcesHeader";
 import { Consumables } from "./resources/consumables/Consumables";
 import { ToolDetail } from "./resources/tools/components/ToolDetail";
+import { AddTool } from "./resources/tools/components/AddTool";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = localStorage.getItem('payloadToken') !== null
@@ -33,6 +34,7 @@ const AppRoutes = () => {
           <Route path='tools' element={<ProtectedRoute><Tools /></ProtectedRoute>} />
         </Route>
         <Route path="/resources/tools/:barcode" element={<ToolDetail />} />
+        <Route path="/resources/tools/new" element={<AddTool />} />
         <Route path='/register' element={<ProtectedRoute><RegisterHeader /></ProtectedRoute>}>
           <Route path='consumables' element={<ProtectedRoute><ConsumablesRegister /></ProtectedRoute>} />
           <Route path='tools' element={<ProtectedRoute><ToolsRegister /></ProtectedRoute>} />

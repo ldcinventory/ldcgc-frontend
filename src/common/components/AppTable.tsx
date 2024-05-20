@@ -1,7 +1,7 @@
 import { ReactNode } from "react";
 
 export function AppTableCell({ children, className, columns }: { children?: ReactNode, className?: string, columns?: number }) {
-  const width = columns ? `w-[${100/columns}%]` : ''
+  const width = columns ? `w-[${Math.floor(100/columns)}%]` : ''
 
   return (
     <td className={`p-2 ${width}`}>
@@ -12,9 +12,10 @@ export function AppTableCell({ children, className, columns }: { children?: Reac
   )
 }
 
-export function AppTableHeaderCell({ children, className }: { children?: ReactNode, className?: string }) {
+export function AppTableHeaderCell({ children, className, columns }: { children?: ReactNode, className?: string, columns?: number }) {
+  const width = columns ? `w-[${Math.floor(100 / columns)}%]` : ''
   return (
-    <th className="p-2">
+    <th className={`p-2 ${width}`}>
       <div className={`flex gap-2 items-center ${className ? className : ''}`}>
         {children}
       </div>

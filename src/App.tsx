@@ -10,9 +10,11 @@ import { Volunteers } from "./volunteers/components/Volunteers";
 import { Menu } from "./menu/Menu";
 import { ConsumablesRegister } from "./register/consumables/components/ConsumablesRegister";
 import { ResourcesHeader } from "./resources/common/ResourcesHeader";
-import { Consumables } from "./resources/consumables/Consumables";
+import { Consumables } from "./resources/consumables/components/Consumables";
 import { ToolDetail } from "./resources/tools/components/ToolDetail";
 import { AddTool } from "./resources/tools/components/AddTool";
+import { AddConsumable } from "./resources/consumables/components/AddConsumable";
+import { ConsumableDetail } from "./resources/consumables/components/ConsumableDetail";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = localStorage.getItem('payloadToken') !== null
@@ -39,6 +41,8 @@ const AppRoutes = () => {
           <Route path='consumables' element={<ProtectedRoute><ConsumablesRegister /></ProtectedRoute>} />
           <Route path='tools' element={<ProtectedRoute><ToolsRegister /></ProtectedRoute>} />
         </Route>      
+        <Route path="/resources/consumables/:barcode" element={<ConsumableDetail />} />
+        <Route path="/resources/consumables/new" element={<AddConsumable />} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<NotFound />} />

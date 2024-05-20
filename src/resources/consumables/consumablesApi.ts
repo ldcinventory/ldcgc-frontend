@@ -1,14 +1,21 @@
 import { fetchApi } from "../../api/fetchApi"
-import { ConsumableParams, ConsumableWithId } from "./tConsumables"
+import { ConsumableParams, ConsumablePost, ConsumableWithId } from "./tConsumables"
 const CONSUMABLES_PATH = '/resources/consumables'
 
-export const fetchConsumables = (params: ConsumableParams = {}) =>
-  fetchApi({ method: "GET", path: `${CONSUMABLES_PATH}/loose`, queryParams: params })
+export const fetchConsumablesLoose = (params: ConsumableParams = {}) =>
+  fetchApi({ method: "GET", path: `${CONSUMABLES_PATH}`, queryParams: params })
 
-export const fetchDeleteConsumable = (registerId: number) =>
-  fetchApi({ method: 'DELETE', path: `${CONSUMABLES_PATH}/${registerId}` })
+export const fecthConsumables = ({ consumablesParams }: { consumablesParams: ConsumableParams }) =>
+  fetchApi({ method: 'GET', path: CONSUMABLES_PATH, queryParams: consumablesParams })
 
-export const fetchUpdateConsumable = (register: ConsumableWithId) =>
-  fetchApi({ method: "PUT", path: `${CONSUMABLES_PATH}/${register.id}`, body: JSON.stringify(register) })
+export const fetchUploadConsumablesExcel = ({ formData, groupId }: { groupId: number, formData: FormData }) =>
+  fetchApi({ method: "POST", path: `${CONSUMABLES_PATH}/excel`, body: formData, queryParams: { groupId }, contentTypeAuto: true })
 
-export const fetchUploadConsumablesExcel = (formData: FormData) => fetchApi({ method: "POST", path: `${CONSUMABLES_PATH}/excel`, body: formData })
+export const fetchAddConsumable = (consumable: ConsumablePost) =>
+  fetchApi({ method: 'POST', path: CONSUMABLES_PATH, body: JSON.stringify(consumable) })
+
+export const fetchDeleteConsumable = (consumableId: number) => 
+  fetchApi({ method: 'DELETE', path: `${CONSUMABLES_PATH}/${consumableId}`, })
+
+export const fetchUpdateConsumable = (consumable: ConsumableWithId) =>
+  fetchApi({ method: 'PUT', path: `${CONSUMABLES_PATH}/${consumable.id}`, body: JSON.stringify(consumable) })

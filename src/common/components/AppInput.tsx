@@ -2,12 +2,14 @@ import { MouseEvent } from "react";
 import { Input, InputFile, LabeledInput, LabeledTextArea } from "../tCommon";
 import { AppButton } from "./AppButton";
 
-export function AppTextInput({ value, onChange, placeholder, className }: Input) {
+export function AppTextInput({ value, onChange, placeholder, className, defaultValue, name }: Input) {
   return (
     <input type="text" placeholder={placeholder}
       value={value}
       className={`font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
-      onChange={onChange} />
+      onChange={onChange}
+      defaultValue={defaultValue}
+      name={name} />
   )
 }
 
@@ -103,26 +105,29 @@ export function AppLabeledTextInput({ value, onChange, placeholder, label, id }:
   )
 }
 
-export function AppLabeledTextInputForm({ name, placeholder, label, id }: LabeledInput) {
+export function AppLabeledTextInputForm({ name, placeholder, label, id, defaultValue }: LabeledInput) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <input id={id} type="text" placeholder={placeholder}
         className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
         name={name}
+        defaultValue={defaultValue}
          />
     </div>
   )
 }
 
-export function AppLabeledTextArea({ value, onChange, placeholder, label, id, rows = 4, cols = 20 }: LabeledTextArea) {
+export function AppLabeledTextArea({ value, onChange, placeholder, label, id, rows = 4, cols = 20, name, defaultValue }: LabeledTextArea) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <textarea id={id} placeholder={placeholder} rows={rows} cols={cols}
         value={value}
         className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
-        onChange={onChange} />
+        onChange={onChange}
+        defaultValue={defaultValue}
+        name={name} />
     </div>
   )
 }

@@ -6,4 +6,10 @@ export const fetchUploadToolImages = ({ images, toolBarcode }: { images: FormDat
   fetchApi({ method: 'PATCH', path: DRIVE_PATH, queryParams: { toolBarcode }, body: images, contentTypeAuto: true })
 
 export const fetchDeleteToolImages = (driveParams: DriveParams) => 
-  fetchApi({ method: 'PATCH', path: `${DRIVE_PATH}/clean`, queryParams: driveParams})
+  fetchApi({ method: 'PATCH', path: `${DRIVE_PATH}/clean`, queryParams: driveParams })
+
+export const fetchUploadConsumableImages = ({ images, consumableBarcode }: { images: FormData, consumableBarcode: string }) =>
+  fetchApi({ method: 'PATCH', path: DRIVE_PATH, queryParams: { consumableBarcode }, body: images, contentTypeAuto: true })
+
+export const fetchDeleteConsumableImages = (driveParams: DriveParams) =>
+  fetchApi({ method: 'PATCH', path: `${DRIVE_PATH}/clean`, queryParams: driveParams })

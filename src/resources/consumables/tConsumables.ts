@@ -1,22 +1,28 @@
 import { Brand } from "../../brands/tBrands"
 import { Group } from "../../groups/tGroups"
+import { Location } from "../../locations/tLocations"
+import { ResourceType } from "../tResources"
 
-export interface Consumable {
-  barcode: string
-  resourceType: Brand
+
+export interface ConsumablePost {
+  resourceType: ResourceType
   brand: Brand
-  price: number
-  purchaseDate: Date
   name: string
   model: string
   description: string
-  urlImages: string[]
-  quantityEachItem: number
   stock: number
   minStock: number
   stockType: string
+  quantityEachItem: number
+  price: number
+  purchaseDate: Date
   location: Location
   group: Group
+}
+
+export interface Consumable extends ConsumablePost{
+  barcode: string
+  urlImages: string[]  
   uploadStatus: string
 }
 
@@ -30,4 +36,14 @@ export interface ConsumableParams {
   filterString?: string
   sortField?: string
   hasStock?: boolean
+  name?: string
+  barcode?: string
+  location?: string
+  model?: string
+  brand?: string
+  groupId?: number
+}
+
+export interface ConsumablePost {
+
 }

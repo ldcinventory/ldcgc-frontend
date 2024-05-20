@@ -6,7 +6,7 @@ import { PaginatedResponse, StatusType } from "../../common/tCommon"
 import { RootState } from "../../app/index"
 import { toast } from "sonner"
 import { ConsumableParams, ConsumableWithId } from "../../resources/consumables/tConsumables"
-import { fetchConsumables } from "../../resources/consumables/consumablesApi"
+import { fetchConsumablesLoose } from "../../resources/consumables/consumablesApi"
 import { AnyAsyncThunk, FulfilledActionFromAsyncThunk, RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
 
 export interface ConsumablesRegisterState {
@@ -42,17 +42,17 @@ export const getConsumablesRegister =
       const newParams = { ...state.consumablesRegister.queryParams, ...queryParams }
       thunkApi.dispatch(updateQueryParams(newParams))
       const response = await fetchConsumablesRegister(newParams)
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
-    
+
 
 export const deleteConsumableRegister =
   createAsyncThunk<any, number, { state: RootState }>(
     "register/consumables/delete",
     async (registerId, thunkApi) => {
       const response = await fetchDeleteConsumableRegister(registerId)
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
 
       if (response.ok)
         thunkApi.dispatch(getConsumablesRegister(thunkApi.getState().consumablesRegister.queryParams))
@@ -69,7 +69,7 @@ export const closeConsumableRegister =
         throw new Error('Error! Indica el stock devuelto antes de cerrar el registro')
       register = { ...register, registerTo: new Date() }
       const response = await fetchUpdateConsumableRegister(register)
-        .catch((error:string) => { throw new Error(`The server responded with an error: ${error}`) })
+        .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       if (response.ok)
         thunkApi.dispatch(getConsumablesRegister(thunkApi.getState().consumablesRegister.queryParams))
 
@@ -85,7 +85,7 @@ export const getPossibleConsumables =
       const state = thunkApi.getState()
       const newParams = { ...state.consumablesRegister.consumablesParams, ...consumablesParams }
       thunkApi.dispatch(updateConsumablesParams(newParams))
-      const response = await fetchConsumables(newParams)
+      const response = await fetchConsumablesLoose(newParams)
         .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
     })
@@ -110,7 +110,7 @@ export const consumablesRegisterSlice = createSlice({
   initialState,
   reducers: {
     updateQueryParams: (state, action: PayloadAction<ConsumablesRegisterParams>) => {
-      return {...state, queryParams: action.payload}
+      return { ...state, queryParams: action.payload }
     },
     setCurrentConsumable: (state, action: PayloadAction<string>) => {
       const newCurrentConsumable = action.payload
@@ -143,7 +143,7 @@ export const consumablesRegisterSlice = createSlice({
       return { ...state, selectedConsumables: newSelectedConsumables }
     },
     setSelectedConsumables: (state, action: PayloadAction<SelectedConsumable[]>) => {
-      return {...state, selectedConsumables: action.payload}
+      return { ...state, selectedConsumables: action.payload }
     }
   },
   extraReducers: (builder) => {

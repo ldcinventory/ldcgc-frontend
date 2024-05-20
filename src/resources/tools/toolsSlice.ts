@@ -19,7 +19,7 @@ export interface ToolsState {
 
 const initialState: ToolsState = {
   tools: [],
-  queryParams: { size: 10, pageIndex: 0 },
+  queryParams: { size: 10, pageIndex: 0, brand: '', barcode: '', name: '', location: '', model: '' },
   totalPages: 0,
   status: "idle",
   toolToDelete: null,

@@ -104,9 +104,10 @@ export interface FindAllParams {
 }
 
 export interface TextArea extends Interactable {
-  onChange: ChangeEventHandler<HTMLTextAreaElement>,
+  onChange?: ChangeEventHandler<HTMLTextAreaElement>,
   rows?: number
   cols?: number
+  name?: string
 }
 
 export interface LabeledTextArea extends TextArea {

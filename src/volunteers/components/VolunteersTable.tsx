@@ -22,14 +22,14 @@ export const VolunteersTable = () => {
         <li className={`${!showFilters && 'hidden'} flex justify-between gap-2 border-b pb-2 border-primary-1 dark:border-primary-5`}>
           <nav className="flex flex-col gap-2 flex-1">
             <AppTextInput placeholder="Nombre y apellidos"
-              value={volunteersState.volunteersParams.filterString} onChange={(e) => handleEditVolunteersParams({ filterString: e.target.value })} />
+              value={volunteersState.volunteersParams.filterString} onChange={(e) => handleEditVolunteersParams({ filterString: e.target.value, pageIndex: 0 })} />
             <AppTextInput placeholder="Id de Builder"
-              value={volunteersState.volunteersParams.builderAssistantId} onChange={(e) => handleEditVolunteersParams({ builderAssistantId: e.target.value })} />
+              value={volunteersState.volunteersParams.builderAssistantId} onChange={(e) => handleEditVolunteersParams({ builderAssistantId: e.target.value, pageIndex: 0 })} />
           </nav>
           <nav className="flex-1">
             <AppSelect
               options={[{ name: 'Cualquiera', value: '' }, { name: 'Sí', value: 'true' }, { name: 'No', value: 'false' }]}
-              onChange={(e) => handleEditVolunteersParams({ isActive: e.target.value === '' ? undefined : e.target.value === 'true' })} />
+              onChange={(e) => handleEditVolunteersParams({ isActive: e.target.value === '' ? undefined : e.target.value === 'true', pageIndex: 0 })} />
           </nav>
           <nav>
             <AppButtonTransparent onClick={(e) => handleEditVolunteersParams({ filterString: '', builderAssistantId: '', isActive: undefined })}><XMarkIcon className="h-6" /></AppButtonTransparent>
@@ -79,12 +79,12 @@ export const VolunteersTable = () => {
         </li>
         <li className={`${!showFilters && 'hidden'} flex justify-between gap-2 border-b pb-2 border-primary-1 dark:border-primary-5`}>
           <AppTextInput placeholder="Pedro, Antonio, Juan..."
-            value={volunteersState.volunteersParams.filterString} onChange={(e) => handleEditVolunteersParams({ filterString: e.target.value })} />
+            value={volunteersState.volunteersParams.filterString} onChange={(e) => handleEditVolunteersParams({ filterString: e.target.value, pageIndex: 0 })} />
           <AppTextInput placeholder="CNUsvEx8..."
-            value={volunteersState.volunteersParams.builderAssistantId} onChange={(e) => handleEditVolunteersParams({ builderAssistantId: e.target.value })} />
+            value={volunteersState.volunteersParams.builderAssistantId} onChange={(e) => handleEditVolunteersParams({ builderAssistantId: e.target.value, pageIndex: 0 })} />
           <AppSelect
             options={[{ name: 'Cualquiera', value: '' }, { name: 'Sí', value: 'true' }, { name: 'No', value: 'false' }]}
-            onChange={(e) => handleEditVolunteersParams({ isActive: e.target.value === '' ? undefined : e.target.value === 'true' })} />
+            onChange={(e) => handleEditVolunteersParams({ isActive: e.target.value === '' ? undefined : e.target.value === 'true', pageIndex: 0 })} />
           <AppButton onClick={(e) => handleEditVolunteersParams({ filterString: '', builderAssistantId: '', isActive: undefined })}><XMarkIcon className="h-6" /></AppButton>
         </li>
         {

@@ -38,7 +38,7 @@ export function AppButtonError({ children, onClick, className, disabled }: Butto
 export function AppButton({ children, onClick, className, disabled }: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-primary-2 rounded-md p-1 hover:bg-primary-4 transition-all duration-300
+      className={`bg-primary-2 rounded-md p-1 hover:bg-primary-4 transition-all duration-300 dark:bg-primary-7
       ${className}`}
       disabled={disabled}>
       {children}
@@ -62,7 +62,7 @@ export function AppButtonRounded({ children, onClick, className, disabled }: But
 export function AppButtonSubmit({ children, onClick, className, disabled }: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-primary-2 rounded-md p-1 hover:bg-primary-4 transition-all duration-300
+      className={`bg-primary-2 rounded-md p-1 hover:bg-primary-4 transition-all duration-300 dark:bg-primary-6
       ${className}`}
       disabled={disabled}
       type="submit">

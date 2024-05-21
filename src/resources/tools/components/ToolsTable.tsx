@@ -16,7 +16,7 @@ export function ToolsTable() {
           <tr>
             <AppTableHeaderCell>Datos</AppTableHeaderCell>
             <AppTableHeaderCell className="flex justify-end">
-              <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3'}`}>
+              <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3 dark:bg-primary-5'}`}>
                 <Bars2Icon className="h-7" />
               </AppButton>
             </AppTableHeaderCell>
@@ -42,9 +42,9 @@ export function ToolsTable() {
               <AppTableCell columns={2} className="flex-col">
                 <div className="flex gap-2 whitespace-nowrap self-start">
                   <span className={`rounded-lg p-1 text-xs font-monospace font-bold
-                    ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3'}
-                    ${(tool.status === 'NOT_AVAILABLE' || tool.status === 'IN_MAINTENANCE') && 'bg-warning-3'}
-                    ${(tool.status === 'DAMAGED' || tool.status === 'DEPRECATED') && 'bg-error-3'}`}>
+                    ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3 dark:bg-success-6'}
+                    ${(tool.status === 'NOT_AVAILABLE' || tool.status === 'IN_MAINTENANCE') && 'bg-warning-3 dark:bg-warning-7'}
+                    ${(tool.status === 'DAMAGED' || tool.status === 'DEPRECATED') && 'bg-error-3 dark:bg-error-7'}`}>
                     {toolStatusConverter(tool.status)}
                   </span>
                   {tool.name}
@@ -64,7 +64,7 @@ export function ToolsTable() {
 
               </AppTableCell>
               <AppTableCell columns={2} className="justify-end">
-                <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 p-1 rounded-md"><PencilIcon className="h-5" /> </AppNavLink>
+                <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-5" /> </AppNavLink>
                 <AppButtonError onClick={() => handleOpenDeleteToolModal(tool)}>
                   <TrashIcon className="h-5" />
                 </AppButtonError>
@@ -107,7 +107,7 @@ export function ToolsTable() {
             <AppTableHeaderCell>Código de barras</AppTableHeaderCell>
             <AppTableHeaderCell>Ubicación</AppTableHeaderCell>
             <AppTableHeaderCell>
-              <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3'}`}>
+              <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3 dark:bg-primary-5'}`}>
                 <Bars2Icon className="h-7" />
               </AppButton>
             </AppTableHeaderCell>
@@ -137,9 +137,9 @@ export function ToolsTable() {
               <AppTableCell columns={3} className="flex-col">
                 <div className="flex gap-2 whitespace-nowrap self-start">
                   <span className={`rounded-lg p-1 text-xs font-monospace font-bold
-                    ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3'}
-                    ${(tool.status === 'NOT_AVAILABLE' || tool.status === 'IN_MAINTENANCE') && 'bg-warning-3'}
-                    ${(tool.status === 'DAMAGED' || tool.status === 'DEPRECATED') && 'bg-error-3'}`}>
+                    ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3 dark:bg-success-6'}
+                    ${(tool.status === 'NOT_AVAILABLE' || tool.status === 'IN_MAINTENANCE') && 'bg-warning-3 dark:bg-warning-7'}
+                    ${(tool.status === 'DAMAGED' || tool.status === 'DEPRECATED') && 'bg-error-3 dark:bg-error-7'}`}>
                     {toolStatusConverter(tool.status)}
                   </span>
                   {tool.name}
@@ -159,7 +159,7 @@ export function ToolsTable() {
                 {tool.location.name}
               </AppTableCell>
               <AppTableCell columns={3}>
-                <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
+                <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
                 <AppButtonError onClick={() => handleOpenDeleteToolModal(tool)}>
                   <TrashIcon className="h-6" />
                 </AppButtonError>
@@ -202,7 +202,7 @@ export function ToolsTable() {
             <AppTableHeaderCell5>Modelo</AppTableHeaderCell5>
             <AppTableHeaderCell5>Ubicación</AppTableHeaderCell5>
             <AppTableHeaderCell>
-              <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3'}`}>
+              <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3 dark:bg-primary-5'}`}>
                 <Bars2Icon className="h-7" />
               </AppButton>
             </AppTableHeaderCell>
@@ -236,9 +236,9 @@ export function ToolsTable() {
               <AppTableCell5>
                 <div className="flex gap-2 whitespace-nowrap self-start">
                   <span className={`rounded-lg p-1 text-xs font-monospace font-bold
-                    ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3'}
-                    ${(tool.status === 'NOT_AVAILABLE' || tool.status === 'IN_MAINTENANCE') && 'bg-warning-3'}
-                    ${(tool.status === 'DAMAGED' || tool.status === 'DEPRECATED') && 'bg-error-3'}`}>
+                    ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3 dark:bg-success-6'}
+                    ${(tool.status === 'NOT_AVAILABLE' || tool.status === 'IN_MAINTENANCE') && 'bg-warning-3 dark:bg-warning-7'}
+                    ${(tool.status === 'DAMAGED' || tool.status === 'DEPRECATED') && 'bg-error-3 dark:bg-error-7'}`}>
                     {toolStatusConverter(tool.status)}
                   </span>
                   {tool.name}
@@ -258,7 +258,7 @@ export function ToolsTable() {
                 {tool.location.name}
               </AppTableCell5>
               <AppTableCell>
-                <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
+                <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
                 <AppButtonError onClick={() => handleOpenDeleteToolModal(tool)}>
                   <TrashIcon className="h-6" />
                 </AppButtonError>

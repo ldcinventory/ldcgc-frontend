@@ -19,8 +19,8 @@ export function AddTool() {
     <>
       <Toaster />
       <form onSubmit={handleFormSubmit}
-        className="flex flex-col min-h-[87vh] my-10 bg-primary-2 dark:bg-primary-8 p-5 max-w-[500px] rounded-lg mx-auto gap-2">
-        <h1 className="font-bold text-2xl mb-10">Añadir herramienta</h1>
+        className="flex flex-col min-h-[87vh] my-10 bg-primary-2 dark:bg-primary-7 p-5 max-w-[500px] rounded-lg mx-auto gap-2">
+        <h1 className="font-bold text-xl mb-10">Añadir herramienta</h1>
         <AppLabeledTextInputForm id="tool-name" label="Nombre" name="tool-name" />
         <AppLabeledSelectForm id="tool-resourceType" name="tool-resourceType" label="Tipo" 
           options={(resourceTypes || []).map(r => { return { name: r.name, value: r.id.toString() } })} />

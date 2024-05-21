@@ -15,7 +15,7 @@ interface VolunteersState {
 
 const initialState: VolunteersState = {
   volunteers: [],
-  volunteersParams: { pageIndex: 0, size: 10, filterString: '' },
+  volunteersParams: { pageIndex: 0, size: 10, filterString: '', isActive: undefined, builderAssistantId: '' },
   totalPages: 0,
   actualPage: 0
 }

@@ -50,7 +50,7 @@ export function ToolDetail() {
             }
           </section>          
         </header>
-        <aside className="bg-primary-2 dark:bg-primary-8 p-5 rounded-lg flex flex-col gap-4 flex-1 max-w-[700px]">
+        <aside className="bg-primary-2 dark:bg-primary-7 p-5 rounded-lg flex flex-col gap-4 flex-1 max-w-[700px]">
           <AppLabeledSelectForm id="tool-resourceType" name="tool-resourceType" label="Tipo"
             options={(resourceTypes || []).map(r => { return { name: r.name, value: r.id.toString() } })}
             onChange={(e) => handleEditTool({ resourceType: resourceTypes.find(r => r.id === Number(e.target.value)) })}

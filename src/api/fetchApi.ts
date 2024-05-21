@@ -73,6 +73,7 @@ const generateParamsStr = (queryParams?: QueryParams) => {
   let paramsStr = ''
   if (queryParams !== undefined) {
     paramsStr = '?' + Object.entries(queryParams)
+      .filter(param => param[1] !== undefined && param[1] !== '')
       .map(param => `${param[0]}=${param[1]}`)
       .join('&')
   }

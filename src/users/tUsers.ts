@@ -1,12 +1,12 @@
 import { Group } from "../groups/tGroups"
-import { Volunteer } from "../volunteers/tVolunteers"
+import { VolunteerWithId } from "../volunteers/tVolunteers"
 
 export interface User {
   id: number
   email: string
   password: string
   role: "admin" | "user" | "manager"
-  volunteer: Volunteer
+  volunteer: VolunteerWithId
   //responsibility: Respon
   group: Group
 }

@@ -1,10 +1,16 @@
-import { AppNavLink } from "../../common/components/AppNavLink";
+import { Toaster } from "sonner";
+import { VolunteersTable } from "./VolunteersTable";
+import { AddVolunteersModal } from "./AddVolunteersModal";
 
 export function Volunteers() {
+
   return (
-    <section className="flex flex-col gap-4 min-h-[92.5vh] items-center mt-10">
-      <h1 className="text-5xl">Página en construcción</h1>
-      <span>Ir a la <AppNavLink to="/" className='text-primary-7 dark:text-primary-4'>home</AppNavLink></span>
-    </section>
+    <>
+      <Toaster />
+      <section className="my-16 min-h-[77vh] flex flex-col gap-4">
+        <AddVolunteersModal />
+        <VolunteersTable />
+      </section>
+    </>
   )
 }

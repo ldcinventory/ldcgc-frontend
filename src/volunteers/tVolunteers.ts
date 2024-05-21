@@ -3,17 +3,21 @@ import { FindAllParams } from "../common/tCommon";
 import { Group } from "../groups/tGroups";
 
 export interface Volunteer {
-  id: number;
-  name: string;
-  lastName: string;
-  builderAssistantId: string;
-  isActive: boolean;
-  availability: string[];
-  absences: Absence[];
-  groupDto: Group;
+  name: string
+  lastName: string
+  builderAssistantId: string
+  isActive: boolean
+  availability: string[]
+  absences: Absence[]
+  group: Group
+}
+
+export interface VolunteerWithId  extends Volunteer{
+  id: number
 }
 
 export interface VolunteersParams extends FindAllParams {
-  builderAssistantId?: number
+  builderAssistantId?: string
   userId?: number
+  isActive?: boolean
 }

@@ -10,7 +10,7 @@ import resourceTypesReducer from "../resources/common/resourceTypeSlice"
 import locationsReducer from "../locations/locationsSlice"
 import brandsReducer from "../brands/brandSlice"
 import driveReducer from "../drive/driveSlice"
-
+import volunteersReducer from "../volunteers/volunteersSlice"
 
 export const store = configureStore({
   reducer: {
@@ -23,7 +23,8 @@ export const store = configureStore({
     resourceTypes: resourceTypesReducer,
     locations: locationsReducer,
     brands: brandsReducer,
-    drive: driveReducer
+    drive: driveReducer,
+    volunteers: volunteersReducer
   }
 })
 

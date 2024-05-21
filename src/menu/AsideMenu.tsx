@@ -22,7 +22,10 @@ export function AsideMenu() {
           <AppNavLink to='/'>
             <AppButtonTransparent onClick={() => setOpened(false)} ><HomeIcon className="h-8" /></AppButtonTransparent>
           </AppNavLink>
-          <a href={`${import.meta.env.VITE_ELM_APP}/volunteers`}>Voluntarios</a>
+          {/*<a href={`${import.meta.env.VITE_ELM_APP}/volunteers`}>Voluntarios</a>*/}
+          <AppNavLink to='/volunteers'>
+            <AppButtonTransparent onClick={() => setOpened(false)} >Voluntarios</AppButtonTransparent>
+          </AppNavLink>
           <AppNavLink to='/resources/tools'>
             <AppButtonTransparent onClick={() => setOpened(false)} >Materiales</AppButtonTransparent>
           </AppNavLink>

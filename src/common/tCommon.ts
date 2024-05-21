@@ -56,6 +56,13 @@ export interface LabeledInput extends Input {
   label: ReactNode
 }
 
+export interface CheckboxInput extends Input{
+  checked?: boolean
+  defaultChecked?: boolean
+  id?: string
+  label?: string
+}
+
 export interface InputSelect extends Interactable {
   onChange?: ChangeEventHandler<HTMLSelectElement>,
   options: Option[]
@@ -101,6 +108,8 @@ export interface FindAllParams {
   filterString?: string
   size?: number
   pageIndex?: number
+  sortField?: string
+  order?: 'ASC' |'DESC'
 }
 
 export interface TextArea extends Interactable {

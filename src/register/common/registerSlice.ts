@@ -1,17 +1,17 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit"
 
 import { PaginatedResponse, StatusType } from "../../common/tCommon"
-import { Volunteer, VolunteersParams } from "../../volunteers/tVolunteers"
+import { VolunteerWithId, VolunteersParams } from "../../volunteers/tVolunteers"
 import { RootState } from "../../app/index"
-import { fetchVolunteers } from "../../volunteers/volunteerService"
+import { fetchVolunteers } from "../../volunteers/volunteerApi"
 
 export interface RegisterState {
   status: StatusType
   error: string | undefined
   message: string | undefined
   currentVolunteer: string
-  possibleVolunteers: Volunteer[]
-  selectedVolunteer: Volunteer | null
+  possibleVolunteers: VolunteerWithId[]
+  selectedVolunteer: VolunteerWithId | null
   volunteersParams: VolunteersParams
   modalOpened: boolean
   registersAddDate: string
@@ -58,20 +58,20 @@ export const registerSlice = createSlice({
     updateVolunteersParams: (state, action: PayloadAction<VolunteersParams>) => {
       return { ...state, volunteersParams: action.payload }
     },
-    selectVolunteer: (state, action: PayloadAction<Volunteer>) => {
+    selectVolunteer: (state, action: PayloadAction<VolunteerWithId>) => {
       const newVolunteer = action.payload
       return { ...state, selectedVolunteer: newVolunteer, currentVolunteer: `${newVolunteer.name} ${newVolunteer.lastName} (${newVolunteer.builderAssistantId})` }
     },
     resetState: (state, action: PayloadAction<RegisterState>) => {
       return { ...initialState, ...action.payload }
     },
-    updateAddRegistersDate: (state, action: PayloadAction<string>) => {      
+    updateAddRegistersDate: (state, action: PayloadAction<string>) => {
       return { ...state, registersAddDate: action.payload }
     }
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getPossibleVolunteers.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<Volunteer> }>) => {
+      .addCase(getPossibleVolunteers.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<VolunteerWithId> }>) => {
         state.status = "succeeded"
         state.possibleVolunteers = action.payload.data.elements
       })

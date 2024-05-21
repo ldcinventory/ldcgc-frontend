@@ -1,5 +1,5 @@
 import { MouseEvent } from "react";
-import { Input, InputFile, LabeledInput, LabeledTextArea } from "../tCommon";
+import { CheckboxInput, Input, InputFile, LabeledInput, LabeledTextArea } from "../tCommon";
 import { AppButton } from "./AppButton";
 
 export function AppTextInput({ value, onChange, placeholder, className, defaultValue, name }: Input) {
@@ -93,14 +93,16 @@ export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min
 }
 
 
-export function AppLabeledTextInput({ value, onChange, placeholder, label, id }: LabeledInput) { 
+export function AppLabeledTextInput({ name, value, onChange, placeholder, label, id }: LabeledInput) { 
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <input id={id} type="text" placeholder={placeholder}
         value={value}
         className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
-        onChange={onChange} />
+        onChange={onChange}
+        name={name}
+      />
     </div>
   )
 }
@@ -177,5 +179,36 @@ export function AppFileInput({ value, onChange, children, id, className, accept,
         multiple={multiple}
       />
     </>
+  )
+}
+
+export function AppCheckboxInput({ value, onChange, placeholder, className, defaultValue, name, checked, defaultChecked }: CheckboxInput) {
+  return (
+    <input type="checkbox" placeholder={placeholder}
+      value={value}
+      className={`font-normal rounded-md dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
+      onChange={onChange}
+      defaultValue={defaultValue}
+      name={name}
+      checked={checked}
+      defaultChecked={defaultChecked}
+    />
+  )
+}
+
+export function AppLabeledCheckboxInput({ id, label, value, onChange, placeholder, className, defaultValue, name, checked, defaultChecked }: CheckboxInput) {
+  return (
+    <div className="flex flex-col gap-2 items-start">
+      <label htmlFor={id} className="flex gap-2">{label}</label>
+      <input type="checkbox" placeholder={placeholder}
+        value={value}
+        className={`font-normal rounded-md dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
+        onChange={onChange}
+        defaultValue={defaultValue}
+        name={name}
+        checked={checked}
+        defaultChecked={defaultChecked}
+        />
+    </div>
   )
 }

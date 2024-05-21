@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from "../../app/store";
 import { getPossibleVolunteers, selectVolunteer, setCurrentVolunteer, toggleModalOpened, updateAddRegistersDate } from "./registerSlice";
 import { ChangeEvent, FormEvent } from "react";
 import { addConsumableRegisters, getConsumablesRegister, getPossibleConsumables, removeSelectedConsumable, selectConsumable, setCurrentConsumable, updateSelectedConsumable } from "../consumables/consumablesRegisterSlice";
-import { Volunteer } from "../../volunteers/tVolunteers";
+import { VolunteerWithId } from "../../volunteers/tVolunteers";
 import { Tool } from "../../resources/tools/tTools";
 import { SelectedTool } from "../tools/tToolRegisters";
 import { ConsumableWithId } from "../../resources/consumables/tConsumables";
@@ -18,7 +18,7 @@ export const useRegisterModal = () => {
   const getPossibleConsumablesDebounced = useDebouncedCallback((consumablesParams) => dispatch(getPossibleConsumables(consumablesParams)), 500)
 
   const handleToggleModalOpened = () => dispatch(toggleModalOpened())
-  const handleSelectVolunteer = (volunteer: Volunteer) => dispatch(selectVolunteer(volunteer))
+  const handleSelectVolunteer = (volunteer: VolunteerWithId) => dispatch(selectVolunteer(volunteer))
   const handleGetPossibleVolunteers = (e: ChangeEvent<HTMLInputElement>) => {
     const inputValue = e.target.value
     dispatch(setCurrentVolunteer(inputValue))
@@ -60,7 +60,7 @@ export const useRegisterModal = () => {
     const volunteer = register.selectedVolunteer
     if (volunteer === null)
       return
-    
+
     const registerFrom = new Date(register.registersAddDate)
 
     if (toolsRegister.selectedTools.length > 0) {
@@ -85,8 +85,8 @@ export const useRegisterModal = () => {
 
       dispatch(addConsumableRegisters(consumablesRegistersToAdd))
     }
-    
-      dispatch(getConsumablesRegister({}))
+
+    dispatch(getConsumablesRegister({}))
   }
 
   const handleSetAddRegistersDate = (e: ChangeEvent<HTMLInputElement>) => {

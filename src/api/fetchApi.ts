@@ -43,7 +43,11 @@ export const fetchApi = ({ method, path, queryParams, body, contentTypeAuto = fa
         localStorage.removeItem('payloadToken')
         localStorage.removeItem('signatureToken')
         window.location.replace('/login')
-        return Promise.reject();
+        return Promise.reject()
+      }
+      else if (res.status === 403 && (json.message?.toLowerCase().includes('eula') || json.data?.message?.toLowerCase().includes('eula'))) {
+        window.location.replace('/eula')
+        return Promise.reject({message: 'Acepta el eula para usar la aplicación.'})
       }
 
       return Promise.reject({message: json.message || json.data?.message, status: res.status})

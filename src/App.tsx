@@ -15,6 +15,7 @@ import { ToolDetail } from "./resources/tools/components/ToolDetail";
 import { AddTool } from "./resources/tools/components/AddTool";
 import { AddConsumable } from "./resources/consumables/components/AddConsumable";
 import { ConsumableDetail } from "./resources/consumables/components/ConsumableDetail";
+import { Eula } from "./eula/Eula";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = sessionStorage.getItem('payloadToken') !== null && sessionStorage.getItem('signatureToken') !== null
@@ -45,6 +46,7 @@ const AppRoutes = () => {
         <Route path="/resources/consumables/new" element={<ProtectedRoute><AddConsumable /></ProtectedRoute>} />
       </Route>
       <Route path="/login" element={<Login />} />
+      <Route path="/eula" element={<Eula />} />
       <Route path="*" element={<NotFound />} />
     </Routes>
   )
@@ -54,7 +56,7 @@ function App() {
   return (
     <div>
       <AppRoutes />
-      <footer className="h-[7.6vh] bg-primary-2 dark:bg-primary-9">
+      <footer className="h-[7.6vh] bg-primary-2 dark:bg-primary-9 wfull">
         <p className="text-xs w-full p-2 flex h-full items-center justify-center">
           LDC Inventory App 2024 | Todos los derechos reservados
         </p>

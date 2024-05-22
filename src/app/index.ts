@@ -11,6 +11,7 @@ import locationsReducer from "../locations/locationsSlice"
 import brandsReducer from "../brands/brandSlice"
 import driveReducer from "../drive/driveSlice"
 import volunteersReducer from "../volunteers/volunteersSlice"
+import eulaReducer from "../eula/eulaSlice"
 
 export const store = configureStore({
   reducer: {
@@ -24,7 +25,8 @@ export const store = configureStore({
     locations: locationsReducer,
     brands: brandsReducer,
     drive: driveReducer,
-    volunteers: volunteersReducer
+    volunteers: volunteersReducer,
+    eula: eulaReducer
   }
 })
 

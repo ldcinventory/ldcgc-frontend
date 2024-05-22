@@ -5,6 +5,7 @@ import { ConsumableParams } from "../resources/consumables/tConsumables"
 import { VolunteersParams } from "../volunteers/tVolunteers"
 import { ToolsParams } from "../resources/tools/tTools"
 import { DriveParams } from "../drive/tDrive"
+import { EulaParams } from "../eula/tEula"
 
 export interface Parent {
   id: number
@@ -31,7 +32,7 @@ export interface FetchApiParams {
   contentTypeAuto?: boolean
 }
 
-export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams | DriveParams
+export type QueryParams = ConsumableParams | ToolRegisterParams | ConsumablesRegisterParams | VolunteersParams | ToolsParams | DriveParams | EulaParams
 
 export type StatusType = "idle" | "loading" | "failed" | "succeeded"
 

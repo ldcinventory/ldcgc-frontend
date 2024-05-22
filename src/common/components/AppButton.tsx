@@ -15,7 +15,7 @@ export function AppButtonTransparent({ children, onClick, className, disabled }:
 export function AppButtonSuccess({children, onClick, className, disabled}: Button) {
   return (
     <button onClick={onClick}
-      className={`bg-success-4 rounded-md p-1 hover:bg-success-3 transition-all duration-300
+      className={`bg-success-4 dark:bg-success-6 dark:hover:bg-success-5 rounded-md p-1 hover:bg-success-3 transition-all duration-300
       ${className}`}
       disabled={disabled}>
       {children}

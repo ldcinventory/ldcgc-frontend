@@ -3,6 +3,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 import { RootState } from "../app/index"
 import { fetchMyUser, fetchUsers } from "../users/usersApi"
 import { User } from "./tUsers"
+import { apiLogin } from "../login/LoginService"
+import { LoginRequestBody } from "../login/tLogin"
+import { AnyAsyncThunk, RejectedActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
+import { toast } from "sonner"
 
 export interface UsersState {
   users: User[]
@@ -27,6 +31,42 @@ export const getMyUser = createAsyncThunk("users/me", async () => {
   return fetchMyUser()
     .then(res => res.json())
 })
+
+
+export const login = createAsyncThunk<any, LoginRequestBody, {state: RootState}>("login", async (loginRequestBody, thunkApi) => {
+  return apiLogin(loginRequestBody)
+    .then(res => {
+      if (res.status === 400)
+        throw new Error('Contraseña incorrecta.')
+
+      if (res.status === 401)
+        throw new Error('Este usuario no está habilitado. Contacte con el adminsitrador.')
+
+      if (res.status === 404)
+        throw new Error('Este usuario no existe.')
+
+      if (loginRequestBody.rememberMe) {
+        const headers = res.headers
+        const payloadToken = headers.get('x-header-payload-token')
+
+        if (payloadToken !== null)
+          localStorage.setItem('payloadToken', payloadToken)
+
+        const signatureToken = headers.get('x-signature-token')
+        if (signatureToken !== null)
+          localStorage.setItem('signatureToken', signatureToken)
+      } else {
+        localStorage.removeItem('payloadToken')
+        localStorage.removeItem('signatureToken')
+      }
+      return res.json()
+    })
+    .catch(error => {
+      console.log(error)
+      return thunkApi.rejectWithValue(`Error al hacer login: ${error.message}`)
+    })
+})
+
 
 export const usersSlice = createSlice({
   name: "users",
@@ -59,7 +99,14 @@ export const usersSlice = createSlice({
         state.status = 'failed'
         state.error = action.error.message
       })
-    
+      .addCase(login.fulfilled, (state, action: PayloadAction<User>) => {
+        state.me = action.payload
+        window.location.replace('/')
+      })
+      .addCase(login.rejected, (state, action: PayloadAction<RejectedActionFromAsyncThunk<AnyAsyncThunk>>) => {
+        state.me = null
+        toast.error(action.payload)
+      })
   },
 })
 

@@ -35,14 +35,14 @@ const AppRoutes = () => {
           <Route path='consumables' element={<ProtectedRoute><Consumables /></ProtectedRoute>} />
           <Route path='tools' element={<ProtectedRoute><Tools /></ProtectedRoute>} />
         </Route>
-        <Route path="/resources/tools/:barcode" element={<ToolDetail />} />
-        <Route path="/resources/tools/new" element={<AddTool />} />
+        <Route path="/resources/tools/:barcode" element={<ProtectedRoute><ToolDetail /></ProtectedRoute>} />
+        <Route path="/resources/tools/new" element={<ProtectedRoute><AddTool /></ProtectedRoute>} />
         <Route path='/register' element={<ProtectedRoute><RegisterHeader /></ProtectedRoute>}>
           <Route path='consumables' element={<ProtectedRoute><ConsumablesRegister /></ProtectedRoute>} />
           <Route path='tools' element={<ProtectedRoute><ToolsRegister /></ProtectedRoute>} />
         </Route>      
-        <Route path="/resources/consumables/:barcode" element={<ConsumableDetail />} />
-        <Route path="/resources/consumables/new" element={<AddConsumable />} />
+        <Route path="/resources/consumables/:barcode" element={<ProtectedRoute><ConsumableDetail /></ProtectedRoute>} />
+        <Route path="/resources/consumables/new" element={<ProtectedRoute><AddConsumable /></ProtectedRoute>} />
       </Route>
       <Route path="/login" element={<Login />} />
       <Route path="*" element={<NotFound />} />

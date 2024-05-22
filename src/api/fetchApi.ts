@@ -65,7 +65,6 @@ export const fetchApiPublic = ({ method, path, queryParams, body }: FetchApiPara
   const url = `${API_URL}${path}${paramsStr}`
 
   return fetch(url, options)
-    .then(response => response.headers)
 }
 
 const generateParamsStr = (queryParams?: QueryParams) => {

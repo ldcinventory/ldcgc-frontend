@@ -1,40 +1,36 @@
 import { useNavigate } from "react-router-dom"
-import { ApiLogin } from "./LoginService"
 import { AppButtonSubmit } from "../common/components/AppButton"
-import { FormEvent, useState } from "react"
-import { AppCheckboxInput, AppLabeledCheckboxInput, AppLabeledPasswordInput, AppLabeledTextInput } from "../common/components/AppInput"
-import { Toaster, toast } from "sonner"
+import { FormEvent, useEffect } from "react"
+import { AppCheckboxInput, AppLabeledPasswordInput, AppLabeledTextInput } from "../common/components/AppInput"
+import { Toaster } from "sonner"
+import { useAppDispatch } from "../app/store"
+import { getMyUser, login } from "../users/usersSlice"
 
 export function Login() {
-  const [error, setError] = useState("")
   const navigate = useNavigate()
+  const dispatch = useAppDispatch()
+
+  useEffect(() => {
+    const payloadToken = localStorage.getItem('payloadToken')
+    const signatureToken = localStorage.getItem('signatureToken')
+
+    if (payloadToken !== null && signatureToken !== null) {
+      dispatch(getMyUser())
+      navigate('/')
+    }
+  },[]
+  )
 
   const handleLogin = async (event:FormEvent<HTMLFormElement>) => {
     event.preventDefault()
-    setError("")
     const formData = new FormData(event.currentTarget)
-    const email = formData.get('email') as string
-    const password = formData.get('password') as string
-    const rememberMe = (formData.get("rememberMe") as string) === ''
-    
-    await ApiLogin({ email, password })
-      .then(headers => {
-        if(rememberMe) {
-          const payloadToken = headers.get('x-header-payload-token')
-
-          if (payloadToken !== null)
-            localStorage.setItem('payloadToken', payloadToken)
-
-          const signatureToken = headers.get('x-signature-token')
-          if (signatureToken !== null)
-            localStorage.setItem('signatureToken', signatureToken)
-        } else {
-          localStorage.clear()
-          localStorage.setItem('payloadToken', '')
-        }
-        navigate('/')
-      })
-      .catch((error) => toast.error(`Error al hacer login: ${error.message}`))
+    const loginForm = {
+      email: formData.get('email') as string,
+      password: formData.get('password') as string,
+      rememberMe: (formData.get("rememberMe") as string) === ''
+    }
+    console.log(loginForm)
+    dispatch(login(loginForm))
   }
 
   return (
@@ -51,7 +47,6 @@ export function Login() {
           </label>
           <AppButtonSubmit className="rounded-md p-2">Iniciar sesión</AppButtonSubmit>
         </form>
-        <span className="text-error-4 mx-auto">{error}</span>
       </section>
     </>
   )

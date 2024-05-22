@@ -45,16 +45,20 @@ export const login = createAsyncThunk<any, LoginRequestBody, {state: RootState}>
       if (res.status === 404)
         throw new Error('Este usuario no existe.')
 
-      if (loginRequestBody.rememberMe) {
-        const headers = res.headers
-        const payloadToken = headers.get('x-header-payload-token')
 
-        if (payloadToken !== null)
-          localStorage.setItem('payloadToken', payloadToken)
+      const headers = res.headers
+      const payloadToken = headers.get('x-header-payload-token')
+      const signatureToken = headers.get('x-signature-token')
 
-        const signatureToken = headers.get('x-signature-token')
-        if (signatureToken !== null)
-          localStorage.setItem('signatureToken', signatureToken)
+      if (payloadToken === null || signatureToken === null)
+        throw new Error('Error del servidor. No se encuentran tokens en la respuesta. Contacte con el administrador')
+      
+      sessionStorage.setItem('payloadToken', payloadToken)
+      sessionStorage.setItem('signatureToken', signatureToken)
+
+      if (loginRequestBody.rememberMe) {        
+        localStorage.setItem('payloadToken', payloadToken)
+        localStorage.setItem('signatureToken', signatureToken)
       } else {
         localStorage.removeItem('payloadToken')
         localStorage.removeItem('signatureToken')

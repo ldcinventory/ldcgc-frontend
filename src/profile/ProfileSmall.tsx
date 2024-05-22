@@ -18,6 +18,8 @@ export function ProfileSmall() {
     , [])
   const navigate = useNavigate()
   const handleLogout = () => {
+    sessionStorage.removeItem('payloadToken')
+    sessionStorage.removeItem('signatureToken')
     localStorage.removeItem('payloadToken')
     localStorage.removeItem('signatureToken')
     ApiLogout()

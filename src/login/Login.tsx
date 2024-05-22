@@ -15,6 +15,8 @@ export function Login() {
     const signatureToken = localStorage.getItem('signatureToken')
 
     if (payloadToken !== null && signatureToken !== null) {
+      sessionStorage.setItem('payloadToken', payloadToken)
+      sessionStorage.setItem('signatureToken', signatureToken)
       dispatch(getMyUser())
       navigate('/')
     }
@@ -29,7 +31,6 @@ export function Login() {
       password: formData.get('password') as string,
       rememberMe: (formData.get("rememberMe") as string) === ''
     }
-    console.log(loginForm)
     dispatch(login(loginForm))
   }
 

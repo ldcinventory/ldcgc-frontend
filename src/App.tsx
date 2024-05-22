@@ -17,7 +17,7 @@ import { AddConsumable } from "./resources/consumables/components/AddConsumable"
 import { ConsumableDetail } from "./resources/consumables/components/ConsumableDetail";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
-  const isAuthenticated = localStorage.getItem('payloadToken') !== null
+  const isAuthenticated = sessionStorage.getItem('payloadToken') !== null && sessionStorage.getItem('signatureToken') !== null
 
   if (isAuthenticated)
     return children

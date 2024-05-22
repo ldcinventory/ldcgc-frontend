@@ -3,8 +3,8 @@ import { FetchApiParams, QueryParams } from "../common/tCommon"
 const API_URL = import.meta.env.VITE_API_URL
 
 export const fetchApi = ({ method, path, queryParams, body, contentTypeAuto = false, contentType = 'application/json'}: FetchApiParams) => {
-  const payloadToken = localStorage.getItem('payloadToken')
-  const signatureToken = localStorage.getItem('signatureToken')
+  const payloadToken = sessionStorage.getItem('payloadToken')
+  const signatureToken = sessionStorage.getItem('signatureToken')
 
 
   if (!payloadToken || !signatureToken || payloadToken === '' || signatureToken === '') {

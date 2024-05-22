@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "../app/store";
 import { useEffect } from "react";
 import { getMyUser } from "../users/usersSlice";
 import { ApiLogout } from "../login/LoginService";
+import { AppNavLink } from "../common/components/AppNavLink";
 
 export function ProfileSmall() {
   const state = useAppSelector(state => state.users)
@@ -30,7 +31,7 @@ export function ProfileSmall() {
     <div className="flex gap-6 items-center">
       <section className="flex gap-2 items-center">
         <UserIcon className="h-8"/>
-        <span className="flex-1 text-sm whitespace-nowrap">{state.me?.email}</span>
+        <AppNavLink to="/profile" className="flex-1 text-sm whitespace-nowrap">{state.me?.email}</AppNavLink>
       </section>
       <AppButtonTransparent onClick={handleLogout}>
         <ArrowRightEndOnRectangleIcon className="h-8" />

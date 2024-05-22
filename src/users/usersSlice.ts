@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit"
 
 import { RootState } from "../app/index"
-import { fetchMyUser, fetchUsers } from "../users/usersApi"
+import { fetchMyUser, fetchUpdateMyUser, fetchUsers } from "../users/usersApi"
 import { User } from "./tUsers"
 import { apiLogin } from "../login/LoginService"
 import { LoginRequestBody } from "../login/tLogin"
@@ -31,7 +31,6 @@ export const getMyUser = createAsyncThunk("users/me", async () => {
   return fetchMyUser()
     .then(res => res.json())
 })
-
 
 export const login = createAsyncThunk<any, LoginRequestBody, {state: RootState}>("login", async (loginRequestBody, thunkApi) => {
   return apiLogin(loginRequestBody)
@@ -71,6 +70,13 @@ export const login = createAsyncThunk<any, LoginRequestBody, {state: RootState}>
     })
 })
 
+export const updateMyUser = createAsyncThunk<any, User, {state: RootState}>("users/me/update", async (user, thunkApi) => {
+  return fetchUpdateMyUser(user)
+    .then(res => res.json())
+    .catch(error => thunkApi.rejectWithValue(`Error al actualizar el usuario: ${error.message}`))
+})
+
+
 
 export const usersSlice = createSlice({
   name: "users",
@@ -109,6 +115,13 @@ export const usersSlice = createSlice({
       })
       .addCase(login.rejected, (state, action: PayloadAction<RejectedActionFromAsyncThunk<AnyAsyncThunk>>) => {
         state.me = null
+        toast.error(action.payload)
+      })
+      .addCase(updateMyUser.fulfilled, (state, action: PayloadAction<User>) => {
+        state.me = action.payload
+        toast.success('Usuario actualizado correctamente.')
+      })
+      .addCase(updateMyUser.rejected, (state, action: PayloadAction<RejectedActionFromAsyncThunk<AnyAsyncThunk>>) => {
         toast.error(action.payload)
       })
   },

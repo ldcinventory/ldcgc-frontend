@@ -16,6 +16,7 @@ import { AddTool } from "./resources/tools/components/AddTool";
 import { AddConsumable } from "./resources/consumables/components/AddConsumable";
 import { ConsumableDetail } from "./resources/consumables/components/ConsumableDetail";
 import { Eula } from "./eula/Eula";
+import { Profile } from "./profile/Profile";
 
 const ProtectedRoute = ({ children }: {children: JSX.Element}) => {
   const isAuthenticated = sessionStorage.getItem('payloadToken') !== null && sessionStorage.getItem('signatureToken') !== null
@@ -31,6 +32,7 @@ const AppRoutes = () => {
     <Routes>
       <Route path='/' element={<ProtectedRoute><Menu /></ProtectedRoute>}>
         <Route path='/' element={<ProtectedRoute><Home /></ProtectedRoute>} />
+        <Route path='/profile' element={<ProtectedRoute><Profile /></ProtectedRoute>} />
         <Route path='/volunteers' element={<ProtectedRoute><Volunteers /></ProtectedRoute>} />
         <Route path='/resources' element={<ProtectedRoute><ResourcesHeader /></ProtectedRoute>}>
           <Route path='consumables' element={<ProtectedRoute><Consumables /></ProtectedRoute>} />

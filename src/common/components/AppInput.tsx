@@ -99,7 +99,7 @@ export function AppLabeledTextInput({ name, value, onChange, placeholder, label,
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <input id={id} type="text" placeholder={placeholder}
         value={value}
-        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5"
         onChange={onChange}
         name={name}
       />
@@ -113,7 +113,7 @@ export function AppLabeledPasswordInput({ name, value, onChange, placeholder, la
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <input id={id} type="password" placeholder={placeholder}
         value={value}
-        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5"
         onChange={onChange}
         name={name}
       />

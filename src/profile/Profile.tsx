@@ -3,7 +3,7 @@ import { useAppDispatch, useAppSelector } from "../app/store"
 import { AppButton, AppButtonSubmit } from "../common/components/AppButton"
 import { VolunteerWithId } from "../volunteers/tVolunteers"
 import { FormEvent, useState } from "react"
-import { AppLabeledPasswordInput, AppLabeledTextInput } from "../common/components/AppInput"
+import { AppLabeledPasswordInput, AppLabeledTextInput, AppTextInput } from "../common/components/AppInput"
 import { updateMyUser } from "../users/usersSlice"
 
 const VolunteerDetails = ({ volunteer }: {volunteer: VolunteerWithId}) =>
@@ -16,12 +16,14 @@ export const Profile = () => {
   const state = useAppSelector(state => state.users)
   const dispatch = useAppDispatch()
   const [changeCredentials, setChangeCredentials] = useState(false)
+  const [linkVolunteer, setLinkVolunteer] = useState(false)
   
   if (!state.me)
     return <h1 className="h-screen flex items-center my-10">Usuario no encontrado. Cierre sesión e inténtelo de nuevo</h1>
 
   const volunteer = state.me.volunteer
   const toggleChangeCredentials = () => setChangeCredentials(!changeCredentials)
+  const toggleLinkVolunteer = () => setLinkVolunteer(!linkVolunteer)
   const handleChangeCredentials = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     const formData = new FormData(e.currentTarget)
@@ -49,11 +51,13 @@ export const Profile = () => {
     <>
       <Toaster />
       <section className="my-10 flex flex-col gap-4 min-h-[77vh]">
-        {volunteer ? <VolunteerDetails volunteer={volunteer}/> : <AppButton className="max-w-[200px] p-2">Vincular voluntario</AppButton>}
+        {volunteer && <VolunteerDetails volunteer={volunteer}/>}
         <p>{state.me.email}</p>
+        <p>{state.me.responsibility.name}</p>
+        <p>{state.me.group.name}</p>
         {
           changeCredentials ? 
-            <form className="flex flex-col gap-2 max-w-xs" onSubmit={handleChangeCredentials}>
+          <form className="flex flex-col gap-2 max-w-xs" onSubmit={handleChangeCredentials}>
               <h1 className="font-bold my-4">Elige las nuevas credenciales</h1>
               <AppLabeledTextInput id="new-email" name="new-email" label="Nuevo email" />
               <AppLabeledPasswordInput id="new-password" name="new-password" label="Nueva contraseña" />
@@ -61,7 +65,8 @@ export const Profile = () => {
               <AppButtonSubmit>Guardar</AppButtonSubmit>
             </form> :
             <AppButton onClick={toggleChangeCredentials} className="max-w-[200px] p-2"> Cambiar credenciales </AppButton> 
-        }
+          }
+        
       </section>
     </>
   )

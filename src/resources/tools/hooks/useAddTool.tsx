@@ -55,7 +55,7 @@ export const useAddTool = ({ resourceTypes, brands, locations }: { resourceTypes
 
     const newImages = e.target.files ?? []
 
-    if (newImages?.length <= 0)
+    if (!newImages || newImages.length <= 0)
       return
 
     setImages([...images, ...Array.from(newImages)])

@@ -14,7 +14,7 @@ export function AsideMenu() {
       </AppButtonTransparent>      
       <aside className={`md:hidden fixed bg-primary-3 dark:bg-primary-9 w-4/5 h-full top-0 z-10
       transition-all duration-300 pl-10 py-10 flex flex-col justify-between ${opened ? 'left-0' : 'left-[-100%]'}`}>
-        <AppButtonRounded className={`md:hidden absolute top-10 z-20 ${opened ? 'right-[-5%]' : 'right-[100%]'} bg-primary-3`}
+        <AppButtonRounded className={`md:hidden absolute top-10 z-20 ${opened ? 'right-[-5%]' : 'right-[100%]'} bg-primary-3 dark:bg-primary-9`}
           onClick={() => setOpened(false)}>
           <ChevronLeftIcon className="h-8" />
         </AppButtonRounded>

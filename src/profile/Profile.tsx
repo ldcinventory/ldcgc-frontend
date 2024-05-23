@@ -8,7 +8,7 @@ import { updateMyUser } from "../users/usersSlice"
 
 const VolunteerDetails = ({ volunteer }: {volunteer: VolunteerWithId}) =>
   <>
-    <h1>{volunteer.name}</h1>
+    <h1>{`${volunteer.name} ${volunteer.lastName}`}</h1>
     <h2 className="font-barcode text-3xl">{volunteer.builderAssistantId}</h2>
   </>
 
@@ -53,8 +53,8 @@ export const Profile = () => {
       <section className="my-10 flex flex-col gap-4 min-h-[77vh]">
         {volunteer && <VolunteerDetails volunteer={volunteer}/>}
         <p>{state.me.email}</p>
-        <p>{state.me.responsibility.name}</p>
-        <p>{state.me.group.name}</p>
+        <p>{state.me.responsibility?.name}</p>
+        <p>{state.me.group?.name}</p>
         {
           changeCredentials ? 
           <form className="flex flex-col gap-2 max-w-xs" onSubmit={handleChangeCredentials}>
@@ -66,7 +66,13 @@ export const Profile = () => {
             </form> :
             <AppButton onClick={toggleChangeCredentials} className="max-w-[200px] p-2"> Cambiar credenciales </AppButton> 
           }
-        
+        {!volunteer && <AppButton onClick={toggleLinkVolunteer} className="max-w-[200px] p-2">Vincular voluntario</AppButton>}
+        {
+          linkVolunteer &&
+          <section className="max-w-[200px]">
+            <AppLabeledTextInput id="volunteer-search-name" label="Nombre" />
+          </section>
+        }
       </section>
     </>
   )

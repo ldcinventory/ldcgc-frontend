@@ -51,6 +51,9 @@ export const addTool =
       if (error !== '')
         return thunkApi.rejectWithValue(error)
       
+      if (!images || images.getAll('images').length === 0)
+        return toolCreated
+
       const urlImages = await fetchUploadToolImages({ images, toolBarcode: toolCreated.barcode })
         .then(res => res.json())
         .catch(e => error = `Error al añadir las imágenes: ${e.message}`)

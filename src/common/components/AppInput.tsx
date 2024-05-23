@@ -6,14 +6,14 @@ export function AppTextInput({ value, onChange, placeholder, className, defaultV
   return (
     <input type="text" placeholder={placeholder}
       value={value}
-      className={`font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
+      className={`font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
       onChange={onChange}
       defaultValue={defaultValue}
       name={name} />
   )
 }
 
-export function AppNumberInput({ value, defaultValue, onChange, placeholder, min, max, step, onKeyUp, className }: Input) {
+export function AppNumberInput({ value, defaultValue, onChange, placeholder, min, max, step = "any", onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
@@ -23,12 +23,12 @@ export function AppNumberInput({ value, defaultValue, onChange, placeholder, min
       value={value}
       defaultValue={defaultValue}
       className={` ${className} font-normal rounded-md w-full p-1 
-      dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}
+      dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}
       onChange={onChange} />
   )
 }
 
-export function AppNumberInputSm({ value, onChange, placeholder, min, max, step, onKeyUp, className }: Input) {
+export function AppNumberInputSm({ value, onChange, placeholder, min, max, step = "any", onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
@@ -37,12 +37,12 @@ export function AppNumberInputSm({ value, onChange, placeholder, min, max, step,
       onKeyUp={onKeyUp}
       value={value}
       className={` ${className} font-normal rounded-md w-12 px-1 
-      dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}
+      dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}
       onChange={onChange} />
   )
 }
 
-export function AppNumberInputXs({ value, onChange, placeholder, min, max, step, onKeyUp, className }: Input) {
+export function AppNumberInputXs({ value, onChange, placeholder, min, max, step = "any", onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
@@ -51,12 +51,12 @@ export function AppNumberInputXs({ value, onChange, placeholder, min, max, step,
       onKeyUp={onKeyUp}
       value={value}
       className={` ${className} font-normal rounded-md w-10 px-1 
-      dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}
+      dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}
       onChange={onChange} />
   )
 }
 
-export function AppLabeledNumberInput({ value, defaultValue, onChange, placeholder, min, max, step, onKeyUp, className, id, label }: LabeledInput) {
+export function AppLabeledNumberInput({ value, defaultValue, onChange, placeholder, min, max, step = "any", onKeyUp, className, id, label }: LabeledInput) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
@@ -68,14 +68,14 @@ export function AppLabeledNumberInput({ value, defaultValue, onChange, placehold
         value={value}
         defaultValue={defaultValue}
         className={` ${className} font-normal rounded-md w-full p-1 
-        dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}
+        dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}
           onChange={onChange} />
     </div>
   )
 }
 
 
-export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min, max, step, onKeyUp, className, id, label }: LabeledInput) {
+export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min, max, step = "any", onKeyUp, className, id, label }: LabeledInput) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <label htmlFor={id} className="flex gap-2">{label}</label>
@@ -87,7 +87,7 @@ export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min
         name={name}
         defaultValue={defaultValue}
         className={` ${className} font-normal rounded-md w-full p-1 
-        dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5`}/>
+        dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}/>
     </div>
   )
 }
@@ -126,7 +126,7 @@ export function AppLabeledTextInputForm({ name, placeholder, label, id, defaultV
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <input id={id} type="text" placeholder={placeholder}
-        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5"
         name={name}
         defaultValue={defaultValue}
          />
@@ -140,7 +140,7 @@ export function AppLabeledTextArea({ value, onChange, placeholder, label, id, ro
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <textarea id={id} placeholder={placeholder} rows={rows} cols={cols}
         value={value}
-        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5"
         onChange={onChange}
         defaultValue={defaultValue}
         name={name} />
@@ -155,7 +155,7 @@ export function AppLabeledDateInput({ defaultValue, value, onChange, placeholder
       <input id={id} type="date" placeholder={placeholder}
         value={value}
         defaultValue={defaultValue}
-        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5"
         onChange={onChange} />
     </div>
   )
@@ -168,7 +168,7 @@ export function AppLabeledDateInputForm({ defaultValue, name, placeholder, label
       <input id={id} type="date" placeholder={placeholder}
         name={name}
         defaultValue={defaultValue}
-        className="font-normal rounded-md w-full p-1 dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5"/>
+        className="font-normal rounded-md w-full p-1 dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5"/>
     </div>
   )
 }
@@ -200,7 +200,7 @@ export function AppCheckboxInput({ value, onChange, placeholder, className, defa
   return (
     <input type="checkbox" placeholder={placeholder}
       value={value}
-      className={`font-normal rounded-md dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
+      className={`font-normal rounded-md dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
       onChange={onChange}
       defaultValue={defaultValue}
       name={name}
@@ -216,7 +216,7 @@ export function AppLabeledCheckboxInput({ id, label, value, onChange, placeholde
       <label htmlFor={id} className="flex gap-2">{label}</label>
       <input type="checkbox" placeholder={placeholder}
         value={value}
-        className={`font-normal rounded-md dark:bg-primary-1 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
+        className={`font-normal rounded-md dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5 ${className}`}
         onChange={onChange}
         defaultValue={defaultValue}
         name={name}

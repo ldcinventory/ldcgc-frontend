@@ -1,8 +1,8 @@
 import {
-  ArrowUturnDownIcon, Bars2Icon, CalendarIcon, ChevronDoubleLeftIcon, CircleStackIcon, QueueListIcon, UserIcon, WrenchIcon,
+  ArrowUturnDownIcon, Bars2Icon, ChevronDoubleLeftIcon, 
   ArrowsUpDownIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon, TrashIcon, XMarkIcon
  } from "@heroicons/react/24/outline"
-import { AppNumberInputSm, AppTextInput } from "../../../common/components/AppInput"
+import { AppNumberInputSm, AppNumberInputXs, AppTextInput } from "../../../common/components/AppInput"
 import { AppSelect } from "../../../common/components/AppSelect"
 import { AppButtonError, AppButtonSuccess, AppButtonTransparent } from "../../../common/components/AppButton"
 import { AppTableHeaderCell5, AppTableCell5 } from "../../../common/components/AppTable"
@@ -35,12 +35,7 @@ export function ToolsRegister() {
       <table className="w-full text-left min-h-[80vh] lg:hidden table-fixed">
         <thead className="border-b">
           <tr>
-            <th className="p-2 w-2/3">
-              <div className="flex gap-2 items-center">
-                <CircleStackIcon className="h-7" />
-                Datos
-              </div>
-            </th>
+            <th className="p-2 w-2/3"> Datos </th>
             <th className="p-2 flex justify-end">
               <AppButtonTransparent onClick={toggleShowFilters}
                 className={showFilters ? 'bg-primary-6' : ''}>
@@ -138,7 +133,7 @@ export function ToolsRegister() {
                 </AppButtonTransparent>
                 <div className="flex gap-2 justify-center w-full whitespace-nowrap">
                   Página
-                  <AppNumberInputSm min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
+                  <AppNumberInputXs min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
                     onChange={(e) =>
                       updateQueryParams({ pageIndex: Math.max(0, Math.min(state.totalPages - 1, Number(e.target.value) - 1)) })} />
                   de {state.totalPages}
@@ -163,11 +158,11 @@ export function ToolsRegister() {
       <table className="w-full text-left min-h-[80vh] hidden lg:[display:table]">
         <thead className="border-b">
           <tr>
-            <AppTableHeaderCell5 ><UserIcon className="h-7" />Voluntario</AppTableHeaderCell5>
-            <AppTableHeaderCell5><WrenchIcon className="h-7" />Herramienta</AppTableHeaderCell5>
-            <AppTableHeaderCell5><CalendarIcon className="h-7" />Entrega</AppTableHeaderCell5>
-            <AppTableHeaderCell5><CalendarIcon className="h-7" />Devolución</AppTableHeaderCell5>
-            <AppTableHeaderCell5><QueueListIcon className="h-7" />Estado</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Voluntario</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Herramienta</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Entrega</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Devolución</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Estado</AppTableHeaderCell5>
             <AppTableHeaderCell5 className="justify-end">
               <AppButtonTransparent onClick={toggleShowFilters} className={showFilters ? 'bg-primary-6' : ''}>
                 <Bars2Icon className="h-7" />

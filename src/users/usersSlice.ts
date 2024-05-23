@@ -72,7 +72,20 @@ export const login = createAsyncThunk<any, LoginRequestBody, {state: RootState}>
 
 export const updateMyUser = createAsyncThunk<any, User, {state: RootState}>("users/me/update", async (user, thunkApi) => {
   return fetchUpdateMyUser(user)
-    .then(res => res.json())
+    .then(res => {
+      const headers = res.headers
+      const payloadToken = headers.get('x-header-payload-token')
+      const signatureToken = headers.get('x-signature-token')
+
+      if (payloadToken === null || signatureToken === null)
+        throw new Error('Error del servidor. No se encuentran tokens en la respuesta. Contacte con el administrador')
+
+      sessionStorage.setItem('payloadToken', payloadToken)
+      sessionStorage.setItem('signatureToken', signatureToken)
+
+      return res.json()
+    })
+    .then(json => json.data.data)
     .catch(error => thunkApi.rejectWithValue(`Error al actualizar el usuario: ${error.message}`))
 })
 
@@ -118,7 +131,7 @@ export const usersSlice = createSlice({
         toast.error(action.payload)
       })
       .addCase(updateMyUser.fulfilled, (state, action: PayloadAction<User>) => {
-        state.me = action.payload
+        state.me = { ...action.payload }
         toast.success('Usuario actualizado correctamente.')
       })
       .addCase(updateMyUser.rejected, (state, action: PayloadAction<RejectedActionFromAsyncThunk<AnyAsyncThunk>>) => {

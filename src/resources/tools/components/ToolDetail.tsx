@@ -66,7 +66,7 @@ export function ToolDetail() {
             value={toolsState.toolDetail.description} onChange={(e) => handleEditTool({ description: e.target.value })} />
           
           <section className="flex gap-2">
-            <AppLabeledNumberInput id={`${toolsState.toolDetail.barcode}-weight-input`} label="Magnitud" min={0}
+            <AppLabeledNumberInput id={`${toolsState.toolDetail.barcode}-weight-input`} label="Cantidad" min={0}
               value={toolsState.toolDetail.weight} onChange={(e) => handleEditTool({ weight: Number(e.target.value) })} />
             <AppLabeledSelect id={`${toolsState.toolDetail.barcode}-weight-units-input`} label="Unidad de medida"
               value={toolsState.toolDetail.stockWeightType} onChange={(e) => handleEditTool({stockWeightType: e.target.value})}

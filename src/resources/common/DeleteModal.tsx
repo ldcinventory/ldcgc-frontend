@@ -10,7 +10,7 @@ export function DeleteModal({ handleDeleteResource, handleCloseModal, resourceNa
 
   return (
     <div className={`fixed min-h-screen bg-primary-9 w-full top-0 bg-opacity-50 left-0 flex justify-center items-center ${isHidden && 'hidden'}`}>
-      <section className="flex flex-col items-center bg-primary-3 px-4 py-10 rounded-xl max-w-[90%]">
+      <section className="flex flex-col items-center bg-primary-3 dark:bg-primary-7 px-4 py-10 rounded-xl max-w-[90%]">
         <span>¿Estás seguro de que quieres eliminar el siguiente recurso?</span>
         <strong>{resourceName}</strong>
         <div className="flex justify-center w-full gap-4 mt-10">

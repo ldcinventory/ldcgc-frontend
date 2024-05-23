@@ -1,5 +1,4 @@
 import { Toaster } from "sonner";
-import { AppFileInput, AppLabeledDateInputForm, AppLabeledNumberInputForm, AppLabeledTextInputForm } from "../../../common/components/AppInput";
 import { AppLabeledSelectForm } from "../../../common/components/AppSelect";
 import { MaintenaceTimes, StockWeightTypes } from "../tTools";
 import { AppButtonSubmit } from "../../../common/components/AppButton";
@@ -8,6 +7,7 @@ import { useResourceTypes } from "../../common/hooks/useResourceTypes";
 import { useBrands } from "../../../brands/useBrands";
 import { useLocations } from "../../../locations/useLocations";
 import { useAddTool } from "../hooks/useAddTool";
+import { AppFileInput, AppLabeledDateInputForm, AppLabeledNumberInputForm, AppLabeledTextInputForm } from "../../../common/components/AppInput";
 
 export function AddTool() {
   const { resourceTypes } = useResourceTypes()
@@ -29,13 +29,13 @@ export function AddTool() {
         <AppLabeledTextInputForm id="tool-model" label="Modelo" name="tool-model" />
         <AppLabeledTextInputForm id="tool-description" label="Descripción" name="tool-description" />
         <section className="flex gap-2">  
-          <AppLabeledNumberInputForm className="flex-1" id="tool-weight" label="Magnitud" min={0} name="tool-weight" />
+          <AppLabeledNumberInputForm className="flex-1" id="tool-weight" label="Cantidad" min={0} name="tool-weight" step="any"/>
           <AppLabeledSelectForm id="tool-stockWeightType" label="Unidad de medida" name="tool-stockWeightType" options={StockWeightTypes}/>
         </section>
-        <AppLabeledNumberInputForm id="tool-price" label="Precio" name="tool-price" min={0} />
+        <AppLabeledNumberInputForm id="tool-price" label="Precio" name="tool-price" min={0} step="any"/>
         <AppLabeledDateInputForm id="tool-purchaseDate" label="Fecha de compra" defaultValue={new Date().toISOString().slice(0, 10)} name="tool-purchaseDate" />
         <section className="flex gap-2">
-          <AppLabeledNumberInputForm className="flex-1" id="tool-maintenancePeriod" label="Tiempo hasta mantenimiento" min={0} name="tool-maintenancePeriod" />
+          <AppLabeledNumberInputForm className="flex-1" id="tool-maintenancePeriod" label="Tiempo hasta mantenimiento" min={0} name="tool-maintenancePeriod" step="any"/>
           <AppLabeledSelectForm id="tool-maintenanceTime" label="Unidad de mantenimiento" name="tool-maintenanceTime" options={MaintenaceTimes} />
         </section>
         <AppLabeledSelectForm id="tool-location" name="tool-location" label="Ubicación"

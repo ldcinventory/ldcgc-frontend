@@ -3,7 +3,7 @@ import { InputSelect, LabeledInputSelect } from "../tCommon";
 
 export function AppSelect({value, onChange, options} : InputSelect) {
   return (
-    <select className="rounded-md w-full p-1 dark:text-slate-900 dark:bg-primary-1 font-normal"
+    <select className="rounded-md w-full p-1 dark:text-slate-900 dark:bg-primary-4 font-normal"
       value={value}
       onChange={onChange}>
       {
@@ -19,7 +19,7 @@ export function AppLabeledSelect({ value, onChange, options, label, id }: Labele
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
-        <select className="rounded-md w-full p-1 dark:text-slate-900 dark:bg-primary-1 font-normal"
+        <select className="rounded-md w-full p-1 dark:text-slate-900 dark:bg-primary-4 font-normal"
           value={value}
           onChange={onChange}>
           {
@@ -36,7 +36,7 @@ export function AppLabeledSelectForm({ name, options, label, id, defaultValue, o
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
-      <select name={name} defaultValue={defaultValue} className="rounded-md w-full p-1 dark:text-slate-900 dark:bg-primary-1 font-normal" onChange={onChange}>
+      <select name={name} defaultValue={defaultValue} className="rounded-md w-full p-1 dark:text-slate-900 dark:bg-primary-4 font-normal" onChange={onChange}>
         {
           options.map(o =>
             <option key={o.name} value={o.value}>{o.name}</option>

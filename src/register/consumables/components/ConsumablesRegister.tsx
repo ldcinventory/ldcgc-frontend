@@ -1,6 +1,6 @@
-import { ArrowUturnDownIcon, ArrowsUpDownIcon, Bars2Icon, BeakerIcon, CalendarIcon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon, CircleStackIcon, QueueListIcon, TrashIcon, UserIcon, XMarkIcon } from "@heroicons/react/24/outline"
+import { ArrowUturnDownIcon, ArrowsUpDownIcon, Bars2Icon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline"
 import { useConsumablesRegisterTable } from "../hooks/UseConsumablesRegisterTable"
-import { AppNumberInput, AppNumberInputSm, AppTextInput } from "../../../common/components/AppInput"
+import { AppNumberInput, AppNumberInputXs, AppTextInput } from "../../../common/components/AppInput"
 import { AppSelect } from "../../../common/components/AppSelect"
 import { AppButtonError, AppButtonSuccess, AppButtonTransparent } from "../../../common/components/AppButton"
 import { AppTableCell5, AppTableHeaderCell5, AppTableHeaderCell7, AppTableCell7 } from "../../../common/components/AppTable"
@@ -31,12 +31,7 @@ export function ConsumablesRegister() {
       <table className="w-full text-left min-h-[80vh] lg:hidden table-fixed">
         <thead className="border-b">
           <tr>
-            <th className="p-2 w-2/3">
-              <div className="flex gap-2 items-center">
-                <CircleStackIcon className="h-7" />
-                Datos
-              </div>
-            </th>
+            <th className="p-2 w-2/3">Datos</th>
             <th className="p-2 flex justify-end">
               <AppButtonTransparent onClick={toggleShowFilters}
                 className={showFilters ? 'bg-primary-6' : ''}>
@@ -143,17 +138,19 @@ export function ConsumablesRegister() {
         <tfoot>
           <tr className="border-t">
             <td className="pt-2 w-full">
-              <div className="flex justify-e items-center">
-                <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
-                  <ChevronDoubleLeftIcon className="h-7" />
-                </AppButtonTransparent>
-                <AppButtonTransparent onClick={() =>
-                  updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
-                  <ChevronLeftIcon className="h-7" />
-                </AppButtonTransparent>
-                <div className="flex gap-2 justify-center w-full whitespace-nowrap">
+              <div className="flex items-center justify-between gap-2">
+                <nav className="flex">
+                  <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: 0 })}>
+                    <ChevronDoubleLeftIcon className="h-5" />
+                  </AppButtonTransparent>
+                  <AppButtonTransparent onClick={() =>
+                    updateQueryParams({ pageIndex: Math.max(0, (queryParams.pageIndex || 0) - 1) })}>
+                    <ChevronLeftIcon className="h-5" />
+                  </AppButtonTransparent>
+                </nav>
+                <div className="flex gap-1 justify-center w-full whitespace-nowrap">
                   Página
-                  <AppNumberInputSm min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
+                  <AppNumberInputXs min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
                     onChange={(e) =>
                       updateQueryParams({ pageIndex: Math.max(0, Math.min(state.totalPages - 1, Number(e.target.value) - 1)) })} />
                   de {state.totalPages}
@@ -164,10 +161,10 @@ export function ConsumablesRegister() {
               <div className="flex justify-end items-center ">
                 <AppButtonTransparent onClick={() =>
                   updateQueryParams({ pageIndex: Math.min(state.totalPages, (queryParams.pageIndex || 0) + 1) })}>
-                  <ChevronRightIcon className="h-7" />
+                  <ChevronRightIcon className="h-5" />
                 </AppButtonTransparent>
                 <AppButtonTransparent onClick={() => updateQueryParams({ pageIndex: state.totalPages - 1 })}>
-                  <ChevronDoubleRightIcon className="h-7" />
+                  <ChevronDoubleRightIcon className="h-5" />
                 </AppButtonTransparent>
               </div>
             </td>
@@ -178,11 +175,11 @@ export function ConsumablesRegister() {
       <table className="w-full text-left min-h-[80vh] hidden lg:[display:table] xl:hidden">
         <thead className="border-b">
           <tr>
-            <AppTableHeaderCell5><UserIcon className="h-7" />Voluntario</AppTableHeaderCell5>
-            <AppTableHeaderCell5><BeakerIcon className="h-7" />Consumible</AppTableHeaderCell5>
-            <AppTableHeaderCell5><CircleStackIcon className="h-7" />Stock</AppTableHeaderCell5>
-            <AppTableHeaderCell5><CalendarIcon className="h-7" />Fechas</AppTableHeaderCell5>
-            <AppTableHeaderCell5><QueueListIcon className="h-7" />Estado</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Voluntario</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Consumible</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Stock</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Fechas</AppTableHeaderCell5>
+            <AppTableHeaderCell5>Estado</AppTableHeaderCell5>
             <th className="p-2 flex justify-end">
               <AppButtonTransparent onClick={toggleShowFilters} className={showFilters ? 'bg-primary-6' : ''}>
                 <Bars2Icon className="h-7" />
@@ -318,7 +315,7 @@ export function ConsumablesRegister() {
             <AppTableCell5>
               <div className="flex gap-2 justify-end whitespace-nowrap">
                 Página
-                <AppNumberInputSm min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
+                <AppNumberInputXs min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
                   onChange={(e) =>
                     updateQueryParams({ pageIndex: Math.max(0, Math.min(state.totalPages - 1, Number(e.target.value) - 1)) })} />
                 de {state.totalPages}
@@ -344,13 +341,13 @@ export function ConsumablesRegister() {
       <table className="w-full text-left min-h-[80vh] hidden xl:[display:table]">
         <thead className="border-b border-primary-1">
           <tr>
-            <AppTableHeaderCell7><UserIcon className="h-7" />Voluntario</AppTableHeaderCell7>
-            <AppTableHeaderCell7><BeakerIcon className="h-7" />Consumible</AppTableHeaderCell7>
-            <AppTableHeaderCell7><CircleStackIcon className="h-7" />Stock entregado</AppTableHeaderCell7>
-            <AppTableHeaderCell7><CalendarIcon className="h-7" />Entrega</AppTableHeaderCell7>
-            <AppTableHeaderCell7><CircleStackIcon className="h-7" />Stock devuelto</AppTableHeaderCell7>
-            <AppTableHeaderCell7><CalendarIcon className="h-7" />Devolución</AppTableHeaderCell7>
-            <AppTableHeaderCell7><QueueListIcon className="h-7" />Estado</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Voluntario</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Consumible</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Stock entregado</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Entrega</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Stock devuelto</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Devolución</AppTableHeaderCell7>
+            <AppTableHeaderCell7>Estado</AppTableHeaderCell7>
             <AppTableHeaderCell7 className="justify-end">
               <AppButtonTransparent onClick={toggleShowFilters} className={showFilters ? 'bg-primary-6' : ''}>
                 <Bars2Icon className="h-7" />
@@ -485,7 +482,7 @@ export function ConsumablesRegister() {
             <AppTableCell7>
               <div className="flex gap-2 justify-end whitespace-nowrap">
                 Página
-                <AppNumberInputSm min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
+                <AppNumberInputXs min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
                   onChange={(e) =>
                     updateQueryParams({ pageIndex: Math.max(0, Math.min(state.totalPages - 1, Number(e.target.value) - 1)) })} />
                 <span>de {state.totalPages}</span>

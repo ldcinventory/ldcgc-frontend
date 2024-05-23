@@ -31,7 +31,7 @@ export function ProfileSmall() {
     <div className="flex gap-6 items-center">
       <section className="flex gap-2 items-center">
         <UserIcon className="h-8"/>
-        <AppNavLink to="/profile" className="flex-1 text-sm whitespace-nowrap">{state.me?.volunteer ? state.me?.volunteer.name : state.me?.email}</AppNavLink>
+        <AppNavLink to="/profile" className="flex-1 text-sm whitespace-nowrap">{state.me?.volunteer ? `${state.me?.volunteer.name} ${state.me?.volunteer.lastName}` : state.me?.email}</AppNavLink>
       </section>
       <AppButtonTransparent onClick={handleLogout}>
         <ArrowRightEndOnRectangleIcon className="h-8" />

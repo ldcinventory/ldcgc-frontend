@@ -121,7 +121,7 @@ export const updateConsumable =
   createAsyncThunk<any, ConsumableWithId, { state: RootState }>(
     "resources/consumables/detail/update",
     (consumable, thunkApi) => fetchUpdateConsumable(consumable)
-      .then(() => thunkApi.fulfillWithValue('Herramienta actualizada con éxito.'))
+      .then(() => thunkApi.fulfillWithValue('Consumible actualizado con éxito.'))
   )
 
 export const selectConsumableDetail =

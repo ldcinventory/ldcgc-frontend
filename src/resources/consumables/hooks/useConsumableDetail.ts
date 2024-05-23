@@ -5,6 +5,7 @@ import { addConsumableImages, deleteConsumableImage, selectConsumableDetail, upd
 import { ResourceType } from "../../tResources";
 import { Brand } from "../../../brands/tBrands";
 import { Location } from "../../../locations/tLocations";
+import { toast } from "sonner";
 
 export const useConsumableDetail = ({ resourceTypes, brands, locations }: { resourceTypes: ResourceType[], brands: Brand[], locations: Location[] }) => {
   const { barcode } = useParams()
@@ -49,6 +50,11 @@ export const useConsumableDetail = ({ resourceTypes, brands, locations }: { reso
       stockType: formData.get(`${barcode}-stockType`) as string,
       urlImages: consumablesState.consumableDetail.urlImages,
       uploadStatus: consumablesState.consumableDetail.uploadStatus
+    }
+
+    if (consumable.name === '') {
+      toast.error('El nombre no puede estar vacío.')
+      return
     }
 
     dispatch(updateConsumable(consumable))

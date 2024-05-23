@@ -42,6 +42,12 @@ export const useAddConsumable = ({ resourceTypes, brands, locations }: { resourc
       status: 'NEW'
     }
 
+    console.log(consumable)
+    if (consumable.name === '') {
+      toast.error('Rellena todos los campos requeridos.')
+      return
+    }
+
     const imagesForm = new FormData()
     images.forEach(i => imagesForm.append('images', i))
 

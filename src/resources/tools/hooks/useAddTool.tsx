@@ -42,6 +42,11 @@ export const useAddTool = ({ resourceTypes, brands, locations }: { resourceTypes
       status: 'NEW'
     }
 
+    if (tool.name === '') {
+      toast.error('Rellena todos los campos requeridos.')
+      return
+    }
+      
     const imagesForm = new FormData()
     images.forEach(i => imagesForm.append('images', i))
 

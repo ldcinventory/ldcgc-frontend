@@ -13,13 +13,19 @@ export function AppTextInput({ value, onChange, placeholder, className, defaultV
   )
 }
 
-export function AppNumberInput({ value, defaultValue, onChange, placeholder, min, max, step = "any", onKeyUp, className }: Input) {
+export function AppNumberInput({ value, defaultValue, onChange, placeholder, min=0, max=100000, step = "any", onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
       max={max}
       step={step}
-      onKeyUp={onKeyUp}
+      onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement
+        input.value = Math.min(max, Math.max(min, Number(input.value))).toString()
+
+        if (onKeyUp)
+          onKeyUp(e)
+      }}
       value={value}
       defaultValue={defaultValue}
       className={` ${className} font-normal rounded-md w-full p-1 
@@ -28,13 +34,19 @@ export function AppNumberInput({ value, defaultValue, onChange, placeholder, min
   )
 }
 
-export function AppNumberInputSm({ value, onChange, placeholder, min, max, step = "any", onKeyUp, className }: Input) {
+export function AppNumberInputSm({ value, onChange, placeholder, min=0, max=100000, step = "any", onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
       max={max}
       step={step}
-      onKeyUp={onKeyUp}
+      onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement
+        input.value = Math.min(max, Math.max(min, Number(input.value))).toString()
+
+        if (onKeyUp)
+          onKeyUp(e)
+      }}
       value={value}
       className={` ${className} font-normal rounded-md w-12 px-1 
       dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}
@@ -42,13 +54,19 @@ export function AppNumberInputSm({ value, onChange, placeholder, min, max, step 
   )
 }
 
-export function AppNumberInputXs({ value, onChange, placeholder, min, max, step = "any", onKeyUp, className }: Input) {
+export function AppNumberInputXs({ value, onChange, placeholder, min=0, max=100000, step = "any", onKeyUp, className }: Input) {
   return (
     <input type="number" placeholder={placeholder}
       min={min}
       max={max}
       step={step}
-      onKeyUp={onKeyUp}
+      onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+        const input = e.target as HTMLInputElement
+        input.value = Math.min(max, Math.max(min, Number(input.value))).toString()
+
+        if (onKeyUp)
+          onKeyUp(e)
+      }}
       value={value}
       className={` ${className} font-normal rounded-md w-10 px-1 
       dark:bg-primary-4 dark:text-primary-9 placeholder:dark:text-primary-5`}
@@ -56,7 +74,7 @@ export function AppNumberInputXs({ value, onChange, placeholder, min, max, step 
   )
 }
 
-export function AppLabeledNumberInput({ value, defaultValue, onChange, placeholder, min, max, step = "any", onKeyUp, className, id, label }: LabeledInput) {
+export function AppLabeledNumberInput({ value, defaultValue, onChange, placeholder, min=0, max=100000, step = "any", onKeyUp, className, id, label }: LabeledInput) {
   return (
     <div className="flex flex-col gap-2">
       <label htmlFor={id} className="flex gap-2">{label}</label>
@@ -64,7 +82,13 @@ export function AppLabeledNumberInput({ value, defaultValue, onChange, placehold
         min={min}
         max={max}
         step={step}
-        onKeyUp={onKeyUp}
+        onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          const input = e.target as HTMLInputElement
+          input.value = Math.min(max, Math.max(min, Number(input.value))).toString()
+
+          if (onKeyUp)
+            onKeyUp(e)
+        }}
         value={value}
         defaultValue={defaultValue}
         className={` ${className} font-normal rounded-md w-full p-1 
@@ -75,7 +99,7 @@ export function AppLabeledNumberInput({ value, defaultValue, onChange, placehold
 }
 
 
-export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min, max, step = "any", onKeyUp, className, id, label }: LabeledInput) {
+export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min=0, max=100000, step = "any", onKeyUp, className, id, label }: LabeledInput) {
   return (
     <div className={`flex flex-col gap-2 ${className}`}>
       <label htmlFor={id} className="flex gap-2">{label}</label>
@@ -83,7 +107,13 @@ export function AppLabeledNumberInputForm({ defaultValue, name, placeholder, min
         min={min}
         max={max}
         step={step}
-        onKeyUp={onKeyUp}
+        onKeyUp={(e: React.KeyboardEvent<HTMLInputElement>) => {
+          const input = e.target as HTMLInputElement
+          input.value = Math.min(max, Math.max(min, Number(input.value))).toString()
+
+          if(onKeyUp)
+            onKeyUp(e)
+        }}
         name={name}
         defaultValue={defaultValue}
         className={` ${className} font-normal rounded-md w-full p-1 

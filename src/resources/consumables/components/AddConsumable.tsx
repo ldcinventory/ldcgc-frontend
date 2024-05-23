@@ -19,23 +19,24 @@ export const AddConsumable = () => {
     <>
       <Toaster />
       <form onSubmit={handleFormSubmit}
-        className="flex flex-col min-h-[87vh] my-10 bg-primary-2 dark:bg-primary-8 p-5 max-w-[500px] rounded-lg mx-auto gap-2">
-        <h1 className="font-bold text-2xl mb-10">Añadir consumible</h1>
-        <AppLabeledTextInputForm id="consumable-name" label="Nombre" name="consumable-name" />
-        <AppLabeledSelectForm id="consumable-resourceType" name="consumable-resourceType" label="Tipo"
+        className="flex flex-col min-h-[87vh] my-10 bg-primary-2 dark:bg-primary-7 p-5 max-w-[500px] rounded-lg mx-auto gap-2">
+        <h1 className="font-bold text-xl mb-10">Añadir consumible</h1>
+        <small>Todos los campos marcados con * son requeridos</small>
+        <AppLabeledTextInputForm id="consumable-name" label="Nombre *" name="consumable-name" />
+        <AppLabeledSelectForm id="consumable-resourceType" name="consumable-resourceType" label="Tipo *"
           options={(resourceTypes || []).map(r => { return { name: r.name, value: r.id.toString() } })} />
-        <AppLabeledSelectForm id="consumable-brand" name="consumable-brand" label="Marca"
+        <AppLabeledSelectForm id="consumable-brand" name="consumable-brand" label="Marca *"
           options={(brands || []).map(b => { return { name: b.name, value: b.id.toString() } })} />
         <AppLabeledTextInputForm id="consumable-model" label="Modelo" name="consumable-model" />
         <AppLabeledTextArea id="consumable-description" label="Descripción" name="consumable-description" />
         <section className="flex gap-2">
-          <AppLabeledNumberInputForm id="consumable-stock" name="consumable-stock" label="Stock" min={0} className="flex-1" />
-          <AppLabeledSelectForm id="consumable-stockType" label="Unidad de medida" name="consumable-stockType" options={StockWeightTypes} />
+          <AppLabeledNumberInputForm id="consumable-stock" name="consumable-stock" label="Stock *" min={0} className="flex-1" defaultValue={0}/>
+          <AppLabeledSelectForm id="consumable-stockType" label="Unidad de medida *" name="consumable-stockType" options={StockWeightTypes} />
         </section>
         <AppLabeledNumberInputForm id="consumable-minStock" name="consumable-minStock" label="Stock mínimo" min={0}/>
         <AppLabeledNumberInputForm id="consumable-price" label="Precio" name="consumable-price" min={0} />
         <AppLabeledDateInputForm id="consumable-purchaseDate" label="Fecha de compra" defaultValue={new Date().toISOString().slice(0, 10)} name="consumable-purchaseDate" />
-        <AppLabeledSelectForm id="consumable-location" name="consumable-location" label="Ubicación"
+        <AppLabeledSelectForm id="consumable-location" name="consumable-location" label="Ubicación *"
           options={(locations || []).map(l => { return { name: l.name, value: l.id.toString() } })} />
         <AppLabeledNumberInputForm id="consumable-quantityEachItem" name="consumable-quantityEachItem" label="Unidades por paquete" min={0}/>
         <section className="grid grid-cols-4 sm:grid-cols-4 gap-2">

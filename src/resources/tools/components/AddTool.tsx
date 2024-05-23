@@ -21,16 +21,17 @@ export function AddTool() {
       <form onSubmit={handleFormSubmit}
         className="flex flex-col min-h-[87vh] my-10 bg-primary-2 dark:bg-primary-7 p-5 max-w-[500px] rounded-lg mx-auto gap-2">
         <h1 className="font-bold text-xl mb-10">Añadir herramienta</h1>
-        <AppLabeledTextInputForm id="tool-name" label="Nombre" name="tool-name" />
-        <AppLabeledSelectForm id="tool-resourceType" name="tool-resourceType" label="Tipo" 
+        <small>Todos los campos marcados con * son requeridos</small>
+        <AppLabeledTextInputForm id="tool-name" label="Nombre *" name="tool-name" />
+        <AppLabeledSelectForm id="tool-resourceType" name="tool-resourceType" label="Tipo *" 
           options={(resourceTypes || []).map(r => { return { name: r.name, value: r.id.toString() } })} />
-        <AppLabeledSelectForm id="tool-brand" name="tool-brand" label="Marca"
+        <AppLabeledSelectForm id="tool-brand" name="tool-brand" label="Marca *"
           options={(brands || []).map(b => { return { name: b.name, value: b.id.toString() } })} />
         <AppLabeledTextInputForm id="tool-model" label="Modelo" name="tool-model" />
         <AppLabeledTextInputForm id="tool-description" label="Descripción" name="tool-description" />
         <section className="flex gap-2">  
           <AppLabeledNumberInputForm className="flex-1" id="tool-weight" label="Cantidad" min={0} name="tool-weight" step="any"/>
-          <AppLabeledSelectForm id="tool-stockWeightType" label="Unidad de medida" name="tool-stockWeightType" options={StockWeightTypes}/>
+          <AppLabeledSelectForm id="tool-stockWeightType" label="Unidad de medida *" name="tool-stockWeightType" options={StockWeightTypes}/>
         </section>
         <AppLabeledNumberInputForm id="tool-price" label="Precio" name="tool-price" min={0} step="any"/>
         <AppLabeledDateInputForm id="tool-purchaseDate" label="Fecha de compra" defaultValue={new Date().toISOString().slice(0, 10)} name="tool-purchaseDate" />
@@ -38,7 +39,7 @@ export function AddTool() {
           <AppLabeledNumberInputForm className="flex-1" id="tool-maintenancePeriod" label="Tiempo hasta mantenimiento" min={0} name="tool-maintenancePeriod" step="any"/>
           <AppLabeledSelectForm id="tool-maintenanceTime" label="Unidad de mantenimiento" name="tool-maintenanceTime" options={MaintenaceTimes} />
         </section>
-        <AppLabeledSelectForm id="tool-location" name="tool-location" label="Ubicación"
+        <AppLabeledSelectForm id="tool-location" name="tool-location" label="Ubicación *"
           options={(locations || []).map(l => { return { name: l.name, value: l.id.toString() } })} />        
         <section className="grid grid-cols-4 sm:grid-cols-4 gap-2">
           <AppFileInput id="tools-images" name="tools-images" onChange={handleAddImages} accept=".png, .jpg, .webp, .jpeg, .svg" multiple={true}>

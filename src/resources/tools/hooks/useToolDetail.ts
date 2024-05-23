@@ -2,6 +2,7 @@ import { ChangeEvent, FormEvent, MouseEvent, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../../app/store";
 import { addToolImages, deleteToolImage, selectToolDetail, updateTool, updateToolDetail } from "../toolsSlice";
+import { toast } from "sonner";
 
 export const useToolDetail = () => {
   const { barcode } = useParams()
@@ -32,6 +33,11 @@ export const useToolDetail = () => {
     if (toolsState.toolDetail === null)
       return
 
+    if (toolsState.toolDetail.name === '') {
+      toast.error('El nombre no puede estar vacío.')
+      return
+    }
+      
     dispatch(updateTool(toolsState.toolDetail))
   }
 

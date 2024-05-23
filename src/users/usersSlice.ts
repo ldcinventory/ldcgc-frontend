@@ -85,7 +85,7 @@ export const updateMyUser = createAsyncThunk<any, User, {state: RootState}>("use
 
       return res.json()
     })
-    .then(json => json.data.data)
+    .then(json => json.data)
     .catch(error => thunkApi.rejectWithValue(`Error al actualizar el usuario: ${error.message}`))
 })
 
@@ -131,6 +131,8 @@ export const usersSlice = createSlice({
         toast.error(action.payload)
       })
       .addCase(updateMyUser.fulfilled, (state, action: PayloadAction<User>) => {
+
+        console.log(action.payload)
         state.me = { ...action.payload }
         toast.success('Usuario actualizado correctamente.')
       })

@@ -45,6 +45,7 @@ export const Profile = () => {
     newUser.email = formData.get('new-email') as string
     newUser.password = password
     dispatch(updateMyUser(newUser))
+    setChangeCredentials(false)
   }
 
   return (

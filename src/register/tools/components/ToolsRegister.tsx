@@ -64,7 +64,7 @@ export function ToolsRegister() {
               <AppButtonTransparent
                 onClick={() =>
                   updateQueryParams({ volunteer: '', tool: '', status: '', descOrder: true })}>
-                <TrashIcon className="h-7" />
+                <TrashIcon className="h-6" />
               </AppButtonTransparent>
             </th>
           </tr>
@@ -106,13 +106,13 @@ export function ToolsRegister() {
                         opened &&
                         <AppButtonSuccess onClick={() => closeRegister(register)} disabled={isLoading}
                           className={isLoading ? 'bg-opacity-50' : ''}>
-                          <ArrowUturnDownIcon className="h-7" />
+                          <ArrowUturnDownIcon className="h-6" />
                         </AppButtonSuccess>
                       }
                       <AppButtonError onClick={() => deleteRegister(register.id)}
                         className={isLoading ? 'bg-opacity-50' : ''}
                         disabled={isLoading}>
-                        <TrashIcon className="h-7" />
+                        <TrashIcon className="h-6" />
                       </AppButtonError>
                     </div>
                   </td>
@@ -181,13 +181,13 @@ export function ToolsRegister() {
             <AppTableHeaderCell5>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortString: 'registerFrom', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortString: 'registerTo', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
@@ -236,12 +236,12 @@ export function ToolsRegister() {
                         opened &&
                         <AppButtonSuccess onClick={() => { closeRegister(register) }} disabled={isLoading}
                           className={isLoading ? 'bg-opacity-50' : ''}>
-                          <ArrowUturnDownIcon className="h-7" />
+                          <ArrowUturnDownIcon className="h-6" />
                         </AppButtonSuccess>
                       }
                       <AppButtonError onClick={() => deleteRegister(register.id)} disabled={isLoading}
                         className={isLoading ? 'bg-opacity-50' : ''}>
-                        <TrashIcon className="h-7" />
+                        <TrashIcon className="h-6" />
                       </AppButtonError>
                     </div>
                   </AppTableCell5>

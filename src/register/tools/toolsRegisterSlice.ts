@@ -24,12 +24,12 @@ export interface ToolsRegisterState {
 
 const initialState: ToolsRegisterState = {
   toolsRegister: [],
-  queryParams: { size: 10, pageIndex: 0 },
+  queryParams: { size: 10, pageIndex: 0, tool: '', volunteer: '', descOrder: true, sortString: 'id', status: ''},
   totalPages: 0,
   currentTool: "",
   possibleTools: [],
   selectedTools: [],
-  toolsParams: { pageIndex: 0, size: 10, status: 'AVAILABLE' },
+  toolsParams: { pageIndex: 0, size: 10, status: 'AVAILABLE', filterString: '' },
   status: "idle",
   error: undefined,
 }
@@ -40,8 +40,9 @@ export const getPossibleTools =
     async (toolsParams
       , thunkApi) => {
       const state = thunkApi.getState()
-      const newParams = { ...state.toolsRegister.toolsParams, ...toolsParams }
+      const newParams = { ...state.toolsRegister.toolsParams, ...toolsParams }      
       thunkApi.dispatch(updateToolsParams(newParams))
+
       const response = await fecthToolsLoose({ toolsParams: newParams })
         .catch((error: string) => { throw new Error(`The server responded with an error: ${error}`) })
       return response.json()
@@ -170,9 +171,23 @@ export const toolsRegisterSlice = createSlice({
       })
       .addCase(getPossibleTools.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<ToolWithId> }>) => {
         state.status = "succeeded"
+        if (state.currentTool === '') {
+          state.possibleTools = []
+          return
+        }
+          
         const excludedBarcodes = state.selectedTools.map(t => t.toolBarcode)
         const newPossibleTools = action.payload.data.elements.filter(t => !excludedBarcodes.includes(t.barcode))
+        
+        if (newPossibleTools.length === 1){
+          state.selectedTools = [...state.selectedTools, { toolName: newPossibleTools[0].name, toolBarcode: newPossibleTools[0].barcode }]
+          state.possibleTools = []
+          state.currentTool = ''
+          return
+        }
+        
         state.possibleTools = newPossibleTools
+        
       })
   }
 })

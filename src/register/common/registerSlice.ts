@@ -6,8 +6,6 @@ import { RootState } from "../../app/index"
 import { fetchVolunteers } from "../../volunteers/volunteerApi"
 
 export interface RegisterState {
-  status: StatusType
-  error: string | undefined
   message: string | undefined
   currentVolunteer: string
   possibleVolunteers: VolunteerWithId[]
@@ -18,8 +16,6 @@ export interface RegisterState {
 }
 
 const initialState: RegisterState = {
-  status: "idle",
-  error: undefined,
   message: undefined,
   currentVolunteer: "",
   possibleVolunteers: [],
@@ -33,7 +29,11 @@ export const getPossibleVolunteers =
   createAsyncThunk<any, VolunteersParams, { state: RootState }>(
     "register/possibleVolunteers",
     async (volunteersParams
-      , thunkApi) => {
+      , thunkApi) => {      
+      if (!volunteersParams.filterString || volunteersParams.filterString === '') {        
+        return {data: {elements: []}}
+      }
+      
       const state = thunkApi.getState()
       const newParams = { ...state.register.volunteersParams, ...volunteersParams }
       thunkApi.dispatch(updateVolunteersParams(newParams))
@@ -60,7 +60,7 @@ export const registerSlice = createSlice({
     },
     selectVolunteer: (state, action: PayloadAction<VolunteerWithId>) => {
       const newVolunteer = action.payload
-      return { ...state, selectedVolunteer: newVolunteer, currentVolunteer: `${newVolunteer.name} ${newVolunteer.lastName} (${newVolunteer.builderAssistantId})` }
+      return { ...state, selectedVolunteer: newVolunteer, currentVolunteer: `${newVolunteer.name} ${newVolunteer.lastName}` }
     },
     resetState: (state, action: PayloadAction<RegisterState>) => {
       return { ...initialState, ...action.payload }
@@ -72,8 +72,21 @@ export const registerSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(getPossibleVolunteers.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<VolunteerWithId> }>) => {
-        state.status = "succeeded"
-        state.possibleVolunteers = action.payload.data.elements
+        if (state.currentVolunteer === '') {
+          state.possibleVolunteers = []
+          return 
+        }          
+
+        const newPossibleVolunteers = action.payload.data.elements
+        console.log(newPossibleVolunteers, newPossibleVolunteers.length, newPossibleVolunteers[0])
+        if (newPossibleVolunteers.length === 1) {
+          state.selectedVolunteer = newPossibleVolunteers[0]
+          state.currentVolunteer = `${state.selectedVolunteer.name} ${state.selectedVolunteer.lastName}`
+          state.possibleVolunteers = []
+          return
+        }
+
+        state.possibleVolunteers = newPossibleVolunteers
       })
   }
 })

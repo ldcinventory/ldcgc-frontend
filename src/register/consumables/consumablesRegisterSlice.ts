@@ -183,9 +183,24 @@ export const consumablesRegisterSlice = createSlice({
       })
       .addCase(getPossibleConsumables.fulfilled, (state, action: PayloadAction<{ data: PaginatedResponse<ConsumableWithId> }>) => {
         state.status = "succeeded"
+        if (state.currentConsumable === '') {
+          state.possibleConsumables = []
+          return
+        }
         const excludedBarcodes = state.selectedConsumables.map(c => c.consumableBarcode)
         const newPossibleConsumables = action.payload.data.elements.filter(c => !excludedBarcodes.includes(c.barcode))
+        
+        if (newPossibleConsumables.length === 1) {
+          const consumable = newPossibleConsumables[0]
+          state.selectedConsumables = [...state.selectedConsumables,
+            { consumableName: consumable.name, consumableBarcode: consumable.barcode, consumableStockType: consumable.stockType, stockAmountRequest: 0, stockAvailable: consumable.stock }]
+          state.possibleConsumables = []
+          state.currentConsumable = ''
+          return
+        }
+
         state.possibleConsumables = newPossibleConsumables
+        
       })
   }
 })

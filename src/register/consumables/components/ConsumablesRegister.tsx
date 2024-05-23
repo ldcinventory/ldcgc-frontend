@@ -121,13 +121,13 @@ export function ConsumablesRegister() {
                         opened &&
                         <AppButtonSuccess onClick={() => closeRegister(register)} disabled={isLoading}
                           className={isLoading ? 'bg-opacity-50' : ''}>
-                          <ArrowUturnDownIcon className="h-7" />
+                          <ArrowUturnDownIcon className="h-6" />
                         </AppButtonSuccess>
                       }
                       <AppButtonError onClick={() => deleteRegister(register.id)}
                         className={isLoading ? 'bg-opacity-50' : ''}
                         disabled={isLoading}>
-                        <TrashIcon className="h-7" />
+                        <TrashIcon className="h-6" />
                       </AppButtonError>
                     </div>
                   </td>
@@ -198,21 +198,21 @@ export function ConsumablesRegister() {
             <AppTableHeaderCell5 className="gap-6">
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountRequest', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent> -
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountReturn', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5 className="gap-7">
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerFrom', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent> -
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerTo', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell5>
             <AppTableHeaderCell5>
@@ -285,12 +285,12 @@ export function ConsumablesRegister() {
                       opened &&
                       <AppButtonSuccess onClick={() => { closeRegister(register) }} disabled={isLoading}
                         className={isLoading ? 'bg-opacity-50' : ''}>
-                        <ArrowUturnDownIcon className="h-7" />
+                        <ArrowUturnDownIcon className="h-6" />
                       </AppButtonSuccess>
                     }
                     <AppButtonError onClick={() => deleteRegister(register.id)} disabled={isLoading}
                       className={isLoading ? 'bg-opacity-50' : ''}>
-                      <TrashIcon className="h-7" />
+                      <TrashIcon className="h-6" />
                     </AppButtonError>
                   </div>
                 </AppTableCell5>
@@ -366,25 +366,25 @@ export function ConsumablesRegister() {
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountRequest', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerFrom', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'stockAmountReturn', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
               <AppButtonTransparent
                 onClick={() => updateQueryParams({ sortField: 'registerTo', descOrder: !queryParams.descOrder })}>
-                <ArrowsUpDownIcon className="h-7" />
+                <ArrowsUpDownIcon className="h-6" />
               </AppButtonTransparent>
             </AppTableHeaderCell7>
             <AppTableHeaderCell7>
@@ -451,12 +451,12 @@ export function ConsumablesRegister() {
                         opened &&
                         <AppButtonSuccess onClick={() => { closeRegister(register) }} disabled={isLoading}
                           className={isLoading ? 'bg-opacity-50' : ''}>
-                          <ArrowUturnDownIcon className="h-7" />
+                          <ArrowUturnDownIcon className="h-6" />
                         </AppButtonSuccess>
                       }
                       <AppButtonError onClick={() => deleteRegister(register.id)} disabled={isLoading}
                         className={isLoading ? 'bg-opacity-50' : ''}>
-                        <TrashIcon className="h-7" />
+                        <TrashIcon className="h-6" />
                       </AppButtonError>
                     </div>
                   </AppTableCell7>

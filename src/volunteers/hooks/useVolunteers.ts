@@ -17,7 +17,7 @@ export const useVolunteers = () => {
   }, []
   )
   
-  const handleDeleteVolunteer = (id: string) => () => dispatch(deleteVolunteer(id))
+  const handleDeleteVolunteer = (id: string) => dispatch(deleteVolunteer(id))
   
   const toggleShowFilters = () => setShowFilters(!showFilters)
 

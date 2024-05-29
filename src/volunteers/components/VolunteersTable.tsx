@@ -5,9 +5,10 @@ import { AppButton, AppButtonError, AppButtonTransparent } from "../../common/co
 import { Bars2Icon, ChevronDoubleLeftIcon, ChevronDoubleRightIcon, ChevronLeftIcon, ChevronRightIcon, ClipboardIcon, TrashIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { AppSelect } from "../../common/components/AppSelect";
 import { handleCopyText } from "../../utils/textUtils";
+import { VolunteerWithId } from "../tVolunteers";
 
-export const VolunteersTable = () => {
-  const { volunteersState, handleDeleteVolunteer, showFilters, toggleShowFilters, handleEditVolunteersParams, handleModifyVolunteer } = useVolunteers()
+export const VolunteersTable = ({ handleOpenModal }: { handleOpenModal : (volunteer: VolunteerWithId) => () => void}) => {
+  const { volunteersState, showFilters, toggleShowFilters, handleEditVolunteersParams, handleModifyVolunteer } = useVolunteers()
 
   return (
     <>
@@ -48,7 +49,7 @@ export const VolunteersTable = () => {
               <div className="flex-1">
                 <AppCheckboxInput checked={volunteer.isActive} onChange={handleModifyVolunteer({ ...volunteer, isActive: !volunteer.isActive })} className="h-6 w-6" />
               </div>
-              <AppButtonError onClick={handleDeleteVolunteer(volunteer.builderAssistantId)}><TrashIcon className="h-6 text-primary-1" /></AppButtonError>
+              <AppButtonError onClick={handleOpenModal(volunteer)}><TrashIcon className="h-6 text-primary-1" /></AppButtonError>
             </li>
           )
         }
@@ -98,7 +99,7 @@ export const VolunteersTable = () => {
               <div className="flex-1">
                 <AppCheckboxInput checked={volunteer.isActive} onChange={handleModifyVolunteer({ ...volunteer, isActive: !volunteer.isActive })} className="h-6 w-6" />
               </div>
-              <AppButtonError onClick={handleDeleteVolunteer(volunteer.builderAssistantId)}><TrashIcon className="h-6 text-primary-1" /></AppButtonError>
+              <AppButtonError onClick={handleOpenModal(volunteer)}><TrashIcon className="h-6 text-primary-1" /></AppButtonError>
             </li>
           )
         }

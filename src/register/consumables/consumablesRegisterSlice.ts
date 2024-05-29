@@ -91,12 +91,13 @@ export const getPossibleConsumables =
     })
 
 export const addConsumableRegisters =
-  createAsyncThunk<ConsumablesRegisterState, ConsumableRegister[]>(
+  createAsyncThunk<ConsumablesRegisterState, ConsumableRegister[], {state: RootState}>(
     "register/consumables/add",
     async (registers, thunkApi) => fetchCreateConsumableRegisters(registers)
       .then(res => {
         if (res.ok) {
           thunkApi.dispatch(setSelectedConsumables([]))
+          thunkApi.dispatch(getConsumablesRegister(thunkApi.getState().consumablesRegister.queryParams))
           return thunkApi.fulfillWithValue("Registros de consumibles añadidos correctamente.")
         }
 

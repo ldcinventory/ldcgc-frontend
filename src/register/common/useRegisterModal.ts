@@ -8,7 +8,7 @@ import { SelectedTool } from "../tools/tToolRegisters";
 import { ConsumableWithId } from "../../resources/consumables/tConsumables";
 import { SelectedConsumable } from "../consumables/tConsumableRegisters";
 import { useDebouncedCallback } from "use-debounce";
-import { addToolRegisters, getPossibleTools, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
+import { addToolRegisters, getPossibleTools, getToolsRegister, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
 
 export const useRegisterModal = () => {
   const { toolsRegister, register, consumablesRegister } = useAppSelector(state => state)
@@ -69,6 +69,7 @@ export const useRegisterModal = () => {
         return { ...toolRegister, volunteerBuilderAssistantId: volunteer.builderAssistantId, registerFrom, volunteerName: volunteer.name, volunteerLastName: volunteer.lastName, toolUrlImages: [] }
       })
       dispatch(addToolRegisters(toolRegisters))
+      
     }
 
     const validConsumables = consumablesRegister.selectedConsumables

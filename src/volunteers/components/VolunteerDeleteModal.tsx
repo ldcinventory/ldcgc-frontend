@@ -1,4 +1,3 @@
-import { XMarkIcon } from "@heroicons/react/24/outline";
 import { AppButton, AppButtonError } from "../../common/components/AppButton";
 import { useVolunteers } from "../hooks/useVolunteers";
 import { VolunteerWithId } from "../tVolunteers";

@@ -48,7 +48,7 @@ export function AddRegistersModal() {
                 <AppList items={toolsRegister.possibleTools.map(tool => {
                   return {
                     id: tool.id,
-                    display: tool.name,
+                    display: `${tool.name} - ${tool.brand.name} - ${tool.model}`,
                     onClick: () => handleSelectTool(tool)
                   }
                 })}/>
@@ -58,7 +58,7 @@ export function AddRegistersModal() {
                 <ul className="mt-4">
                     {toolsRegister.selectedTools.map(toolRegister => 
                       <li key={toolRegister.toolBarcode} className="flex items-center justify-between">
-                        <span className="flex gap-2 text-sm"><CheckCircleIcon className="h-6 text-success-4" /> {toolRegister.toolName}</span>
+                        <span className="flex gap-2 text-sm"><CheckCircleIcon className="h-6 text-success-4" /> {`${toolRegister.toolName}  - ${toolRegister.toolBarcode}`}</span>
                         <AppButton onClick={() => handleRemoveSelectedTool(toolRegister)}><XCircleIcon className="h-6"/></AppButton> 
                       </li>)}
                 </ul>
@@ -74,7 +74,7 @@ export function AddRegistersModal() {
                 <AppList items={consumablesRegister.possibleConsumables.map(consumible => {
                   return {
                     id: consumible.id,
-                    display: consumible.name,
+                    display: `${consumible.name} - ${consumible.brand.name} - ${consumible.model}`,
                     onClick: () => handleSelectConsumable(consumible)
                   }
                 })} />
@@ -87,7 +87,7 @@ export function AddRegistersModal() {
                           <div className="flex justify-between w-full">
                             <section className="flex gap-2">
                               {consumableRegister.stockAmountRequest > 0 && <CheckCircleIcon className="h-6 text-success-4" />}
-                              {consumableRegister.consumableName}
+                            {`${consumableRegister.consumableName} - ${consumableRegister.consumableBarcode}`}
                             </section>
                             <AppButton onClick={() => handleRemoveSelectedConsumable(consumableRegister)}><XCircleIcon className="h-6" /></AppButton>
                           </div>

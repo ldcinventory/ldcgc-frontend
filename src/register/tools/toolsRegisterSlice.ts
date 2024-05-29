@@ -9,6 +9,7 @@ import { toast } from "sonner"
 import { AnyAsyncThunk, FulfilledActionFromAsyncThunk, RejectedWithValueActionFromAsyncThunk } from "@reduxjs/toolkit/dist/matchers"
 import { Tool, ToolsParams, ToolWithId } from "../../resources/tools/tTools"
 import { fecthToolsLoose } from "../../resources/tools/toolApi"
+import { getConsumablesRegister } from "../consumables/consumablesRegisterSlice"
 
 export interface ToolsRegisterState {
   toolsRegister: ToolRegisterWithId[]
@@ -92,12 +93,13 @@ export const closeToolRegister =
   )
 
 export const addToolRegisters =
-  createAsyncThunk<ToolsRegisterState, ToolRegister[]>(
+  createAsyncThunk<ToolsRegisterState, ToolRegister[], {state: RootState}>(
     "register/tools/add",
     async (registers, thunkApi) => fetchCreateToolRegisters(registers)
       .then(res => {
         if (res.ok) {
           thunkApi.dispatch(setSelectedTools([]))
+          thunkApi.dispatch(getToolsRegister(thunkApi.getState().toolsRegister.queryParams))
           return thunkApi.fulfillWithValue("Registros de herramientas añadidos correctamente.")
         }
         

@@ -196,34 +196,36 @@ export function ToolsTable() {
       <table className="w-full text-left min-h-[80vh] hidden lg:[display:table]">
         <thead className="border-b border-primary-1">
           <tr>
-            <AppTableHeaderCell5>Herramienta</AppTableHeaderCell5>
-            <AppTableHeaderCell5>Código de barras</AppTableHeaderCell5>
-            <AppTableHeaderCell5>Marca</AppTableHeaderCell5>
-            <AppTableHeaderCell5>Modelo</AppTableHeaderCell5>
-            <AppTableHeaderCell5>Ubicación</AppTableHeaderCell5>
-            <AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>Herramienta</AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>Código de barras</AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>Marca</AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>Modelo</AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>Ubicación</AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>Almacén</AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>
               <AppButton onClick={toggleShowFilters} className={`${showFilters && 'bg-primary-3 dark:bg-primary-5'}`}>
                 <Bars2Icon className="h-7" />
               </AppButton>
             </AppTableHeaderCell>
           </tr>
           <tr className={showFilters ? '' : 'hidden'}>
-            <AppTableHeaderCell5>
+            <AppTableHeaderCell columns={6}>
               <AppTextInput placeholder="Martillo, destornillador..." value={queryParams.name} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, name: e.target.value })} />
-            </AppTableHeaderCell5>
-            <AppTableHeaderCell5>
+            </AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>
               <AppTextInput placeholder="19XG87F..." value={queryParams.barcode} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, barcode: e.target.value })} />
-            </AppTableHeaderCell5>
-            <AppTableHeaderCell5>
+            </AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>
               <AppTextInput placeholder="Bosch, Hilti..." value={queryParams.brand} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, brand: e.target.value })} />
-            </AppTableHeaderCell5>
-            <AppTableHeaderCell5>
+            </AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>
               <AppTextInput placeholder="B2..." value={queryParams.model} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, model: e.target.value })} />
-            </AppTableHeaderCell5>
-            <AppTableHeaderCell5>
-              <AppTextInput placeholder="Arcón, oficina..." value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, location: e.target.value })} />
-            </AppTableHeaderCell5>
-            <AppTableHeaderCell>
+            </AppTableHeaderCell>
+            <AppTableHeaderCell columns={6}>
+              <AppTextInput placeholder="Betel, SR Guadalajara..." value={queryParams.location} onChange={(e) => handleUpdateQueryParams({ pageIndex: 0, location: e.target.value })} />
+            </AppTableHeaderCell>
+            <AppTableHeaderCell columns={6} />
+            <AppTableHeaderCell columns={6}>
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ name: "", barcode: "", brand: "", model: "", location: "" })}>
                 <XMarkIcon className="h-7" />
               </AppButtonTransparent>
@@ -233,7 +235,7 @@ export function ToolsTable() {
         <tbody>
           {state.tools.map(tool =>
             <tr key={tool.id} className="align-top">
-              <AppTableCell5>
+              <AppTableCell columns={6}>
                 <div className="flex gap-2 whitespace-nowrap self-start">
                   <span className={`rounded-lg p-1 text-xs font-monospace font-bold
                     ${(tool.status === 'AVAILABLE' || tool.status === 'NEW') && 'bg-success-3 dark:bg-success-6'}
@@ -243,21 +245,24 @@ export function ToolsTable() {
                   </span>
                   {tool.name}
                 </div>
-              </AppTableCell5>
-              <AppTableCell5>
+              </AppTableCell>
+              <AppTableCell columns={6}>
                 <span className="font-barcode text-2xl xl:text-4xl mr-4">
                   {tool.barcode}
                 </span>
                 <AppButtonTransparent onClick={async () => await navigator.clipboard.writeText(tool.barcode)} >
                   <ClipboardIcon className="h-4 xl:h-6" />
                 </AppButtonTransparent>
-              </AppTableCell5>
-              <AppTableCell5>{tool.brand.name}</AppTableCell5>
-              <AppTableCell5>{tool.model}</AppTableCell5>
-              <AppTableCell5>
+              </AppTableCell>
+              <AppTableCell columns={6}>{tool.brand.name}</AppTableCell>
+              <AppTableCell columns={6}>{tool.model}</AppTableCell>
+              <AppTableCell columns={6}>
+                {tool.group.location.name}
+              </AppTableCell>
+              <AppTableCell columns={6}>
                 {tool.location.name}
-              </AppTableCell5>
-              <AppTableCell>
+              </AppTableCell>
+              <AppTableCell columns={6}>
                 <AppNavLink to={`/resources/tools/${tool.barcode}`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
                 <AppButtonError onClick={() => handleOpenDeleteToolModal(tool)}>
                   <TrashIcon className="h-6" />
@@ -268,12 +273,12 @@ export function ToolsTable() {
         </tbody>
         <tfoot>
           <tr className="border-t border-primary-1">
-            <AppTableCell5>
+            <AppTableCell columns={6}>
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ pageIndex: 0 })}> <ChevronDoubleLeftIcon className="h-6" /> </AppButtonTransparent>
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ pageIndex: (queryParams.pageIndex || 1) - 1 })}> <ChevronLeftIcon className="h-6" /> </AppButtonTransparent>
-            </AppTableCell5>
-            <AppTableCell5 />
-            <AppTableCell5>
+            </AppTableCell>
+            <AppTableCell columns={6} />
+            <AppTableCell columns={6}>
               <div className="flex gap-2 whitespace-nowrap justify-end">
                 Página
                 <AppNumberInputSm min={1} max={state.totalPages} value={(queryParams.pageIndex || 0) + 1}
@@ -281,15 +286,15 @@ export function ToolsTable() {
                     handleUpdateQueryParams({ pageIndex: Math.max(0, Math.min(state.totalPages - 1, Number(e.target.value) - 1)) })} />
                 de {state.totalPages}
               </div>
-            </AppTableCell5>
-            <AppTableCell5 />
-            <AppTableCell5 />
-            <AppTableCell5 >
+            </AppTableCell>
+            <AppTableCell columns={6} />
+            <AppTableCell columns={6} />
+            <AppTableCell columns={6} >
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ pageIndex: Math.min((queryParams.pageIndex || 0) + 1, state.totalPages - 1) })}>
                 <ChevronRightIcon className="h-6" />
               </AppButtonTransparent>
               <AppButtonTransparent onClick={() => handleUpdateQueryParams({ pageIndex: state.totalPages - 1 })}> <ChevronDoubleRightIcon className="h-6" /></AppButtonTransparent>
-            </AppTableCell5>
+            </AppTableCell>
           </tr>
         </tfoot>
       </table>

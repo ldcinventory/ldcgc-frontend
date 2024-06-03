@@ -31,18 +31,25 @@ export const Profile = () => {
     const password = formData.get('new-password') as string
     const passwordConfirm = formData.get('new-password-confirm') as string
 
+    
     if (password !== passwordConfirm) {
       toast.error('Las contraseñas no coinciden.')
       return
     }
     
+    const email = formData.get('new-email') as string
+    if (!email || email === '' || email.includes('@')) {
+      toast.error('Introduce un email válido.')
+      return
+    }
+
     if (!state.me) {
       toast.error('Usuario no encontrado. Cierra sesión e inténtalo de nuevo.')
       return
     }
 
     const newUser = { ...state.me }
-    newUser.email = formData.get('new-email') as string
+    newUser.email = email
     newUser.password = password
     dispatch(updateMyUser(newUser))
     setChangeCredentials(false)
@@ -60,7 +67,7 @@ export const Profile = () => {
           changeCredentials ? 
           <form className="flex flex-col gap-2 max-w-xs" onSubmit={handleChangeCredentials}>
               <h1 className="font-bold my-4">Elige las nuevas credenciales</h1>
-              <AppLabeledTextInput id="new-email" name="new-email" label="Nuevo email" />
+              <AppLabeledTextInput id="new-email" name="new-email" label="Nuevo email" defaultValue={state.me.email} />
               <AppLabeledPasswordInput id="new-password" name="new-password" label="Nueva contraseña" />
               <AppLabeledPasswordInput id="new-password-confirm" name="new-password-confirm" label="Confirmar nueva contraseña" />
               <AppButtonSubmit>Guardar</AppButtonSubmit>

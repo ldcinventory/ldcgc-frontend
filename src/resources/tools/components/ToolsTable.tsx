@@ -257,7 +257,6 @@ export function ToolsTable() {
               <AppTableCell columns={6}>{tool.brand.name}</AppTableCell>
               <AppTableCell columns={6}>{tool.model}</AppTableCell>
               <AppTableCell columns={6}>
-                {tool.group.location.name}
               </AppTableCell>
               <AppTableCell columns={6}>
                 {tool.location.name}

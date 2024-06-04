@@ -148,7 +148,7 @@ export const ConsumablesTable = () => {
                 {consumable.location.name}
               </AppTableCell>
               <AppTableCell columns={4}>
-                <AppNavLink to={`/resources/consumables/${consumable.barcode}`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
+                <AppNavLink to={`/resources/consumables/${consumable.barcode.replace('#', '%23')}`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-6" /> </AppNavLink>
                 <AppButtonError onClick={() => handleOpenDeleteConsumableModal(consumable)}>
                   <TrashIcon className="h-6" />
                 </AppButtonError>

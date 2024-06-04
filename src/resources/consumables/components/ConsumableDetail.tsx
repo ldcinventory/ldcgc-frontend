@@ -1,6 +1,6 @@
 import { AppButton, AppButtonSubmit } from "../../../common/components/AppButton";
-import { AppLabeledSelect, AppLabeledSelectForm } from "../../../common/components/AppSelect";
-import { AppFileInput, AppLabeledDateInput, AppLabeledDateInputForm, AppLabeledNumberInputForm,  AppLabeledTextArea, AppLabeledTextInput, AppLabeledTextInputForm, AppTextInput } from "../../../common/components/AppInput";
+import { AppLabeledSelectForm } from "../../../common/components/AppSelect";
+import { AppFileInput, AppLabeledDateInputForm, AppLabeledNumberInputForm,  AppLabeledTextArea, AppLabeledTextInputForm, AppTextInput } from "../../../common/components/AppInput";
 import { Toaster } from "sonner";
 import { useResourceTypes } from "../../common/hooks/useResourceTypes";
 import { useBrands } from "../../../brands/useBrands";
@@ -53,11 +53,11 @@ export const ConsumableDetail = () => {
         <aside className="bg-primary-2 dark:bg-primary-8 p-5 rounded-lg flex flex-col gap-4 flex-1 max-w-[700px]">
           <AppLabeledSelectForm id={`${barcode}-resourceType`} name={`${barcode}-resourceType`} label="Tipo"
             options={(resourceTypes || []).map(r => { return { name: r.name, value: r.id.toString() } })}
-            defaultValue={consumablesState.consumableDetail.resourceType.id}
+            defaultValue={consumablesState.consumableDetail.resourceType?.id || 0}
           />
           <AppLabeledSelectForm id={`${barcode}-brand`} name={`${barcode}-brand`} label="Marca"
             options={(brands || []).map(b => { return { name: b.name, value: b.id.toString() } })}
-            defaultValue={consumablesState.consumableDetail.brand.id}
+            defaultValue={consumablesState.consumableDetail.brand?.id || 0}
           />
           <AppLabeledTextInputForm id={`${barcode}-model`} name={`${barcode}-model`} label="Modelo" defaultValue={consumablesState.consumableDetail.model}/>
           <AppLabeledTextArea id={`${barcode}-description`} name={`${barcode}-description`} label="Descripción" rows={5} defaultValue={consumablesState.consumableDetail.description} />
@@ -71,11 +71,12 @@ export const ConsumableDetail = () => {
 
           <AppLabeledNumberInputForm id={`${barcode}-price`} name={`${barcode}-price`} label="Precio" min={0} step="any" defaultValue={consumablesState.consumableDetail.price} />
 
-          <AppLabeledDateInputForm id={`${barcode}-purchaseDate`} name={`${barcode}-purchaseDate`} label="Fecha de compra" defaultValue={new Date(consumablesState.consumableDetail.purchaseDate).toISOString().slice(0, 10)}/>
+          <AppLabeledDateInputForm id={`${barcode}-purchaseDate`} name={`${barcode}-purchaseDate`} label="Fecha de compra" defaultValue={consumablesState.consumableDetail.purchaseDate ?
+            new Date(consumablesState.consumableDetail.purchaseDate).toISOString().slice(0, 10) : ''} />
 
           <AppLabeledSelectForm id={`${barcode}-location`} name={`${barcode}-location`} label="Ubicación"
             options={(locations || []).map(l => { return { name: l.name, value: l.id.toString() } })}
-            defaultValue={consumablesState.consumableDetail.location.id}
+            defaultValue={consumablesState.consumableDetail.location?.id || 0}
           />
           <AppLabeledNumberInputForm id={`${barcode}-quantityEachItem`} name={`${barcode}-quantityEachItem`} label="Unidades por paquete" min={0} defaultValue={consumablesState.consumableDetail.quantityEachItem} />
           <AppButtonSubmit className="bg-primary-3 max-w-[300px] self-center py-2 px-4">Guardar cambios</AppButtonSubmit>

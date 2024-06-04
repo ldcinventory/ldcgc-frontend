@@ -15,6 +15,7 @@ export const useConsumableDetail = ({ resourceTypes, brands, locations }: { reso
   const [currentImageShown, setCurrentImageShown] = useState(0)
 
   useEffect(() => {
+    console.log(barcode)
     if (!barcode) {
       navigate("/resources/consumables")
       return

@@ -1,14 +1,14 @@
 import { useAppDispatch, useAppSelector } from "../../app/store";
-import { getPossibleVolunteers, selectVolunteer, setCurrentVolunteer, toggleModalOpened, updateAddRegistersDate } from "./registerSlice";
+import { clearVolunteer, getPossibleVolunteers, selectVolunteer, setCurrentVolunteer, toggleModalOpened, updateAddRegistersDate } from "./registerSlice";
 import { ChangeEvent, FormEvent } from "react";
-import { addConsumableRegisters, getConsumablesRegister, getPossibleConsumables, removeSelectedConsumable, selectConsumable, setCurrentConsumable, updateSelectedConsumable } from "../consumables/consumablesRegisterSlice";
+import { addConsumableRegisters, cleanPossibleConsumables, getConsumablesRegister, getPossibleConsumables, removeSelectedConsumable, selectConsumable, setCurrentConsumable, updateSelectedConsumable } from "../consumables/consumablesRegisterSlice";
 import { VolunteerWithId } from "../../volunteers/tVolunteers";
 import { Tool } from "../../resources/tools/tTools";
 import { SelectedTool } from "../tools/tToolRegisters";
 import { ConsumableWithId } from "../../resources/consumables/tConsumables";
 import { SelectedConsumable } from "../consumables/tConsumableRegisters";
 import { useDebouncedCallback } from "use-debounce";
-import { addToolRegisters, getPossibleTools, getToolsRegister, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
+import { addToolRegisters, cleanPossibleTools, getPossibleTools, getToolsRegister, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
 
 export const useRegisterModal = () => {
   const { toolsRegister, register, consumablesRegister } = useAppSelector(state => state)
@@ -29,6 +29,8 @@ export const useRegisterModal = () => {
     else
       volunteersParams = { builderAssistantId: baId }
 
+    dispatch(cleanPossibleTools())
+    dispatch(cleanPossibleConsumables())
     getPossibleVolunteerssDebounced(volunteersParams)
   }
   const handleGetPossibleTools = (e: ChangeEvent<HTMLInputElement>) => {
@@ -36,6 +38,7 @@ export const useRegisterModal = () => {
     dispatch(setCurrentTool(newTool))
 
     const toolsParams = { filterString: newTool }
+    dispatch(cleanPossibleConsumables())
     getPossibleToolsDebounced(toolsParams)
   }
 
@@ -54,8 +57,6 @@ export const useRegisterModal = () => {
   const handleUpdateSelectedConsumable = (consumableRegister: SelectedConsumable) => dispatch(updateSelectedConsumable(consumableRegister))
   const handleAddRegisters = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    //dispatch(addRegisters())
-
 
     const volunteer = register.selectedVolunteer
     if (volunteer === null)
@@ -88,6 +89,7 @@ export const useRegisterModal = () => {
     }
 
     dispatch(getConsumablesRegister({}))
+    dispatch(clearVolunteer())
   }
 
   const handleSetAddRegistersDate = (e: ChangeEvent<HTMLInputElement>) => {

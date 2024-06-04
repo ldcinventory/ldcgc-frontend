@@ -145,6 +145,9 @@ export const consumablesRegisterSlice = createSlice({
     },
     setSelectedConsumables: (state, action: PayloadAction<SelectedConsumable[]>) => {
       return { ...state, selectedConsumables: action.payload }
+    },
+    cleanPossibleConsumables: (state) => {
+      return {...state, possibleConsumables: []}
     }
   },
   extraReducers: (builder) => {
@@ -206,7 +209,7 @@ export const consumablesRegisterSlice = createSlice({
   }
 })
 
-export const { updateQueryParams, setCurrentConsumable, updateConsumablesParams, selectConsumable, updateSelectedConsumable, removeSelectedConsumable, setSelectedConsumables }
+export const { updateQueryParams, setCurrentConsumable, updateConsumablesParams, selectConsumable, updateSelectedConsumable, removeSelectedConsumable, setSelectedConsumables, cleanPossibleConsumables }
   = consumablesRegisterSlice.actions
 
 export default consumablesRegisterSlice.reducer

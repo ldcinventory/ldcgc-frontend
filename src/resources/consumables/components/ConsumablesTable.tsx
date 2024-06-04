@@ -38,7 +38,7 @@ export const ConsumablesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {state.consumables.map(consumable =>
+          {state.consumables ? state.consumables.map(consumable =>
             <tr key={consumable.id} className="align-top">
               <AppTableCell columns={2} className="flex-col">
                 <span className="self-start font-semibold text-lg">{consumable.name}</span>
@@ -58,12 +58,13 @@ export const ConsumablesTable = () => {
               </AppTableCell>
               <AppTableCell columns={2} className="justify-end">
                 <AppNavLink to={`/resources/consumables/${consumable.barcode.replace('#', '%23') }`} className="bg-primary-3 dark:bg-primary-5 p-1 rounded-md"><PencilIcon className="h-5" /> </AppNavLink>
-                <AppButtonError onClick={() => handleOpenDeleteConsumableModal(consumable)}>
+                <AppButtonError onClick={() => handleOpenDeleteConsumableModal(consumable) }>
                   <TrashIcon className="h-5" />
                 </AppButtonError>
               </AppTableCell>
             </tr>
-          )}
+          ) :
+            <>No se encontraron consumibles</> }
         </tbody>
         <tfoot>
           <tr className="border-t border-primary-1">
@@ -127,7 +128,7 @@ export const ConsumablesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {state.consumables.map(consumable =>
+          {state.consumables ? state.consumables.map(consumable =>
             <tr key={consumable.id} className="align-top">
               <AppTableCell columns={4} className="flex-col">
                 <span className="self-start font-semibold">{consumable.name}</span>
@@ -154,7 +155,8 @@ export const ConsumablesTable = () => {
                 </AppButtonError>
               </AppTableCell>
             </tr>
-          )}
+          ) :
+            <>No se encontraron consumibles</>}
         </tbody>
         <tfoot>
           <tr className="border-t border-primary-1">
@@ -222,7 +224,7 @@ export const ConsumablesTable = () => {
           </tr>
         </thead>
         <tbody>
-          {state.consumables.map(consumable =>
+          {state.consumables ? state.consumables.map(consumable =>
             <tr key={consumable.id} className="align-top">
               <AppTableCell columns={6} className="font-semibold">
                   {consumable.name}
@@ -248,7 +250,8 @@ export const ConsumablesTable = () => {
                 </AppButtonError>
               </AppTableCell>
             </tr>
-          )}
+          ) :
+            <>No se encontraron consumibles</>}
         </tbody>
         <tfoot>
           <tr className="border-t border-primary-1">

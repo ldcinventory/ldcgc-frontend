@@ -23,8 +23,7 @@ export const useAddVolunteers = () => {
       builderAssistantId: formData.get("volunteer-builderAssistantId") as string,
       isActive: (formData.get("volunteer-active") as string) === '',
       absences: [],
-      availability: [],
-      group: usersState.me.group
+      availability: []
     }
     
     dispatch(addVolunteer(volunteer))

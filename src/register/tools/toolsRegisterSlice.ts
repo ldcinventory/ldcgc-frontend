@@ -134,6 +134,9 @@ export const toolsRegisterSlice = createSlice({
     },
     setSelectedTools: (state, action: PayloadAction<SelectedTool[]>) => {
       return {...state, selectedTools: action.payload}
+    },
+    cleanPossibleTools: (state) => {
+      return {...state, possibleTools: []}
     }
   },
   extraReducers: (builder) => {
@@ -194,6 +197,6 @@ export const toolsRegisterSlice = createSlice({
   }
 })
 
-export const { updateQueryParams, updateToolsParams, selectTool, removeSelectedTool, setCurrentTool, setSelectedTools } = toolsRegisterSlice.actions
+export const { updateQueryParams, updateToolsParams, selectTool, removeSelectedTool, setCurrentTool, setSelectedTools, cleanPossibleTools } = toolsRegisterSlice.actions
 
 export default toolsRegisterSlice.reducer

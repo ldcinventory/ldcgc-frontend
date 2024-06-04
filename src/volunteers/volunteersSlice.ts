@@ -1,5 +1,5 @@
 import { PayloadAction, createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import { Volunteer, VolunteerWithId, VolunteersParams } from "./tVolunteers";
+import { Volunteer, VolunteerPayload, VolunteerWithId, VolunteersParams } from "./tVolunteers";
 import { fetchAddVolunteer, fetchDeleteVolunteer, fetchUpdateVolunteer, fetchVolunteers } from "./volunteerApi";
 import { PaginatedResponse } from "../common/tCommon";
 import { RootState } from "../app/index";
@@ -58,7 +58,7 @@ export const updateVolunteer = createAsyncThunk<any, VolunteerWithId, { state: R
   }
 )
 
-export const addVolunteer = createAsyncThunk<any, Volunteer, { state: RootState }>("volunteers/addVolunteer",
+export const addVolunteer = createAsyncThunk<any, VolunteerPayload, { state: RootState }>("volunteers/addVolunteer",
   async (volunteer, thunkApi) =>
     fetchAddVolunteer(volunteer)
       .then(res => res.json())

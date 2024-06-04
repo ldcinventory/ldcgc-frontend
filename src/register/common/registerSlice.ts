@@ -67,6 +67,9 @@ export const registerSlice = createSlice({
     },
     updateAddRegistersDate: (state, action: PayloadAction<string>) => {
       return { ...state, registersAddDate: action.payload }
+    },
+    clearVolunteer: (state) => {
+      return {...state, currentVolunteer: '', selectedVolunteer:  null, possibleVolunteers: []}
     }
   },
   extraReducers: (builder) => {
@@ -78,7 +81,6 @@ export const registerSlice = createSlice({
         }          
 
         const newPossibleVolunteers = action.payload.data.elements
-        console.log(newPossibleVolunteers, newPossibleVolunteers.length, newPossibleVolunteers[0])
         if (newPossibleVolunteers.length === 1) {
           state.selectedVolunteer = newPossibleVolunteers[0]
           state.currentVolunteer = `${state.selectedVolunteer.name} ${state.selectedVolunteer.lastName}`
@@ -91,6 +93,6 @@ export const registerSlice = createSlice({
   }
 })
 
-export const { toggleModalOpened, setCurrentVolunteer, updateVolunteersParams, selectVolunteer, resetState, updateAddRegistersDate } = registerSlice.actions
+export const { toggleModalOpened, setCurrentVolunteer, updateVolunteersParams, selectVolunteer, resetState, updateAddRegistersDate, clearVolunteer } = registerSlice.actions
 
 export default registerSlice.reducer

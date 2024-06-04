@@ -3,7 +3,6 @@ import { useAppDispatch, useAppSelector } from "../../../app/store"
 import { useDebouncedCallback } from "use-debounce"
 import { ConsumableWithId, ConsumableParams } from "../tConsumables"
 import { getConsumables, selectConsumableToDelete } from "../consumablesSlice"
-import { toast } from "sonner"
 
 export const useConsumablesTable = () => {
   const state = useAppSelector(state => state.consumables)

@@ -1,5 +1,5 @@
 import { fetchApi } from "../api/fetchApi"
-import { Volunteer, VolunteerWithId, VolunteersParams } from "./tVolunteers"
+import { Volunteer, VolunteerPayload, VolunteerWithId, VolunteersParams } from "./tVolunteers"
 const VOLUNTEERS_PATH = '/volunteers'
 
 export const fetchVolunteers = ({ volunteersParams }: { volunteersParams: VolunteersParams }) =>
@@ -11,5 +11,5 @@ export const fetchDeleteVolunteer = (volunteerBuilderAssistantId: string) =>
 export const fetchUpdateVolunteer = (volunteer: VolunteerWithId) =>
   fetchApi({ method: 'PUT', path: `${VOLUNTEERS_PATH}/${volunteer.builderAssistantId}`, body: JSON.stringify(volunteer) })
 
-export const fetchAddVolunteer = (volunteer: Volunteer) => 
+export const fetchAddVolunteer = (volunteer: VolunteerPayload) => 
   fetchApi({method: 'POST', path: VOLUNTEERS_PATH, body: JSON.stringify(volunteer)})

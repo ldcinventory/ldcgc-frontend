@@ -8,7 +8,7 @@ import { SelectedTool } from "../tools/tToolRegisters";
 import { ConsumableWithId } from "../../resources/consumables/tConsumables";
 import { SelectedConsumable } from "../consumables/tConsumableRegisters";
 import { useDebouncedCallback } from "use-debounce";
-import { addToolRegisters, cleanPossibleTools, getPossibleTools, getToolsRegister, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
+import { addToolRegisters, cleanPossibleTools, getPossibleTools, removeSelectedTool, selectTool, setCurrentTool } from "../tools/toolsRegisterSlice";
 
 export const useRegisterModal = () => {
   const { toolsRegister, register, consumablesRegister } = useAppSelector(state => state)

@@ -39,6 +39,7 @@ export const ConsumableDetail = () => {
     barcode,
     editBarcode,
     toggleEditBarcode,
+    handleUpdateConsumable,
   } = useConsumableDetail({ resourceTypes, brands, locations })
 
   if (
@@ -73,6 +74,9 @@ export const ConsumableDetail = () => {
             ) : (
               <>
                 <AppTextInput
+                  onChange={(e) =>
+                    handleUpdateConsumable({ barcode: e.target.value })
+                  }
                   defaultValue={consumablesState.consumableDetail.barcode}
                   name={`${barcode}-barcode`}
                 />

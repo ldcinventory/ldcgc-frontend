@@ -6,6 +6,7 @@ import {
   deleteConsumableImage,
   selectConsumableDetail,
   updateConsumable,
+  updateConsumableDetail,
 } from "../consumablesSlice"
 import { ResourceType } from "../../tResources"
 import { Brand } from "../../../brands/tBrands"
@@ -130,6 +131,16 @@ export const useConsumableDetail = ({
     setEditBarcode(!editBarcode)
   }
 
+  const handleUpdateConsumable = (consumableProperties: {}) => {
+    if (consumablesState.consumableDetail === null) return
+    dispatch(
+      updateConsumableDetail({
+        ...consumablesState.consumableDetail,
+        ...consumableProperties,
+      }),
+    )
+  }
+
   return {
     consumablesState,
     handleSubmitForm,
@@ -140,5 +151,6 @@ export const useConsumableDetail = ({
     barcode,
     editBarcode,
     toggleEditBarcode,
+    handleUpdateConsumable,
   }
 }
